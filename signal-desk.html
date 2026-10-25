@@ -262,7 +262,7 @@
       $("timeline").innerHTML = '<div class="empty">Could not load data — ' + e.message + "</div>";
       return;
     }
-    DATA.sort((a, b) => (a.date || "").localeCompare(b.date || ""));
+    DATA.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
     load();
     renderTimeline();
     renderBoard();
