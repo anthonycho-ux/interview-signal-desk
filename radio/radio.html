@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Karsan radio</title>
+<style>
+  :root {
+    color-scheme: light;
+    --surface-1: #fcfcfb;
+    --page: #f9f9f7;
+    --ink-1: #0b0b0b;
+    --ink-2: #52514e;
+    --ink-3: #898781;
+    --hair: #e1e0d9;
+    --accent: #2a78d6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      color-scheme: dark;
+      --surface-1: #1a1a19;
+      --page: #0d0d0d;
+      --ink-1: #f0efec;
+      --ink-2: #c3c2b7;
+      --ink-3: #898781;
+      --hair: #2c2c2a;
+      --accent: #3987e5;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --surface-1: #1a1a19;
+    --page: #0d0d0d;
+    --ink-1: #f0efec;
+    --ink-2: #c3c2b7;
+    --ink-3: #898781;
+    --hair: #2c2c2a;
+    --accent: #3987e5;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--page); color: var(--ink-1);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 15px; line-height: 1.5;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 40px 20px 80px; }
+  h1 { font-size: 23px; margin: 0 0 3px; letter-spacing: -0.01em; }
+  .sub { color: var(--ink-2); font-size: 13.5px; margin: 0 0 24px; }
+  .player { background: var(--surface-1); border: 1px solid var(--hair); border-radius: 10px; padding: 18px; }
+  .player audio { width: 100%; }
+  .meta { margin-top: 12px; font-size: 12.5px; color: var(--ink-3); display: flex; gap: 14px; flex-wrap: wrap; }
+  .meta b { color: var(--ink-2); font-weight: 600; }
+  .seglist { margin-top: 22px; }
+  .seglist h2 { font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.03em; color: var(--ink-3); font-weight: 600; margin: 0 0 10px; }
+  .seg { padding: 10px 12px; border: 1px solid var(--hair); border-radius: 8px; margin-bottom: 8px; background: var(--surface-1); font-size: 14px; }
+  .seg .tag { font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--accent); font-weight: 600; display: block; margin-bottom: 3px; }
+  .seg.theme .tag { color: var(--ink-3); }
+  .seg.quote { border-left: 3px solid var(--accent); }
+  .seg .txt { color: var(--ink-2); }
+  .note { margin-top: 26px; font-size: 12.5px; color: var(--ink-3); }
+  .note a { color: var(--accent); }
+  .off { color: var(--ink-3); }
+  @media (prefers-color-scheme: dark) { audio { filter: invert(0.9) hue-rotate(180deg); } }
+  :root[data-theme="dark"] audio { filter: invert(0.9) hue-rotate(180deg); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Karsan radio</h1>
+  <p class="sub">The compressed signal, read aloud — quotes are Cem Karsan's own words.</p>
+  <div class="player">
+    <audio controls preload="metadata" id="audio">
+      <source src="radio.mp3" type="audio/mpeg">
+    </audio>
+    <div class="meta" id="meta"></div>
+  </div>
+  <div class="seglist">
+    <h2>What you're hearing</h2>
+    <div id="segs"></div>
+  </div>
+  <p class="note">Radio is generated from the same <a href="../karsan/" target="_blank">signal desk</a> evidence — regenerate by running <code>radio_script.py && render_radio.py</code> in <code>~/Projects/karsan-inventory/radio</code>.</p>
+</div>
+
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  async function load() {
+    let script = null, meta = null;
+    try {
+      [script, meta] = await Promise.all([
+        fetch("radio-script.json").then(r => r.json()).catch(() => null),
+        fetch("radio-meta.json").then(r => r.json()).catch(() => null),
+      ]);
+    } catch (e) {}
+    if (meta) {
+      const when = (meta.renderedNow || "").replace("T", " ").slice(0, 16);
+      $("meta").innerHTML =
+        '<span><b>rendered</b> ' + when + "</span>" +
+        '<span><b>voice</b> ' + esc(meta.voiceName || meta.voice || "default") + "</span>" +
+        '<span><b>length</b> ' + (meta.words || "?") + " words</span>";
+    } else {
+      $("meta").textContent = "no render metadata — generate a bulletin first.";
+    }
+    if (script && script.segments && script.segments.length) {
+      $("segs").innerHTML = script.segments.map(s => {
+        const kind = s.kind === "theme" ? "theme" : (s.kind === "outro" ? "outro" : "quote");
+        return '<div class="seg ' + kind + '"><span class="tag">' + esc(s.kind) +
+          "</span><span class=\"txt\">" + esc(s.text) + "</span></div>";
+      }).join("");
+    } else {
+      $("segs").innerHTML = '<div class="off">No bulletin segments yet — run <code>radio_script.py</code>.</div>';
+    }
+  }
+  function esc(s) {
+    const d = document.createElement("div");
+    d.textContent = s || "";
+    return d.innerHTML;
+  }
+  load();
+})();
+</script>
+</body>
+</html>
