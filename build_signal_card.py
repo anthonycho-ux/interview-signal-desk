@@ -23,7 +23,7 @@ LABEL = {
     "vol_posture": "vol posture",
     "opex_stance": "opex stance",
     "fed_liquidity": "fed & liquidity",
-    "crash_call": "base case",
+    "crash_call": "crash / drawdown",
 }
 
 # marker key -> theme it evidences (or None)
@@ -501,7 +501,7 @@ const THEME_KR = {
   vol_posture: "Vol posture",
   opex_stance: "Opex stance",
   fed_liquidity: "Fed & liquidity",
-  crash_call: "Base case"
+  crash_call: "크래시 / 하락"
 };
 
 const MARKER_NAMES = {
