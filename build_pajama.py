@@ -17,6 +17,12 @@ DRAFT = os.path.join(HERE, "pajama-draft.txt")
 SIG = os.path.join(HERE, "signals.json")
 OUT = os.path.join(HERE, "pajama", "index.html")
 
+HANGUL = re.compile(r"[가-힣]")
+
+
+def lang_of(line):
+    return "kr" if HANGUL.search(line) else "en"
+
 LABEL = {
     "regime": "regime",
     "gamma_flip": "gamma flip",
@@ -82,7 +88,7 @@ def render():
 
     sections = []
     for heading, paras in blocks:
-        body = "".join("<p>%s</p>" % esc(p) for p in paras)
+        body = "".join('<p class="%s">%s</p>' % (lang_of(p), esc(p)) for p in paras)
         sections.append(
             '<section class="sec"><h3>%s</h3>%s</section>' % (esc(heading), body))
 
@@ -122,8 +128,14 @@ def render():
     font-size: 15px; line-height: 1.6; }
   .wrap { max-width: 1080px; margin: 0 auto; padding: 36px 20px 90px;
     display: grid; grid-template-columns: minmax(0,1fr) 340px; gap: 26px; }
+  .top { grid-column: 1 / -1; display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
   h1 { font-size: 24px; margin: 0 0 4px; letter-spacing: -0.015em; }
-  .sub { color: var(--ink-2); font-size: 13.5px; margin: 0 0 22px; }
+  .sub { color: var(--ink-2); font-size: 13.5px; margin: 0; }
+  .langsw { margin-left: auto; display: inline-flex; border: 1px solid var(--hair);
+    border-radius: 8px; overflow: hidden; font-size: 13px; }
+  .langsw button { font: inherit; border: 0; background: var(--surface-1);
+    color: var(--ink-2); padding: 6px 14px; cursor: pointer; }
+  .langsw button.on { background: var(--accent); color: #fff; }
   .sec { margin-bottom: 26px; }
   .sec h3 { font-size: 13px; letter-spacing: 0.03em; text-transform: uppercase;
     color: var(--accent); margin: 0 0 8px; }
@@ -138,16 +150,27 @@ def render():
   .ev .d { color: var(--accent); font-size: 11.5px; font-variant-numeric: tabular-nums; }
   .ev .qt { display: block; color: var(--ink-2); margin-top: 2px; }
   .note { margin-top: 18px; font-size: 12px; color: var(--ink-3); }
+  body[data-lang="en"] .kr, body[data-lang="kr"] .en { display: none; }
   @media (max-width: 860px) {
     .wrap { grid-template-columns: 1fr; }
+    .langsw { margin-left: 0; }
   }
 </style>
 </head>
 <body>
 <div class="wrap">
+  <div class="top">
+    <div>
+      <h1>Pajama trader briefing</h1>
+      <p class="sub">Plain-language read of the Karsan signal · for the evening trader</p>
+    </div>
+    <div class="langsw" id="langsw">
+      <button data-l="both" class="on">EN+KR</button>
+      <button data-l="en">EN</button>
+      <button data-l="kr">KR</button>
+    </div>
+  </div>
   <div>
-    <h1>Pajama trader briefing</h1>
-    <p class="sub">A plain-language read of the Karsan signal — for the evening trader · English / 한국어</p>
     %s
     <p class="note">Generated with Gemini from the desk's evidence box. Quotes are verbatim from Cem Karsan interviews (last 30 days). Not investment advice; information only.</p>
   </div>
@@ -156,6 +179,25 @@ def render():
     %s
   </aside>
 </div>
+<script>
+(() => {
+  const sw = document.getElementById("langsw");
+  const set = l => {
+    document.body.dataset.lang = l;
+    [...sw.children].forEach(b => b.classList.toggle("on", b.dataset.l === l));
+    try { localStorage.setItem("pajama-lang", l); } catch (e) {}
+  };
+  sw.addEventListener("click", e => {
+    const b = e.target.closest("button");
+    if (b) set(b.dataset.l);
+  });
+  let saved = null;
+  try { saved = localStorage.getItem("pajama-lang"); } catch (e) {}
+  const q = new URLSearchParams(location.search).get("lang");
+  if (q && ["en", "kr", "both"].includes(q)) saved = q;
+  if (saved && ["en", "kr", "both"].includes(saved)) set(saved);
+})();
+</script>
 </body>
 </html>
 """ % ("".join(sections), rail_html)
