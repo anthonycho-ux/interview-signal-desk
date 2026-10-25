@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Karsan signal card</title>
+<style>
+  :root {
+    --bg: #0e1115; --ink: #e9e6e0; --ink2: #a7a49c; --ink3: #6f6d66;
+    --hair: #262a31; --hair2: #333842;
+    --pos: #3b86e0; --neg: #e34948; --gold: #d9a13b;
+    --surf: #161a20;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 15px; line-height: 1.5; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 40px 24px 90px; }
+
+  header { border-bottom: 1px solid var(--hair); padding-bottom: 20px; margin-bottom: 28px; }
+  .eyebrow { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--ink3); margin-bottom: 8px; }
+  h1 { font-size: 34px; font-weight: 750; letter-spacing: -0.03em; margin: 0 0 6px; }
+  .sub { color: var(--ink2); font-size: 14px; margin: 0; }
+  .sub b { color: var(--ink); }
+
+  .grid { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(280px, 1fr); gap: 28px; }
+
+  /* hero ladder */
+  .hero { background: var(--surf); border: 1px solid var(--hair); padding: 24px 22px 28px; }
+  .hero h2 { font-size: 13px; font-weight: 600; color: var(--ink2);
+    margin: 0 0 4px; letter-spacing: 0.01em; }
+  .hero .cap { font-size: 12.5px; color: var(--ink3); margin: 0 0 26px; }
+  .ladder { position: relative; height: 150px; border-bottom: 1px solid var(--hair2); }
+  .ladder .backdrop { position: absolute; top: 0; bottom: 0; background: var(--neg);
+    opacity: 0.10; }
+  .ladder::before { content: ""; position: absolute; left: 0; right: 0; top: 99px;
+    height: 1px; background: var(--hair2); }
+  .ruler { position: absolute; left: 0; right: 0; top: 112px;
+    display: flex; justify-content: space-between; font-size: 11.5px;
+    color: var(--ink3); font-variant-numeric: tabular-nums; }
+  .mk { position: absolute; top: 8px; height: 106px; width: 2px;
+    transform: translateX(-50%); }
+  .mk .tick { display: block; width: 2px; height: 100%; }
+  .mk.spot .tick { background: var(--ink); }
+  .mk.flip .tick { background: var(--gold); }
+  .mk.pw .tick { background: var(--neg); }
+  .mk.cw .tick { background: var(--pos); }
+
+  .legend { display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 8px; margin-top: 14px; }
+  .lg { display: flex; align-items: baseline; gap: 8px;
+    font-size: 12px; color: var(--ink2); }
+  .lg i { width: 10px; height: 2px; flex: none; align-self: center; background: var(--ink3); }
+  .lg.spot i { background: var(--ink); }
+  .lg.flip i { background: var(--gold); }
+  .lg.pw i { background: var(--neg); }
+  .lg.cw i { background: var(--pos); }
+  .lg b { font-weight: 650; color: var(--ink); font-size: 12.5px; }
+  .lg span { color: var(--ink3); font-size: 11.5px; font-variant-numeric: tabular-nums; }
+  .lg.flip b { color: var(--gold); }
+  .lg.pw b { color: #f07574; }
+  .lg.cw b { color: #6ea8ef; }
+  .reveal { animation: draw 1.4s cubic-bezier(.2,.8,.2,1) both; }
+  @keyframes draw { from { opacity: 0; transform: translateX(-50%) scaleY(0); } }
+  @media (prefers-reduced-motion: reduce) { .reveal { animation: none; } }
+
+  /* stat rail */
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--hair); border: 1px solid var(--hair); margin-top: 26px; }
+  .tile { background: var(--surf); padding: 14px 16px; }
+  .tile .k { font-size: 11.5px; color: var(--ink3); margin-bottom: 4px; }
+  .tile .v { font-size: 24px; font-weight: 700; letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums; }
+  .tile .v.pos { color: var(--pos); } .tile .v.neg { color: var(--neg); }
+  .tile .u { font-size: 12px; color: var(--ink3); font-weight: 400; margin-left: 4px; }
+  .tile .note { font-size: 11.5px; color: var(--ink3); margin-top: 2px; }
+
+  /* right rail */
+  .rail { display: flex; flex-direction: column; gap: 22px; }
+  .state { background: var(--surf); border: 1px solid var(--hair); padding: 18px; }
+  .state h3 { font-size: 12px; font-weight: 650; color: var(--ink2); margin: 0 0 12px; }
+  .state .row { display: flex; align-items: baseline; gap: 8px; padding: 7px 0;
+    border-top: 1px solid var(--hair); font-size: 13.5px; }
+  .state .row .k { color: var(--ink3); font-size: 12.5px; }
+  .state .row .v { margin-left: auto; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .state .row .v.neg { color: #f07574; }
+  .state .row .v.pos { color: #6ea8ef; }
+  .state .row .v.gold { color: var(--gold); }
+  .quote { font-size: 13px; color: var(--ink2); border-left: 2px solid var(--hair2);
+    padding-left: 12px; margin-top: 12px; }
+  .quote b { color: var(--ink); font-weight: 600; }
+
+  .ev { padding: 10px 0; border-top: 1px solid var(--hair); font-size: 13px; }
+  .ev .d { color: var(--gold); font-size: 11.5px; font-variant-numeric: tabular-nums; }
+  .ev .lbl { color: var(--ink3); font-size: 11px; text-transform: uppercase;
+    letter-spacing: 0.04em; margin-left: 8px; }
+  .ev .qt { display: block; color: var(--ink2); margin-top: 3px; }
+
+  footer { margin-top: 40px; border-top: 1px solid var(--hair); padding-top: 18px;
+    font-size: 12.5px; color: var(--ink3); display: flex; gap: 18px; flex-wrap: wrap; }
+  footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid var(--hair2); }
+  footer a:hover { color: var(--ink); }
+
+  @media (max-width: 820px) {
+    .grid { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Dealer gamma · options desk</div>
+    <h1>Karsan signal card</h1>
+    <p class="sub">Chain as of <b>Sat 24 Oct 2026 18:24 EDT</b> · quotes verbatim from his last 30 days of interviews.</p>
+  </header>
+
+  <div class="grid">
+    <div>
+      <section class="hero">
+        <h2>Where the levels sit</h2>
+        <p class="cap">Short gamma below the flip amplifies moves; the walls bracket the range the market treats as its floor and ceiling.</p>
+        <div class="ladder" id="ladder">
+          <div class="backdrop" style="left:52.63%;right:36.84%"></div>
+          <div class="mk pw" style="left:52.63%"><span class="tick"></span></div><div class="mk spot" style="left:50.78%"><span class="tick"></span></div><div class="mk flip" style="left:58.45%"><span class="tick"></span></div><div class="mk cw" style="left:63.16%"><span class="tick"></span></div>
+          <div class="ruler"><span>strike level</span><span>SPX</span></div>
+        </div>
+        <div class="legend">
+          <div class="lg pw"><i></i><b>put wall</b><span>7,650</span></div><div class="lg spot"><i></i><b>spot</b><span>7,624</span></div><div class="lg flip"><i></i><b>flip</b><span>7,733 · +1.43%</span></div><div class="lg cw"><i></i><b>call wall</b><span>7,800</span></div>
+        </div>
+        <div class="stats">
+          <div class="tile"><div class="k">Net gamma</div>
+            <div class="v neg">-33.9718<span class="u">USD bn per 1% move</span></div>
+            <div class="note">per 1% move</div></div>
+          <div class="tile"><div class="k">Gamma flip</div>
+            <div class="v gold">7,733</div>
+            <div class="note">+1.43% from spot</div></div>
+          <div class="tile"><div class="k">Regime</div>
+            <div class="v neg">negative gamma</div>
+            <div class="note">negative gamma: dealers short, hedging amplifies moves</div></div>
+        </div>
+      </section>
+    </div>
+
+    <div class="rail">
+      <section class="state">
+        <h3>Current state</h3>
+        <div class="row"><span class="k">Regime</span><span class="v neg">negative gamma: dealers short, hedging amplifies moves</span></div>
+        <div class="row"><span class="k">Spot</span><span class="v">7,624</span></div>
+        <div class="row"><span class="k">Flip</span><span class="v gold">7,733</span></div>
+        <div class="row"><span class="k">Put wall</span><span class="v neg">7,650</span></div>
+        <div class="row"><span class="k">Call wall</span><span class="v pos">7,800</span></div>
+        <div class="quote"><b>fed &amp; liquidity</b> — “the Fed meeting itself. So, so prepare. We're getting close to that Fed meeting.”</div>
+      </section>
+
+      <section class="state">
+        <h3>Newest quotes</h3>
+        <div class="ev"><span class="d">20261023</span><span class="lbl">fed &amp; liquidity</span><span class="qt">“the Fed meeting itself. So, so prepare. We're getting close to that Fed meeting.…”</span></div><div class="ev"><span class="d">20261023</span><span class="lbl">base case</span><span class="qt">“open revert to the price the real price. Um and and just because those you could see a crash in those over weekend something weird could happen but th…”</span></div><div class="ev"><span class="d">20261021</span><span class="lbl">regime</span><span class="qt">“four month window before a decline. So, what you'll see is the skew pops, people are worried, people are starting to hedge, but reflexively what does …”</span></div><div class="ev"><span class="d">20261021</span><span class="lbl">walls &amp; skew</span><span class="qt">“just another reason to be concerned. I'll highlight one important stat here, too. I gave you the skew one. We have not seen uh a combination of the th…”</span></div><div class="ev"><span class="d">20261021</span><span class="lbl">vol posture</span><span class="qt">“Meta up to 722, Tesla up to 393. So, Jim, So, Jim, I want to talk to you about volatility here, because we saw that Vix spike up to to 22 on Friday. A…”</span></div>
+      </section>
+    </div>
+  </div>
+
+  <footer>
+    <span>View on the <a href="../karsan/" target="_blank">signal desk</a></span>
+    <span>Hear it on <a href="../radio/" target="_blank">radio</a></span>
+    <span>Read the <a href="../pajama/" target="_blank">pajama briefing</a></span>
+    <span>Not investment advice · information only</span>
+  </footer>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const ladder = document.getElementById("ladder");
+  [...ladder.querySelectorAll(".mk")].forEach((m, i) => {
+    m.classList.add("reveal");
+    m.style.animationDelay = (0.08 * i) + "s";
+  });
+});
+</script>
+</body>
+</html>
