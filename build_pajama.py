@@ -28,7 +28,14 @@ LABEL = {
 }
 
 HEAD = re.compile(r"^\s*(\d+)\.\s+(.+)$")
-KR_HEAD = re.compile(r"^[가-힣]")
+
+
+def is_heading(line):
+    # heading lines carry a bilingual title (EN / KR) and no terminal period,
+    # or are explicitly numbered.
+    if HEAD.match(line):
+        return True
+    return "/" in line and len(line) < 90 and not line.rstrip().endswith(".")
 
 
 def esc(s):
@@ -43,11 +50,11 @@ def parse_draft():
         line = raw.strip()
         if not line:
             continue
-        m = HEAD.match(line)
-        if m:
+        if is_heading(line):
             if cur:
                 blocks.append(cur)
-            cur = [m.group(2).strip(), []]
+            m = HEAD.match(line)
+            cur = [m.group(2).strip() if m else line, []]
             continue
         if not cur:
             continue
