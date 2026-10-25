@@ -1,0 +1,652 @@
+{
+ "regime": {
+  "label": "Gamma regime",
+  "quotes": [
+   {
+    "video": "8q2DSWpJBCE",
+    "date": "20261021",
+    "t": 479.36,
+    "text": "four month window before a decline. So, what you'll see is the skew pops, people are worried, people are starting to hedge, but reflexively what does that mean? People are short. Uh people are preparing, they're worried, they're hedging. Reflexively that makes it hard for a marke"
+   },
+   {
+    "video": "12bqNXx6PDs",
+    "date": "20261016",
+    "t": 161.72,
+    "text": "long of Vega per day of time. Also, that vol coming getting delivered vol means there's more vol selling, which sells means there's a a vol my element, which means that per implied vol decrease the amount of more Vega that they're decaying long."
+   },
+   {
+    "video": "12bqNXx6PDs",
+    "date": "20261016",
+    "t": 102.16,
+    "text": "implied volatility in that expiration. So, uh what ends up happening is is if you look at a volatility curve, and I encourage people to do that, you will see the implied volatility of these monthly expirations and the quarterly expirations as as slightly higher. And what that is "
+   },
+   {
+    "video": "qbA9__jh8BY",
+    "date": "20261013",
+    "t": 522.16,
+    "text": "that Vanna Charm? You know, little bit of positive positive kind of motion is likely some relief to the wall of worry, call it, is likely there, in my opinion, in the short term."
+   },
+   {
+    "video": "qbA9__jh8BY",
+    "date": "20261013",
+    "t": 224.76,
+    "text": "compressing. Why? Any idea? Why Why Why is this long Vomma? Why do dealers get long vo- a long Vomma and Veda? In other words, by every day that goes by during this period they get longer and longer vol."
+   }
+  ],
+  "levels": [],
+  "latest": {
+   "video": "8q2DSWpJBCE",
+   "date": "20261021",
+   "t": 479.36,
+   "text": "four month window before a decline. So, what you'll see is the skew pops, people are worried, people are starting to hedge, but reflexively what does that mean? People are short. Uh people are preparing, they're worried, they're hedging. Reflexively that makes it hard for a marke"
+  }
+ },
+ "gamma_flip": {
+  "label": "Gamma flip / levels",
+  "quotes": [],
+  "latest": null
+ },
+ "walls_skew": {
+  "label": "Event walls & put skew",
+  "quotes": [
+   {
+    "video": "8q2DSWpJBCE",
+    "date": "20261021",
+    "t": 768.4,
+    "text": "just another reason to be concerned. I'll highlight one important stat here, too. I gave you the skew one. We have not seen uh a combination of the three big forces, price of oil uh you know US uh 10-year yield and dollar index. These are the things that drive uh you know structu"
+   },
+   {
+    "video": "8q2DSWpJBCE",
+    "date": "20261021",
+    "t": 700.16,
+    "text": "tomorrow. They affect things over time. If they are not resolved over some time they they you know create a more more you know convex potential risk to to the economy and to markets to be clear. Um but the voting machine doesn't care in the short term. Buyers sellers has this has"
+   },
+   {
+    "video": "8q2DSWpJBCE",
+    "date": "20261021",
+    "t": 619.56,
+    "text": "can't hate what we've seen so far today. I suppose some of these earnings calls themselves are going to be important. We know that that has turned the screws on many of market reaction in recent sessions. All right, uh, Jim, we only have you for 3 more minutes, so, you know, one "
+   },
+   {
+    "video": "8q2DSWpJBCE",
+    "date": "20261021",
+    "t": 574.64,
+    "text": "what you see at tops, not at bottoms. And uh very very interesting kind of action both from the numbers and the price action and skew and other things underneath the hood."
+   },
+   {
+    "video": "8q2DSWpJBCE",
+    "date": "20261021",
+    "t": 504.96,
+    "text": "have it pay off. It needs to be hard. And so, you generally model through some period of months before a decline. Not uh you can't time this exactly. This is not uh I'm not calling for a decline in the next week or two weeks. I'm telling you that there institutions are worried fo"
+   },
+   {
+    "video": "8q2DSWpJBCE",
+    "date": "20261021",
+    "t": 479.36,
+    "text": "four month window before a decline. So, what you'll see is the skew pops, people are worried, people are starting to hedge, but reflexively what does that mean? People are short. Uh people are preparing, they're worried, they're hedging. Reflexively that makes it hard for a marke"
+   },
+   {
+    "video": "8q2DSWpJBCE",
+    "date": "20261021",
+    "t": 403.24,
+    "text": "after OpEx. Yeah, I think I think the view has been and and generally, the highest probability outcome here is, you know, uh uh push higher, push higher, get good news into midterms with with what comes after. We've talked about that for some time. And the reality is that risk is"
+   },
+   {
+    "video": "QbKczI0S0p4",
+    "date": "20261019",
+    "t": 313.84,
+    "text": "very telling. Uh last thing on flows here before we move on to I think a lot of discussion about that but just let's a good time for this chart about skew. Um one month skew right now is is popped up after which you would imagine is you know a a strong day to the downside that we"
+   },
+   {
+    "video": "QbKczI0S0p4",
+    "date": "20261019",
+    "t": 8.64,
+    "text": "think a lot of people consider it nasty. It's it's always interesting to contextualize that, right? After some of the sell-offs that you and I have have seen in our days, but sell-off nonetheless and um I we did see uh a little bit of change in skew um within this time period um "
+   },
+   {
+    "video": "12bqNXx6PDs",
+    "date": "20261016",
+    "t": 390.72,
+    "text": "not the fear index, okay? The change, now that we get a little inside baseball again, the change relative to the skew of the vol, or in other words, the actual implied volatility change of the strikes themselves, whether or not that volatility surface is going up or down, is the "
+   },
+   {
+    "video": "12bqNXx6PDs",
+    "date": "20261016",
+    "t": 326.16,
+    "text": "during this OpEx period? Yeah, so so fixed rate vol is measuring what the actual uh vol implied volatility of the strikes uh of the the actual surface are whether they're going up and down. And what how is that different than the VIX? The VIX is just measuring at the money floati"
+   },
+   {
+    "video": "12bqNXx6PDs",
+    "date": "20261016",
+    "t": 176.92,
+    "text": "These all lead to vol selling at scale. This is inside baseball. You know, there's a big takeaway during these 2 weeks. So, every morning you come in, vol compression. On top of that, there's another effect that compresses vol as if that wasn't enough, which is the skew is very s"
+   },
+   {
+    "video": "qbA9__jh8BY",
+    "date": "20261013",
+    "t": 1304.2,
+    "text": "Mhm. Like that chart makes a ton of sense in general and well how these things event fall, right? Collapses, that skew comes down, markets rally, but especially if it's been weak beforehand."
+   },
+   {
+    "video": "qbA9__jh8BY",
+    "date": "20261013",
+    "t": 910.64,
+    "text": "a bit of like moguls, like skiing here. You have this situation that keeps happening with calls in the convexity part of the market, like this AI part of the market, the hyperscalers, where those calls are high, but the positioning keeps ebbing and flowing there relative to the t"
+   },
+   {
+    "video": "qbA9__jh8BY",
+    "date": "20261013",
+    "t": 575.32,
+    "text": "Charm flows and event wall passing. But, I think that might be an opportunity to kind of stay short kind of the most stressful weak links weak links Mhm."
+   },
+   {
+    "video": "qbA9__jh8BY",
+    "date": "20261013",
+    "t": 548.84,
+    "text": "good opportunity to to sell there. I want to be clear with one of the key areas I'm most worried about into the potential risks that are coming are regional banks. So, I think there'll be a lot of you know, I I think I would not look at financials as a monolith. I think there are"
+   },
+   {
+    "video": "qbA9__jh8BY",
+    "date": "20261013",
+    "t": 522.16,
+    "text": "that Vanna Charm? You know, little bit of positive positive kind of motion is likely some relief to the wall of worry, call it, is likely there, in my opinion, in the short term."
+   },
+   {
+    "video": "qbA9__jh8BY",
+    "date": "20261013",
+    "t": 510.2,
+    "text": "well. But, given all that, you're also seeing a pretty high put skew in that part of the market. And with an event wall for earnings, that tends to mean what? Is that Vanna Charm?"
+   },
+   {
+    "video": "qbA9__jh8BY",
+    "date": "20261013",
+    "t": 338.88,
+    "text": "more. Vol naturally becomes a hot potato and then it compresses more. But it also compresses the realized vol because the more and more big dealers get long vol that's cheap, right? It's hard for markets to move. I guess the third component, which is very important also, is becau"
+   },
+   {
+    "video": "YIR7RVLadt8",
+    "date": "20261009",
+    "t": 1471.84,
+    "text": "reversal. Again, not yet. getting close. That's one path. And the reason that would start to work and it'd be accompanied with a rising v both into that and out is uh one uh you as you get towards the midterms here, the risks of some contested election start to really increase. A"
+   },
+   {
+    "video": "YIR7RVLadt8",
+    "date": "20261009",
+    "t": 377.76,
+    "text": "crisis, right, which we've talked about. But but uh in the meantime um if it's the ball is compressed and held at bay uh during that trading day uh you will get it will feel more like a wall of worry during the day. So yeah, if a crisis comes, crisis comes, yeah, if a crisis come"
+   },
+   {
+    "video": "YIR7RVLadt8",
+    "date": "20261009",
+    "t": 319.12,
+    "text": "consider as a day trader? My opinion is it's been that way for a long time. And the reason that happens is because of all compression. When market V markets are up in the US index V structured products are being delivered daily as V supply to kind of cushion the market when the U"
+   }
+  ],
+  "levels": [],
+  "latest": {
+   "video": "8q2DSWpJBCE",
+   "date": "20261021",
+   "t": 768.4,
+   "text": "just another reason to be concerned. I'll highlight one important stat here, too. I gave you the skew one. We have not seen uh a combination of the three big forces, price of oil uh you know US uh 10-year yield and dollar index. These are the things that drive uh you know structu"
+  }
+ },
+ "vol_posture": {
+  "label": "Vol posture",
+  "quotes": [
+   {
+    "video": "8q2DSWpJBCE",
+    "date": "20261021",
+    "t": 385.44,
+    "text": "Meta up to 722, Tesla up to 393. So, Jim, So, Jim, I want to talk to you about volatility here, because we saw that Vix spike up to to 22 on Friday. And ever since then, it's been in a steady decline. I mean, two-day, three-day window, we're off six points from the high."
+   },
+   {
+    "video": "12bqNXx6PDs",
+    "date": "20261016",
+    "t": 715.52,
+    "text": "yeah, I mean, yeah, gosh. And people don't want to hear it, but it's a reality and it's not a presidential election this time around, but it is maybe even more important given the size and scale and importance to markets to markets of the administration here, right? And so, if th"
+   },
+   {
+    "video": "12bqNXx6PDs",
+    "date": "20261016",
+    "t": 532.2,
+    "text": "is lower. Right? So, structurally it is showing you a lower implied volatility when that's not again something that's necessarily as true, right? And now just because that implied volatility is higher in the short term, it just means they're pricing an event vol for the election."
+   },
+   {
+    "video": "12bqNXx6PDs",
+    "date": "20261016",
+    "t": 508.8,
+    "text": "let's start there. Um there is this dynamic where the currently we're moving past the actual implied volatility of the event being at the the peak, which it was when it was 30 days out, to now moving to very close. So, now we're in actually sliding to a 30-day vol, which is post "
+   },
+   {
+    "video": "12bqNXx6PDs",
+    "date": "20261016",
+    "t": 435.56,
+    "text": "compressed as the VIX is showing you. So, the VIX is showing down 2.3% .39 today. Uh the reality is it's down about half of that, .2, right? So, but it is down because again, all that vol compression that we've been seeing. And this these are big open interest. Also, uh for good "
+   },
+   {
+    "video": "12bqNXx6PDs",
+    "date": "20261016",
+    "t": 365.8,
+    "text": "would go down. Opposite would be true. If the market went down, we would slide up to a higher implied volatility. It would move to a lower spot."
+   },
+   {
+    "video": "12bqNXx6PDs",
+    "date": "20261016",
+    "t": 189.96,
+    "text": "very steep at these expirations. Meaning, the downside options are more expensive than the calls. So, as that vol comes down, not only are they decaying longer vol, but all the short deltas that dealers hold, the stock relative to short put long call, they also need to buy back."
+   },
+   {
+    "video": "12bqNXx6PDs",
+    "date": "20261016",
+    "t": 134.56,
+    "text": "market of dealers, okay? But, what this does by by its very definition is means as that vol comes down that you've sold for an extra premium, you get delivered long vol behind it. You decay into cheap very, very cheap vol."
+   },
+   {
+    "video": "qbA9__jh8BY",
+    "date": "20261013",
+    "t": 338.88,
+    "text": "more. Vol naturally becomes a hot potato and then it compresses more. But it also compresses the realized vol because the more and more big dealers get long vol that's cheap, right? It's hard for markets to move. I guess the third component, which is very important also, is becau"
+   },
+   {
+    "video": "qbA9__jh8BY",
+    "date": "20261013",
+    "t": 280.52,
+    "text": "Makes sense. Yes. So So if if they can sell those to buy something cheaper, they're going to buy after it. So they can put on a calendar vol spread for example very easily where they're long short the vol behind it for cheap and short the vol above it for expensive."
+   },
+   {
+    "video": "7jVCFx8wnTE",
+    "date": "20261010",
+    "t": 98.8,
+    "text": "Yeah. And all we got was like a steady vol crush, market rally. People just threw in the towel. They were like, \"I guess this isn't going to be anything.\" You know? Um and and so it takes conviction."
+   },
+   {
+    "video": "xsiJmn1jRQQ",
+    "date": "20261005",
+    "t": 917.08,
+    "text": "house. He's not wrong. He's the house. He's better information. Right now, it is hard for him to control the bond market. But, if they take the at the Fed on board into a crisis and they deploy uh sovereign wealth funds, those are tools that are well in excess of the the tools he"
+   },
+   {
+    "video": "xsiJmn1jRQQ",
+    "date": "20261005",
+    "t": 242.52,
+    "text": "this. The reality is there is a real suppression of equity volatility. There is a support to equity vol. They're trying, this is very well known, trying to to Not to cut you off, but we have the same chart, but we have it if we can do the one where they're on together, um, and yo"
+   }
+  ],
+  "levels": [],
+  "latest": {
+   "video": "8q2DSWpJBCE",
+   "date": "20261021",
+   "t": 385.44,
+   "text": "Meta up to 722, Tesla up to 393. So, Jim, So, Jim, I want to talk to you about volatility here, because we saw that Vix spike up to to 22 on Friday. And ever since then, it's been in a steady decline. I mean, two-day, three-day window, we're off six points from the high."
+  }
+ },
+ "opex_stance": {
+  "label": "OpEx stance",
+  "quotes": [
+   {
+    "video": "12bqNXx6PDs",
+    "date": "20261016",
+    "t": 435.56,
+    "text": "compressed as the VIX is showing you. So, the VIX is showing down 2.3% .39 today. Uh the reality is it's down about half of that, .2, right? So, but it is down because again, all that vol compression that we've been seeing. And this these are big open interest. Also, uh for good "
+   },
+   {
+    "video": "12bqNXx6PDs",
+    "date": "20261016",
+    "t": 288.0,
+    "text": "the end of expiration. Long way of saying expiration matter, drive a lot of flows. Vol compression tends to be dominant in this window, but don't don't see that for the macro reality. And if you're scratching your head while the macro is doing another thing, don't think that that"
+   },
+   {
+    "video": "12bqNXx6PDs",
+    "date": "20261016",
+    "t": 252.64,
+    "text": "talked about this before during COVID. We knew about all the risk. Tons of tremendous risk, uh you know, going uh starting in December, January. We talked about the markets rallying. Vol got compressed. When did we roll over? Once that vol compression and buyback rolled off at Fe"
+   },
+   {
+    "video": "12bqNXx6PDs",
+    "date": "20261016",
+    "t": 64.16,
+    "text": "volatility around options expiration? Yeah, so importantly, uh options expiration, even the week before, so really this 2-week period, there is structurally a tremendous amount of vol selling. And whatever it was 2 years ago or 3 years ago, not even close to even where it is now."
+   },
+   {
+    "video": "12bqNXx6PDs",
+    "date": "20261016",
+    "t": 10.84,
+    "text": "earning season. We got expiration week. Uh we're really kicking into gear right now. And of course, we got the Fed soon."
+   },
+   {
+    "video": "12bqNXx6PDs",
+    "date": "20261016",
+    "t": 6.72,
+    "text": "Expiration week. It's a fun week. We got the start of earning season. We got expiration week."
+   },
+   {
+    "video": "12bqNXx6PDs",
+    "date": "20261016",
+    "t": 5.04,
+    "text": "Good to be here. Expiration week."
+   },
+   {
+    "video": "qbA9__jh8BY",
+    "date": "20261013",
+    "t": 963.36,
+    "text": "positioning has come down. Probably a little bit better place for for the dispersion to go back. Now we've seen this go for a bit. Question is, where does that end? Um it's not This is not going to last past, in our opinion, this squeeze past, you know, December OPEX. Does it end"
+   },
+   {
+    "video": "qbA9__jh8BY",
+    "date": "20261013",
+    "t": 219.68,
+    "text": "will go till OPEX more. That 2-week cycle is very vol compressing. Why? Any idea?"
+   },
+   {
+    "video": "qbA9__jh8BY",
+    "date": "20261013",
+    "t": 92.6,
+    "text": "important flows uh coming up this week. Yeah, cuz uh as we just saw, we set the table for the week. Uh CPI is one of those things on there, but expiration is definitely another one of those big things. Um it's a different one in such that we don't have VIX expiring this week, rig"
+   },
+   {
+    "video": "qbA9__jh8BY",
+    "date": "20261013",
+    "t": 47.64,
+    "text": "It's important. I think because this is this is You know, and this is another good thing we could both This is wholly off topic where we're going, but as always, we we can go so many different ways. Um you're right. It is expiration Monday. We do have expiration this week. I don'"
+   },
+   {
+    "video": "xsiJmn1jRQQ",
+    "date": "20261005",
+    "t": 83.2,
+    "text": "Okay. Right? And then there's also Friday, but two Mondays ago when there was no news, there was nothing coming out. And we shot up big after expiration. Now, that was kind of the unclenching of expiration and VIX expiration and all that, right? Um this past Friday, of course, we"
+   }
+  ],
+  "levels": [],
+  "latest": {
+   "video": "12bqNXx6PDs",
+   "date": "20261016",
+   "t": 435.56,
+   "text": "compressed as the VIX is showing you. So, the VIX is showing down 2.3% .39 today. Uh the reality is it's down about half of that, .2, right? So, but it is down because again, all that vol compression that we've been seeing. And this these are big open interest. Also, uh for good "
+  }
+ },
+ "fed_liquidity": {
+  "label": "Fed / liquidity",
+  "quotes": [
+   {
+    "video": "z9l9fkz_M2I",
+    "date": "20261023",
+    "t": 971.92,
+    "text": "the Fed meeting itself. So, so prepare. We're getting close to that Fed meeting."
+   },
+   {
+    "video": "z9l9fkz_M2I",
+    "date": "20261023",
+    "t": 927.92,
+    "text": "and feel for what they are telling you. And they have gone dead quiet. And if anything, uh, they are, which is a complete change. If anything, they are talking down the market and I think that is very, very important. So listen closely. Doesn't mean they will continue to do that."
+   },
+   {
+    "video": "z9l9fkz_M2I",
+    "date": "20261023",
+    "t": 218.0,
+    "text": "that's exacerbating kind of the move. But everything I see here is the thing that aligns here is risk off, risk off, risk off, risk off. And whether that is credit default swaps getting worse, uh, uh, bonds coming yields coming down, uh, and, uh, and also obviously markets and te"
+   },
+   {
+    "video": "QbKczI0S0p4",
+    "date": "20261019",
+    "t": 313.84,
+    "text": "very telling. Uh last thing on flows here before we move on to I think a lot of discussion about that but just let's a good time for this chart about skew. Um one month skew right now is is popped up after which you would imagine is you know a a strong day to the downside that we"
+   },
+   {
+    "video": "qbA9__jh8BY",
+    "date": "20261013",
+    "t": 1051.08,
+    "text": "be sometime in there in my opinion. This is a graphic showing 134 names that are down 40% or more as as Jim said there's bare markets technically 20% so there's way more names that are down 20% if you pull that up and you'd see exactly what he's talking about. I mean this is yeah"
+   },
+   {
+    "video": "qbA9__jh8BY",
+    "date": "20261013",
+    "t": 963.36,
+    "text": "positioning has come down. Probably a little bit better place for for the dispersion to go back. Now we've seen this go for a bit. Question is, where does that end? Um it's not This is not going to last past, in our opinion, this squeeze past, you know, December OPEX. Does it end"
+   },
+   {
+    "video": "qbA9__jh8BY",
+    "date": "20261013",
+    "t": 896.12,
+    "text": "of markets? I think between the Fed meeting, which is the 28th, I believe, and those earnings, given the amount of call positioning in this part of the market again that's building as uh you know, you have this this kind of this is about a bit of like moguls, like skiing here."
+   },
+   {
+    "video": "YIR7RVLadt8",
+    "date": "20261009",
+    "t": 1294.4,
+    "text": "really build up again is is a crisis. Now, the question is, will they let the real real cris type of crisis that's probably needed happen or is this like a temporary, you know, pseudo crisis so they can then reinflate the bubble and keep the plate spinning? And I think uh the cos"
+   },
+   {
+    "video": "YIR7RVLadt8",
+    "date": "20261009",
+    "t": 27.44,
+    "text": "market, though? We're down a little bit. So, we had 10s. We had the FOMC meeting minutes here. Jem, you are out of your FOMOs CNBC blackout window as it were."
+   },
+   {
+    "video": "xsiJmn1jRQQ",
+    "date": "20261005",
+    "t": 917.08,
+    "text": "house. He's not wrong. He's the house. He's better information. Right now, it is hard for him to control the bond market. But, if they take the at the Fed on board into a crisis and they deploy uh sovereign wealth funds, those are tools that are well in excess of the the tools he"
+   },
+   {
+    "video": "xsiJmn1jRQQ",
+    "date": "20261005",
+    "t": 707.88,
+    "text": "that will stop. It will stop. Because they they want a much bigger set of facilities. They want a uh the Fed involved. They want QE at the long end of the curve. They want to control the long end of the curve. They have to. Which by definition will create negative real rates."
+   },
+   {
+    "video": "xsiJmn1jRQQ",
+    "date": "20261005",
+    "t": 544.44,
+    "text": "come back and do QE. Dollars to donuts, I will bet you any amount of money that we have QE at full like bigger than you've seen in in since '08."
+   },
+   {
+    "video": "xsiJmn1jRQQ",
+    "date": "20261005",
+    "t": 533.28,
+    "text": "things? They want the Fed on board. They want wars. They want this Kabuki theater, right, which is happening now. We're all We're raising rates at the front end of the curve, right?"
+   },
+   {
+    "video": "xsiJmn1jRQQ",
+    "date": "20261005",
+    "t": 404.64,
+    "text": "There are no bids to the bond market. And as bit much as as Bissant tries to control that market, as much as he says I'm the house, he's not the house there."
+   }
+  ],
+  "levels": [],
+  "latest": {
+   "video": "z9l9fkz_M2I",
+   "date": "20261023",
+   "t": 971.92,
+   "text": "the Fed meeting itself. So, so prepare. We're getting close to that Fed meeting."
+  }
+ },
+ "crash_call": {
+  "label": "Crash / drawdown view",
+  "quotes": [
+   {
+    "video": "z9l9fkz_M2I",
+    "date": "20261023",
+    "t": 815.12,
+    "text": "open revert to the price the real price. Um and and just because those you could see a crash in those over weekend something weird could happen but that doesn't mean it would cause a crash more more broadly."
+   },
+   {
+    "video": "z9l9fkz_M2I",
+    "date": "20261023",
+    "t": 730.64,
+    "text": "There's no code here. We're trying. There's no code here. And we we love this type of question, right? I don't think people understand how much we like it. I there's I don't think there's many people in the world who are willing to answer questions like these, right, on air. This"
+   },
+   {
+    "video": "z9l9fkz_M2I",
+    "date": "20261023",
+    "t": 528.72,
+    "text": "have the market decline more than 20. what what could happen and markets could be closed for a little bit or something like weird like that could happen and these are things you have to think about that are really fringe but I do think a crisis is coming and so where do I come up"
+   },
+   {
+    "video": "z9l9fkz_M2I",
+    "date": "20261023",
+    "t": 509.76,
+    "text": "decline later. And so you're still calling for like a 20% decline post J sometime after in January or after minimum 20%. The only thing that would this is a new piece of info that I haven't told people. I've been thinking a lot about like what scenario could we have a crisis big "
+   },
+   {
+    "video": "z9l9fkz_M2I",
+    "date": "20261023",
+    "t": 387.12,
+    "text": "some potentially contested election? Right. So um so my view is still very much the case that there's basically two outcomes and I've been very adamant about this one rally into the midterms fail sometime probably more likely in December January but somewhere around and opex prob"
+   },
+   {
+    "video": "8q2DSWpJBCE",
+    "date": "20261021",
+    "t": 504.96,
+    "text": "have it pay off. It needs to be hard. And so, you generally model through some period of months before a decline. Not uh you can't time this exactly. This is not uh I'm not calling for a decline in the next week or two weeks. I'm telling you that there institutions are worried fo"
+   },
+   {
+    "video": "8q2DSWpJBCE",
+    "date": "20261021",
+    "t": 479.36,
+    "text": "four month window before a decline. So, what you'll see is the skew pops, people are worried, people are starting to hedge, but reflexively what does that mean? People are short. Uh people are preparing, they're worried, they're hedging. Reflexively that makes it hard for a marke"
+   },
+   {
+    "video": "8q2DSWpJBCE",
+    "date": "20261021",
+    "t": 403.24,
+    "text": "after OpEx. Yeah, I think I think the view has been and and generally, the highest probability outcome here is, you know, uh uh push higher, push higher, get good news into midterms with with what comes after. We've talked about that for some time. And the reality is that risk is"
+   },
+   {
+    "video": "8q2DSWpJBCE",
+    "date": "20261021",
+    "t": 385.44,
+    "text": "Meta up to 722, Tesla up to 393. So, Jim, So, Jim, I want to talk to you about volatility here, because we saw that Vix spike up to to 22 on Friday. And ever since then, it's been in a steady decline. I mean, two-day, three-day window, we're off six points from the high."
+   },
+   {
+    "video": "8q2DSWpJBCE",
+    "date": "20261021",
+    "t": 266.16,
+    "text": "so far. The average return on a downside surprise, though there's only been maybe seven of those total, um barely anything. And this is EPS, not rev. Um is a 2.2% decline, but that sample space is so tiny that, frankly, forget it."
+   },
+   {
+    "video": "8q2DSWpJBCE",
+    "date": "20261021",
+    "t": 260.32,
+    "text": "is negative. On positive surprises, the average return is a decline of 0.2% so far."
+   },
+   {
+    "video": "QbKczI0S0p4",
+    "date": "20261019",
+    "t": 950.52,
+    "text": "broadly. Um and importantly now, Elon, Anthropic, uh you know, Darya, those guys, a bunch of others, we obviously know Dell, uh whatnot, are starting to come out on on you know, in this kind of techno-populism techno-populism lean, which is we need to start donating stock to the "
+   },
+   {
+    "video": "QbKczI0S0p4",
+    "date": "20261019",
+    "t": 472.72,
+    "text": "decline if we're going to get one. People are worried, people are hedged for it. That means largely if if a decline happens, it's going to be market down, vol down with that one little asterisk of if some news comes out, something that is like just China invades Taiwan, something"
+   },
+   {
+    "video": "QbKczI0S0p4",
+    "date": "20261019",
+    "t": 454.28,
+    "text": "uh activate those puts in the scenario. Again, think March of of 2000 20, Feb into March, then you can get something really historic. So, it's really this 99% of the time if we get a decline unless there's something really historic, this is a is a stair-steppy decline if we're go"
+   },
+   {
+    "video": "12bqNXx6PDs",
+    "date": "20261016",
+    "t": 252.64,
+    "text": "talked about this before during COVID. We knew about all the risk. Tons of tremendous risk, uh you know, going uh starting in December, January. We talked about the markets rallying. Vol got compressed. When did we roll over? Once that vol compression and buyback rolled off at Fe"
+   },
+   {
+    "video": "12bqNXx6PDs",
+    "date": "20261016",
+    "t": 206.48,
+    "text": "also need to buy back. And this tends to happen more in the mornings and the end of the day. And this drives a buyback of deltas, so it makes it very hard for markets to decline during these periods. Or even if they do, it creates what? Little bounce backs that we see, right? And"
+   },
+   {
+    "video": "12bqNXx6PDs",
+    "date": "20261016",
+    "t": 176.92,
+    "text": "These all lead to vol selling at scale. This is inside baseball. You know, there's a big takeaway during these 2 weeks. So, every morning you come in, vol compression. On top of that, there's another effect that compresses vol as if that wasn't enough, which is the skew is very s"
+   },
+   {
+    "video": "bvsA9SxOimU",
+    "date": "20261014",
+    "t": 310.96,
+    "text": "the market more broadly. And I think they got a green light or whatever you call it, a red light to the market where for the decline, which is Trump has come out now and vocally started talking started talking about about you know, if he does this every time, by the way, if you h"
+   },
+   {
+    "video": "bvsA9SxOimU",
+    "date": "20261014",
+    "t": 291.72,
+    "text": "Yeah, look at that. The way I see this is the world starting to wake up to what we've been talking for about. We said about 2 months ago starting in into the last month we've been down the table, not that markets were going to crash then, right? That once we approach the midterms"
+   },
+   {
+    "video": "qbA9__jh8BY",
+    "date": "20261013",
+    "t": 963.36,
+    "text": "positioning has come down. Probably a little bit better place for for the dispersion to go back. Now we've seen this go for a bit. Question is, where does that end? Um it's not This is not going to last past, in our opinion, this squeeze past, you know, December OPEX. Does it end"
+   },
+   {
+    "video": "qbA9__jh8BY",
+    "date": "20261013",
+    "t": 472.88,
+    "text": "overall coming up? Yeah, as you highlighted the banks here, because it's been so stressful kind of in that bank kind of part of the market. I think the stat was something like 70% of all financials are in a correction 10% or more. So, like that is a very high kind of stressful nu"
+   },
+   {
+    "video": "CufhyHuz0oA",
+    "date": "20261011",
+    "t": 277.92,
+    "text": "market. Not like down 10% on a correction, down in a bear market."
+   },
+   {
+    "video": "CufhyHuz0oA",
+    "date": "20261011",
+    "t": 157.32,
+    "text": "accounts. Why do you think that is? Why do you think that is, you know? Again, we we've been here telling you for months that what's coming, and if you watch through that lens, everything, you know, um everything is pointing in that direction. So, um and and here we go, right int"
+   },
+   {
+    "video": "7jVCFx8wnTE",
+    "date": "20261010",
+    "t": 285.68,
+    "text": "58%, is now in a bear market. Not like down 10% on a correction, down in a bear market."
+   },
+   {
+    "video": "7jVCFx8wnTE",
+    "date": "20261010",
+    "t": 202.92,
+    "text": "midterms are going to be very contested. And that brings forward you know, I was really looking for December, January this this thing to top. And if anything, that's been brought forward meaningfully because of I think the risk of the midterm."
+   },
+   {
+    "video": "YIR7RVLadt8",
+    "date": "20261009",
+    "t": 1441.52,
+    "text": "higher from here if that is the path. Um, and that could begin early, right? A little bit of a decline. I don't think it would be super fast if that happened. This is one path. Um, and if that happens, uh, you know, people will be really bush bullish and push pushing for that mid"
+   },
+   {
+    "video": "YIR7RVLadt8",
+    "date": "20261009",
+    "t": 1425.6,
+    "text": "one of two things is going to happen. You're either going to soon before next Wednesday, within a week, um, or maybe before next Friday, next Friday, next Friday's expiration, um, get some short-term top. I think it will be higher from here if that is the path."
+   },
+   {
+    "video": "YIR7RVLadt8",
+    "date": "20261009",
+    "t": 1210.64,
+    "text": "capitalism that needs to happen. Well, and it's not like we haven't had this before. I mean, this is what FDR ultimately was the vector for. the uh government was tiny and incapable of deal of dealing with a recession and certainly not a world war. So suddenly you had to build a "
+   },
+   {
+    "video": "xsiJmn1jRQQ",
+    "date": "20261005",
+    "t": 524.92,
+    "text": "They know that. And on top of that, they want a good outcome by 2028 and they want to be able to roll out really big things. What are those things?"
+   }
+  ],
+  "levels": [
+   2000,
+   2028
+  ],
+  "latest": {
+   "video": "z9l9fkz_M2I",
+   "date": "20261023",
+   "t": 815.12,
+   "text": "open revert to the price the real price. Um and and just because those you could see a crash in those over weekend something weird could happen but that doesn't mean it would cause a crash more more broadly."
+  }
+ }
+}

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pajama trader briefing</title>
+<style>
+  :root {
+    color-scheme: light;
+    --surface-1: #fcfcfb; --surface-2: #f4f4f1; --page: #f9f9f7;
+    --ink-1: #0b0b0b; --ink-2: #52514e; --ink-3: #898781;
+    --hair: #e1e0d9; --axis: #c3c2b7; --accent: #2a78d6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      --surface-1: #1a1a19; --surface-2: #262625; --page: #0d0d0d;
+      --ink-1: #f0efec; --ink-2: #c3c2b7; --ink-3: #898781;
+      --hair: #2c2c2a; --axis: #383835; --accent: #3987e5;
+    }
+  }
+  :root[data-theme="dark"] {
+    --surface-1: #1a1a19; --surface-2: #262625; --page: #0d0d0d;
+    --ink-1: #f0efec; --ink-2: #c3c2b7; --ink-3: #898781;
+    --hair: #2c2c2a; --axis: #383835; --accent: #3987e5;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--page); color: var(--ink-1);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 15px; line-height: 1.6; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 36px 20px 90px;
+    display: grid; grid-template-columns: minmax(0,1fr) 340px; gap: 26px; }
+  h1 { font-size: 24px; margin: 0 0 4px; letter-spacing: -0.015em; }
+  .sub { color: var(--ink-2); font-size: 13.5px; margin: 0 0 22px; }
+  .sec { margin-bottom: 26px; }
+  .sec h3 { font-size: 13px; letter-spacing: 0.03em; text-transform: uppercase;
+    color: var(--accent); margin: 0 0 8px; }
+  .sec p { margin: 0 0 14px; }
+  .rail { background: var(--surface-1); border: 1px solid var(--hair);
+    border-radius: 10px; padding: 16px; align-self: start; }
+  .rail h2 { font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase;
+    color: var(--ink-3); font-weight: 600; margin: 0 0 10px; }
+  .ev { padding: 9px 0; border-top: 1px solid var(--hair); font-size: 13px; }
+  .ev .lbl { display: block; color: var(--ink-3); font-size: 11px;
+    text-transform: uppercase; letter-spacing: 0.04em; margin: 2px 0; }
+  .ev .d { color: var(--accent); font-size: 11.5px; font-variant-numeric: tabular-nums; }
+  .ev .qt { display: block; color: var(--ink-2); margin-top: 2px; }
+  .note { margin-top: 18px; font-size: 12px; color: var(--ink-3); }
+  @media (max-width: 860px) {
+    .wrap { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div>
+    <h1>Pajama trader briefing</h1>
+    <p class="sub">A plain-language read of the Karsan signal — for the evening trader · English / 한국어</p>
+    <section class="sec"><h3>The headline read / 헤드라인 요약</h3><p>Dealers are short gamma, meaning their hedging amplifies market movements while traders brace for upcoming risks.</p><p>딜러들의 숏 감마 상태로 인해 헤징이 시장 변동성을 증폭시키는 가운데, 투자자들은 다가오는 리스크에 대비하고 있습니다.</p></section><section class="sec"><h3>The state of the tape, in plain words / 시장 상황 요약</h3><p>Negative Gamma &amp; Gamma Flip: The market is in a negative gamma regime where dealers are short, meaning their hedging amplifies price moves. Spot sits at 7623.68, which is 1.43% below the gamma flip level of 7732.9.</p><p>시장은 딜러가 숏 상태인 네거티브 감마 체제에 있으며, 이는 딜러의 헤징이 가격 변동을 증폭시킴을 의미합니다. 현재 주가(spot)는 7623.68로 감마 플립 수준인 7732.9보다 1.43% 아래에 위치해 있습니다.</p><p>Walls: The call wall is located at 7800 and the put wall is at 7650.</p><p>콜 월은 7800, 풋 월은 7650에 형성되어 있습니다.</p><p>Vol Posture &amp; OpEx Stance: Volatility experienced a VIX spike up to 22 on Friday before entering a steady decline, while options expiration (OpEx) shows compressed volatility and large open interest.</p><p>변동성 지수(VIX)는 금요일에 22까지 급등한 후 지속적인 하락세를 보였으며, 옵션 만기(OpEx) 부근에서 변동성이 압축되고 큰 미결제약정이 наблюда되고 있습니다.</p><p>Fed &amp; Liquidity: Market focus is shifting toward liquidity considerations as we get closer to the upcoming Fed meeting.</p><p>다가오는 연준(Fed) 회의가 가까워짐에 따라 시장의 관심은 유동성 요소로 이동하고 있습니다.</p></section><section class="sec"><h3>What would change the picture / 국면 전환 요소</h3><p>A shift could occur if macro drivers—specifically the price of oil, the US 10-year yield, and the dollar index—realign, or if weekend market events cause prices at the open to revert to real prices without causing a broader crash.</p><p>유가, 미국 10년물 국채 금리, 달러 인덱스 등 핵심 거시 경제 요인들이 변화하거나, 주말 사이의 이벤트로 인해 개장 시 가격이 넓은 시장의 붕괴 없이 실제 가격으로 회귀할 경우 시장 양상이 바뀔 수 있습니다.</p></section><section class="sec"><h3>Pajama-trader glossary / 야간 투자자 용어집</h3><p>Negative Gamma: A market state where options dealers are short volatility and must sell into declines and buy into rallies. This behavior actively amplifies price moves rather than dampening them.</p><p>옵션 딜러들이 변동성 숏 포지션을 취하여 하락 시 매도하고 상승 시 매수해야 하는 시장 상태입니다. 이러한 행동은 가격 변동을 완화하기보다 활발하게 증폭시킵니다.</p><p>Gamma Flip: The specific price threshold that separates a high-volatility negative gamma regime from a low-volatility positive gamma regime. Currently set at 7732.9, resting 1.43% above the current spot price.</p><p>고변동성 네거티브 감마 체제와 저변동성 포지티브 감마 체제를 나누는 특정 가격 수준입니다. 현재 7732.9로 현재 주가보다 1.43% 위에 위치합니다.</p><p>Call Wall &amp; Put Wall: Key price levels with heavy options open interest that act as strong overhead resistance (call wall at 7800) or downside support (put wall at 7650).</p><p>옵션 미결제약정이 집중되어 강력한 상단 저항선(7800 콜 월) 또는 하단 지지선(7650 풋 월) 역할을 하는 주요 가격 수준입니다.</p><p>Vol Posture / VIX: A measure of market volatility expectations, which recently spiked to 22 before declining over a multi-day window.</p><p>시장 변동성 기대를 나타내는 지표로, 최근 22까지 급등한 후 며칠에 걸쳐 하락세를 보였습니다.</p><p>OpEx Stance: The market environment around options expiration characterized by compressed volatility and significant open interest positioning.</p><p>옵션 만기일 주변의 시장 환경으로, 변동성 압축과 상당한 규모의 미결제약정 포지셔닝이 특징입니다.</p><p>Fed &amp; Liquidity: The macro liquidity environment driven by upcoming Federal Reserve policy decisions and meetings.</p><p>연방준비제도(Fed)의 정책 결정 및 회의 일정에 의해 좌우되는 거시 유동성 환경입니다.</p></section><section class="sec"><h3>What I'd watch this week / 이번 주 주시해야 할 포인트</h3><p>Look out for hedging flows caused by rising skew over a "four month window before a decline. So, what you'll see is the skew pops, people are worried, people are starting to hedge, but reflexively what does that mean? People are short. Uh people are preparing, they're worried, they're hedging. Reflexively that makes" per Karsan (하락 전 4개월의 창 동안 스큐가 튀고 사람들이 걱정하며 헤징을 시작하여 반사적으로 숏 포지션이 됨).</p><p>Monitor the three major macro forces—price of oil, US 10-year yield, and dollar index—since "just another reason to be concerned. I'll highlight one important stat here, too. I gave you the skew one. We have not seen uh a combination of the three big forces, price of oil uh you know US uh 10-year yield and dollar index. These are the things that drive" per Karsan (유가, 미국 10년물 금리, 달러 인덱스라는 세 가지 주요 동인의 조합을 주시해야 함).</p><p>Watch the VIX dynamic following its recent drop from 22, noting that "Meta up to 722, Tesla up to 393. So, Jim, So, Jim, I want to talk to you about volatility here, because we saw that Vix spike up to to 22 on Friday. And ever since then, it's been in a steady decline. I mean, two-day, three-day window, we're off six points fro" per Karsan (금요일 22까지 급등한 후 며칠 동안 6포인트 하락한 VIX 변동성 추이).</p><p>Track options volatility compression around open interest, given that it is "compressed as the VIX is showing you. So, the VIX is showing down 2.3% .39 today. Uh the reality is it's down about half of that, .2, right? So, but it is down because again, all that vol compression that we've been seeing. And this these are big open interest" per Karsan (큰 미결제약정과 함께 관찰되는 옵션 변동성 압축 현상).</p><p>Prepare for volatility shifts tied to the Fed, as we are reminded to "the Fed meeting itself. So, so prepare. We're getting close to that Fed meeting." per Karsan (연준 회의가 가까워짐에 따라 대비가 필요함).</p><p>Not investment advice; information only. / 투자 조언이 아니며 정보 제공 목적으로만 제공됩니다.</p></section>
+    <p class="note">Generated with Gemini from the desk's evidence box. Quotes are verbatim from Cem Karsan interviews (last 30 days). Not investment advice; information only.</p>
+  </div>
+  <aside class="rail">
+    <h2>The evidence behind this</h2>
+    <div class="ev"><span class="d">20261021</span><span class="lbl">regime</span><span class="qt">“four month window before a decline. So, what you'll see is the skew pops, people are worried, people are starting to hedge, but reflexively what does that mean? People are short. Uh people are prepari…”</span></div><div class="ev"><span class="d">20261021</span><span class="lbl">walls &amp; skew</span><span class="qt">“just another reason to be concerned. I'll highlight one important stat here, too. I gave you the skew one. We have not seen uh a combination of the three big forces, price of oil uh you know US uh 10-…”</span></div><div class="ev"><span class="d">20261021</span><span class="lbl">vol posture</span><span class="qt">“Meta up to 722, Tesla up to 393. So, Jim, So, Jim, I want to talk to you about volatility here, because we saw that Vix spike up to to 22 on Friday. And ever since then, it's been in a steady decline.…”</span></div><div class="ev"><span class="d">20261016</span><span class="lbl">opex stance</span><span class="qt">“compressed as the VIX is showing you. So, the VIX is showing down 2.3% .39 today. Uh the reality is it's down about half of that, .2, right? So, but it is down because again, all that vol compression …”</span></div><div class="ev"><span class="d">20261023</span><span class="lbl">fed &amp; liquidity</span><span class="qt">“the Fed meeting itself. So, so prepare. We're getting close to that Fed meeting.…”</span></div><div class="ev"><span class="d">20261023</span><span class="lbl">base case</span><span class="qt">“open revert to the price the real price. Um and and just because those you could see a crash in those over weekend something weird could happen but that doesn't mean it would cause a crash more more b…”</span></div>
+  </aside>
+</div>
+</body>
+</html>
