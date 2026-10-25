@@ -34,9 +34,71 @@ MARKER_THEME = {
     "cw": "walls_skew",
 }
 
+# ranked "what he emphasizes" panel — display names, strongest first
+PRIORITY_LABEL = {
+    "crash_call": "Crash / drawdown view",
+    "walls_skew": "Event walls & put skew",
+    "fed_liquidity": "Fed / liquidity",
+    "vol_posture": "Vol posture",
+    "opex_stance": "OpEx stance",
+    "regime": "Gamma regime",
+    "gamma_flip": "Gamma flip",
+}
+
+# Korean chrome; technical terms stay English
+PRIORITY_KR = {
+    "crash_call": "크래시 / 하락 시나리오",
+    "walls_skew": "이벤트 월 & put skew",
+    "fed_liquidity": "Fed / 유동성",
+    "vol_posture": "변동성 포지션",
+    "opex_stance": "OpEx 대응",
+    "regime": "Gamma regime",
+    "gamma_flip": "Gamma flip",
+}
+
 
 def esc(s):
     return html.escape(str(s), quote=False)
+
+
+# keyword that anchors each theme's evidence snippet
+PRIORITY_KW = {
+    "crash_call": ["crash", "drawdown", "decline", "sell-off", "selloff"],
+    "walls_skew": ["skew", "wall", "hedg"],
+    "fed_liquidity": ["fed", "liquidity", "rate cut", "bond"],
+    "vol_posture": ["vol", "vix"],
+    "opex_stance": ["expir", "opex"],
+    "regime": ["gamma", "regime", "dealer"],
+    "gamma_flip": ["flip"],
+}
+
+# discourse markers a transcript snippet tends to open on
+FILLER = ("Um ", "Uh ", "So, ", "So ", "And ", "But ", "Like, ",
+          "You know, ", "Well, ", "Right? ", "Okay. ",
+          "um ", "uh ", "so, ", "so ", "and ", "but ", "like, ", "well ", "okay. ")
+
+
+def lead_snippet(text, keys, limit=120):
+    """Trim a transcript snippet to the sentence that carries the theme keyword."""
+    pos = -1
+    low = text.lower()
+    for k in keys:
+        i = low.find(k.lower())
+        if i >= 0 and (pos < 0 or i < pos):
+            pos = i
+    if pos > 0:
+        start = text.rfind(". ", 0, pos)
+        if start >= 0:
+            text = text[start + 2:]
+    text = text.strip()
+    trimmed = True
+    while trimmed:
+        trimmed = False
+        for f in FILLER:
+            if text.startswith(f):
+                text = text[len(f):]
+                trimmed = True
+    return text[:limit].strip()
 
 
 def main():
@@ -88,10 +150,37 @@ def main():
             {"date": q["date"], "key": k, "label": label, "text": q["text"][:180]}
             for q in qs[:4]
         ]
+    # ranked emphasis panel: count verbatim claims per theme
+    prio = []
+    videos = set()
+    for k, label in PRIORITY_LABEL.items():
+        v = sig.get(k) or {}
+        qs = v.get("quotes") or []
+        for q in qs:
+            if q.get("video"):
+                videos.add(q["video"])
+        latest = (v.get("latest") or {}).get("date", "")
+        lead = lead_snippet(qs[0]["text"], PRIORITY_KW.get(k, [])) if qs else ""
+        prio.append({
+            "key": k,
+            "label": label,
+            "n": len(qs),
+            "latest": latest,
+            # quote is injected into innerHTML only, so escape it here
+            "quote": esc(lead) if lead else "",
+        })
+    prio_total = sum(p["n"] for p in prio)
+    for p in prio:
+        p["share"] = round(p["n"] / prio_total * 100) if prio_total else 0
+    prio.sort(key=lambda p: (-p["n"], p["key"]))
+
     data_json = json.dumps({
         "markers": markers,
         "themeLabel": LABEL,
         "themes": quotes_by_theme,
+        "priority": prio,
+        "priorityKr": PRIORITY_KR,
+        "prioMeta": {"total": prio_total, "videos": len(videos)},
     }, ensure_ascii=False)
 
     page = """<!doctype html>
@@ -213,6 +302,31 @@ def main():
   .ev .qt { display: block; color: var(--ink2); margin-top: 3px; }
   .ev.off { opacity: 0.45; }
 
+  /* ranked "what he emphasizes" panel */
+  .prio { background: var(--surf); border: 1px solid var(--hair);
+    margin-top: 28px; padding: 22px 22px 16px; }
+  .prio h2 { font-size: 13px; font-weight: 600; color: var(--ink2); margin: 0 0 4px; }
+  .prio .cap { font-size: 12.5px; color: var(--ink3); margin: 0 0 16px; }
+  .pr { display: grid;
+    grid-template-columns: 20px minmax(110px, 0.85fr) minmax(0, 1.6fr) 66px 74px minmax(0, 1.15fr);
+    gap: 14px; align-items: center; padding: 9px 8px;
+    border-top: 1px solid var(--hair); cursor: pointer; border-radius: 4px; }
+  .pr:hover { background: #1b2028; }
+  .pr.on { background: #1b2028; box-shadow: inset 2px 0 0 var(--ink2); }
+  .pr:focus-visible { outline: 1px solid var(--ink2); outline-offset: -1px; }
+  .pr .rk { color: var(--ink3); font-size: 11.5px; font-variant-numeric: tabular-nums; }
+  .pr .nm { font-size: 13.5px; color: var(--ink); font-weight: 550; }
+  .pr .bw { height: 8px; background: #1c222b; border-radius: 0 4px 4px 0; }
+  .pr .bar { display: block; height: 100%%; border-radius: 0 4px 4px 0; }
+  .pr .ct { font-size: 12.5px; color: var(--ink2); text-align: right;
+    font-variant-numeric: tabular-nums; }
+  .pr .ct b { color: var(--ink); font-weight: 650; }
+  .pr .dt { font-size: 11.5px; color: var(--ink3); font-variant-numeric: tabular-nums; }
+  .pr .ev2 { font-size: 12px; color: var(--ink2); overflow: hidden;
+    text-overflow: ellipsis; white-space: nowrap; }
+  .pr.mute .nm, .pr.mute .ct b { color: var(--ink3); font-weight: 500; }
+  .pr.mute .ev2 { color: var(--ink3); }
+
   footer { margin-top: 40px; border-top: 1px solid var(--hair); padding-top: 18px;
     font-size: 12.5px; color: var(--ink3); display: flex; gap: 18px; flex-wrap: wrap; }
   footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid var(--hair2); }
@@ -222,6 +336,12 @@ def main():
     .grid { grid-template-columns: 1fr; }
     .stats { grid-template-columns: 1fr; }
     .legend { grid-template-columns: repeat(2, 1fr); }
+    .pr { grid-template-columns: 18px 1fr 62px; row-gap: 6px; }
+    .pr .rk { grid-row: 1; grid-column: 1; }
+    .pr .nm { grid-row: 1; grid-column: 2; }
+    .pr .ct { grid-row: 1; grid-column: 3; }
+    .pr .bw { grid-row: 2; grid-column: 1 / -1; }
+    .pr .dt, .pr .ev2 { display: none; }
   }
 </style>
 </head>
@@ -290,6 +410,12 @@ def main():
     </div>
   </div>
 
+  <section class="prio">
+    <h2 data-i18n="prioH">What he emphasizes</h2>
+    <p class="cap" id="prioCap"></p>
+    <div id="prio"></div>
+  </section>
+
   <footer>
     <span data-i18n-html="footDesk">View on the <a href="../karsan/" target="_blank">signal desk</a></span>
     <span data-i18n-html="footRadio">Hear it on <a href="../radio/" target="_blank">radio</a></span>
@@ -325,6 +451,8 @@ const I18N = {
     stateCW: "Call wall",
     evH: "Evidence by theme",
     evEmpty: "No explicit mention in this 30-day window.",
+    prioH: "What he emphasizes",
+    prioEmpty: "no verbatim mentions this window",
     tipAxis: "SPX level on the strike axis",
     footDesk: 'View on the <a href="../karsan/" target="_blank">signal desk</a>',
     footRadio: 'Hear it on <a href="../radio/" target="_blank">radio</a>',
@@ -355,6 +483,8 @@ const I18N = {
     stateCW: "Call wall",
     evH: "테마별 근거",
     evEmpty: "이 30일 창에서 직접 언급 없음.",
+    prioH: "그가 강조하는 것",
+    prioEmpty: "이 창에서 직접 언급 없음",
     tipAxis: "strike 축의 SPX level",
     footDesk: '시그널 <a href="../karsan/" target="_blank">데스크</a> 보기',
     footRadio: '<a href="../radio/" target="_blank">라디오</a>로 듣기',
@@ -388,6 +518,8 @@ const MARKER_NAMES = {
   const quotes = document.getElementById("quotes");
   const tip = document.getElementById("tip");
   const langsw = document.getElementById("langsw");
+  const prioEl = document.getElementById("prio");
+  const prioCap = document.getElementById("prioCap");
   const themeKeys = Object.keys(CARD.themes);
   let theme = "all";
   let lang = "en";
@@ -407,6 +539,7 @@ const MARKER_NAMES = {
     renderTabs();
     renderLegend();
     renderQuotes();
+    renderPrio();
     try { localStorage.setItem("card-lang", lang); } catch (e) {}
   }
   langsw.addEventListener("click", e => {
@@ -470,6 +603,51 @@ const MARKER_NAMES = {
       m.classList.toggle("lit", lit);
     });
   }
+
+  /* ranked "what he emphasizes" panel — one hue, brightness carries the count */
+  function ramp(n, max) {
+    if (!max || !n) return "#232932";
+    return "hsl(212, 62%%, " + Math.round(34 + 32 * (n / max)) + "%%)";
+  }
+
+  function renderPrio() {
+    const ps = CARD.priority;
+    const max = ps.reduce((a, p) => Math.max(a, p.n), 0);
+    prioCap.textContent = lang === "kr"
+      ? "그가 말한 빈도순 — 최근 30일 인터뷰 " + CARD.prioMeta.videos + "건에서 나온 원문 발언 " +
+        CARD.prioMeta.total + "개. 행을 누르면 근거가 필터링됩니다."
+      : "Ranked by how often he says it — " + CARD.prioMeta.total + " verbatim claims across " +
+        CARD.prioMeta.videos + " interviews in the last 30 days. Click a row to filter the evidence.";
+    prioEl.innerHTML = ps.map((p, i) => {
+      const nm = lang === "kr" ? (CARD.priorityKr[p.key] || p.label) : p.label;
+      const w = max ? (p.n / max * 100) : 0;
+      return '<div class="pr' + (p.n ? "" : " mute") + (theme === p.key ? " on" : "") +
+        '" data-t="' + p.key + '" role="button" tabindex="0" aria-label="' +
+        nm + ": " + p.n + " claims, " + p.share + ' percent">' +
+        '<span class="rk">' + (i + 1) + "</span>" +
+        '<span class="nm">' + nm + "</span>" +
+        '<span class="bw"><span class="bar" style="width:' + w.toFixed(1) +
+          '%%;background:' + ramp(p.n, max) + '"></span></span>' +
+        '<span class="ct"><b>' + p.n + "</b> " + p.share + "%%</span>" +
+        '<span class="dt">' + (p.latest || "—") + "</span>" +
+        '<span class="ev2">' + (p.quote ? "“" + p.quote + "…”" : t("prioEmpty")) + "</span>" +
+        "</div>";
+    }).join("");
+  }
+
+  function pickPrio(row) {
+    theme = (theme === row.dataset.t) ? "all" : row.dataset.t;
+    renderTabs(); renderQuotes(); renderLadder(); renderPrio();
+  }
+  prioEl.addEventListener("click", e => {
+    const r = e.target.closest(".pr");
+    if (r) pickPrio(r);
+  });
+  prioEl.addEventListener("keydown", e => {
+    if (e.key !== "Enter" && e.key !== " ") return;
+    const r = e.target.closest(".pr");
+    if (r) { e.preventDefault(); pickPrio(r); }
+  });
 
   /* marker tooltips + legend focus */
   function showTip(m, ev) {

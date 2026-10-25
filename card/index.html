@@ -117,6 +117,31 @@
   .ev .qt { display: block; color: var(--ink2); margin-top: 3px; }
   .ev.off { opacity: 0.45; }
 
+  /* ranked "what he emphasizes" panel */
+  .prio { background: var(--surf); border: 1px solid var(--hair);
+    margin-top: 28px; padding: 22px 22px 16px; }
+  .prio h2 { font-size: 13px; font-weight: 600; color: var(--ink2); margin: 0 0 4px; }
+  .prio .cap { font-size: 12.5px; color: var(--ink3); margin: 0 0 16px; }
+  .pr { display: grid;
+    grid-template-columns: 20px minmax(110px, 0.85fr) minmax(0, 1.6fr) 66px 74px minmax(0, 1.15fr);
+    gap: 14px; align-items: center; padding: 9px 8px;
+    border-top: 1px solid var(--hair); cursor: pointer; border-radius: 4px; }
+  .pr:hover { background: #1b2028; }
+  .pr.on { background: #1b2028; box-shadow: inset 2px 0 0 var(--ink2); }
+  .pr:focus-visible { outline: 1px solid var(--ink2); outline-offset: -1px; }
+  .pr .rk { color: var(--ink3); font-size: 11.5px; font-variant-numeric: tabular-nums; }
+  .pr .nm { font-size: 13.5px; color: var(--ink); font-weight: 550; }
+  .pr .bw { height: 8px; background: #1c222b; border-radius: 0 4px 4px 0; }
+  .pr .bar { display: block; height: 100%; border-radius: 0 4px 4px 0; }
+  .pr .ct { font-size: 12.5px; color: var(--ink2); text-align: right;
+    font-variant-numeric: tabular-nums; }
+  .pr .ct b { color: var(--ink); font-weight: 650; }
+  .pr .dt { font-size: 11.5px; color: var(--ink3); font-variant-numeric: tabular-nums; }
+  .pr .ev2 { font-size: 12px; color: var(--ink2); overflow: hidden;
+    text-overflow: ellipsis; white-space: nowrap; }
+  .pr.mute .nm, .pr.mute .ct b { color: var(--ink3); font-weight: 500; }
+  .pr.mute .ev2 { color: var(--ink3); }
+
   footer { margin-top: 40px; border-top: 1px solid var(--hair); padding-top: 18px;
     font-size: 12.5px; color: var(--ink3); display: flex; gap: 18px; flex-wrap: wrap; }
   footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid var(--hair2); }
@@ -126,6 +151,12 @@
     .grid { grid-template-columns: 1fr; }
     .stats { grid-template-columns: 1fr; }
     .legend { grid-template-columns: repeat(2, 1fr); }
+    .pr { grid-template-columns: 18px 1fr 62px; row-gap: 6px; }
+    .pr .rk { grid-row: 1; grid-column: 1; }
+    .pr .nm { grid-row: 1; grid-column: 2; }
+    .pr .ct { grid-row: 1; grid-column: 3; }
+    .pr .bw { grid-row: 2; grid-column: 1 / -1; }
+    .pr .dt, .pr .ev2 { display: none; }
   }
 </style>
 </head>
@@ -194,6 +225,12 @@
     </div>
   </div>
 
+  <section class="prio">
+    <h2 data-i18n="prioH">What he emphasizes</h2>
+    <p class="cap" id="prioCap"></p>
+    <div id="prio"></div>
+  </section>
+
   <footer>
     <span data-i18n-html="footDesk">View on the <a href="../karsan/" target="_blank">signal desk</a></span>
     <span data-i18n-html="footRadio">Hear it on <a href="../radio/" target="_blank">radio</a></span>
@@ -203,7 +240,7 @@
 </div>
 
 <script>
-const CARD = {"markers": [{"key": "pw", "cls": "pw", "v": 7650, "label": "put wall", "val": "7,650", "theme": "walls_skew"}, {"key": "spot", "cls": "spot", "v": 7623.68, "label": "spot", "val": "7,624", "theme": null}, {"key": "flip", "cls": "flip", "v": 7732.9, "label": "flip", "val": "7,733 · +1.43%", "theme": "gamma_flip"}, {"key": "cw", "cls": "cw", "v": 7800, "label": "call wall", "val": "7,800", "theme": "walls_skew"}], "themeLabel": {"regime": "regime", "gamma_flip": "gamma flip", "walls_skew": "walls & skew", "vol_posture": "vol posture", "opex_stance": "opex stance", "fed_liquidity": "fed & liquidity", "crash_call": "base case"}, "themes": {"regime": [{"date": "20261021", "key": "regime", "label": "regime", "text": "four month window before a decline. So, what you'll see is the skew pops, people are worried, people are starting to hedge, but reflexively what does that mean? People are short. U"}, {"date": "20261016", "key": "regime", "label": "regime", "text": "long of Vega per day of time. Also, that vol coming getting delivered vol means there's more vol selling, which sells means there's a a vol my element, which means that per implied"}, {"date": "20261016", "key": "regime", "label": "regime", "text": "implied volatility in that expiration. So, uh what ends up happening is is if you look at a volatility curve, and I encourage people to do that, you will see the implied volatility"}, {"date": "20261013", "key": "regime", "label": "regime", "text": "that Vanna Charm? You know, little bit of positive positive kind of motion is likely some relief to the wall of worry, call it, is likely there, in my opinion, in the short term."}], "gamma_flip": [], "walls_skew": [{"date": "20261021", "key": "walls_skew", "label": "walls & skew", "text": "just another reason to be concerned. I'll highlight one important stat here, too. I gave you the skew one. We have not seen uh a combination of the three big forces, price of oil u"}, {"date": "20261021", "key": "walls_skew", "label": "walls & skew", "text": "tomorrow. They affect things over time. If they are not resolved over some time they they you know create a more more you know convex potential risk to to the economy and to market"}, {"date": "20261021", "key": "walls_skew", "label": "walls & skew", "text": "can't hate what we've seen so far today. I suppose some of these earnings calls themselves are going to be important. We know that that has turned the screws on many of market reac"}, {"date": "20261021", "key": "walls_skew", "label": "walls & skew", "text": "what you see at tops, not at bottoms. And uh very very interesting kind of action both from the numbers and the price action and skew and other things underneath the hood."}], "vol_posture": [{"date": "20261021", "key": "vol_posture", "label": "vol posture", "text": "Meta up to 722, Tesla up to 393. So, Jim, So, Jim, I want to talk to you about volatility here, because we saw that Vix spike up to to 22 on Friday. And ever since then, it's been "}, {"date": "20261016", "key": "vol_posture", "label": "vol posture", "text": "yeah, I mean, yeah, gosh. And people don't want to hear it, but it's a reality and it's not a presidential election this time around, but it is maybe even more important given the "}, {"date": "20261016", "key": "vol_posture", "label": "vol posture", "text": "is lower. Right? So, structurally it is showing you a lower implied volatility when that's not again something that's necessarily as true, right? And now just because that implied "}, {"date": "20261016", "key": "vol_posture", "label": "vol posture", "text": "let's start there. Um there is this dynamic where the currently we're moving past the actual implied volatility of the event being at the the peak, which it was when it was 30 days"}], "opex_stance": [{"date": "20261016", "key": "opex_stance", "label": "opex stance", "text": "compressed as the VIX is showing you. So, the VIX is showing down 2.3% .39 today. Uh the reality is it's down about half of that, .2, right? So, but it is down because again, all t"}, {"date": "20261016", "key": "opex_stance", "label": "opex stance", "text": "the end of expiration. Long way of saying expiration matter, drive a lot of flows. Vol compression tends to be dominant in this window, but don't don't see that for the macro reali"}, {"date": "20261016", "key": "opex_stance", "label": "opex stance", "text": "talked about this before during COVID. We knew about all the risk. Tons of tremendous risk, uh you know, going uh starting in December, January. We talked about the markets rallyin"}, {"date": "20261016", "key": "opex_stance", "label": "opex stance", "text": "volatility around options expiration? Yeah, so importantly, uh options expiration, even the week before, so really this 2-week period, there is structurally a tremendous amount of "}], "fed_liquidity": [{"date": "20261023", "key": "fed_liquidity", "label": "fed & liquidity", "text": "the Fed meeting itself. So, so prepare. We're getting close to that Fed meeting."}, {"date": "20261023", "key": "fed_liquidity", "label": "fed & liquidity", "text": "and feel for what they are telling you. And they have gone dead quiet. And if anything, uh, they are, which is a complete change. If anything, they are talking down the market and "}, {"date": "20261023", "key": "fed_liquidity", "label": "fed & liquidity", "text": "that's exacerbating kind of the move. But everything I see here is the thing that aligns here is risk off, risk off, risk off, risk off. And whether that is credit default swaps ge"}, {"date": "20261019", "key": "fed_liquidity", "label": "fed & liquidity", "text": "very telling. Uh last thing on flows here before we move on to I think a lot of discussion about that but just let's a good time for this chart about skew. Um one month skew right "}], "crash_call": [{"date": "20261023", "key": "crash_call", "label": "base case", "text": "open revert to the price the real price. Um and and just because those you could see a crash in those over weekend something weird could happen but that doesn't mean it would cause"}, {"date": "20261023", "key": "crash_call", "label": "base case", "text": "There's no code here. We're trying. There's no code here. And we we love this type of question, right? I don't think people understand how much we like it. I there's I don't think "}, {"date": "20261023", "key": "crash_call", "label": "base case", "text": "have the market decline more than 20. what what could happen and markets could be closed for a little bit or something like weird like that could happen and these are things you ha"}, {"date": "20261023", "key": "crash_call", "label": "base case", "text": "decline later. And so you're still calling for like a 20% decline post J sometime after in January or after minimum 20%. The only thing that would this is a new piece of info that "}]}};
+const CARD = {"markers": [{"key": "pw", "cls": "pw", "v": 7650, "label": "put wall", "val": "7,650", "theme": "walls_skew"}, {"key": "spot", "cls": "spot", "v": 7623.68, "label": "spot", "val": "7,624", "theme": null}, {"key": "flip", "cls": "flip", "v": 7732.9, "label": "flip", "val": "7,733 · +1.43%", "theme": "gamma_flip"}, {"key": "cw", "cls": "cw", "v": 7800, "label": "call wall", "val": "7,800", "theme": "walls_skew"}], "themeLabel": {"regime": "regime", "gamma_flip": "gamma flip", "walls_skew": "walls & skew", "vol_posture": "vol posture", "opex_stance": "opex stance", "fed_liquidity": "fed & liquidity", "crash_call": "base case"}, "themes": {"regime": [{"date": "20261021", "key": "regime", "label": "regime", "text": "four month window before a decline. So, what you'll see is the skew pops, people are worried, people are starting to hedge, but reflexively what does that mean? People are short. U"}, {"date": "20261016", "key": "regime", "label": "regime", "text": "long of Vega per day of time. Also, that vol coming getting delivered vol means there's more vol selling, which sells means there's a a vol my element, which means that per implied"}, {"date": "20261016", "key": "regime", "label": "regime", "text": "implied volatility in that expiration. So, uh what ends up happening is is if you look at a volatility curve, and I encourage people to do that, you will see the implied volatility"}, {"date": "20261013", "key": "regime", "label": "regime", "text": "that Vanna Charm? You know, little bit of positive positive kind of motion is likely some relief to the wall of worry, call it, is likely there, in my opinion, in the short term."}], "gamma_flip": [], "walls_skew": [{"date": "20261021", "key": "walls_skew", "label": "walls & skew", "text": "just another reason to be concerned. I'll highlight one important stat here, too. I gave you the skew one. We have not seen uh a combination of the three big forces, price of oil u"}, {"date": "20261021", "key": "walls_skew", "label": "walls & skew", "text": "tomorrow. They affect things over time. If they are not resolved over some time they they you know create a more more you know convex potential risk to to the economy and to market"}, {"date": "20261021", "key": "walls_skew", "label": "walls & skew", "text": "can't hate what we've seen so far today. I suppose some of these earnings calls themselves are going to be important. We know that that has turned the screws on many of market reac"}, {"date": "20261021", "key": "walls_skew", "label": "walls & skew", "text": "what you see at tops, not at bottoms. And uh very very interesting kind of action both from the numbers and the price action and skew and other things underneath the hood."}], "vol_posture": [{"date": "20261021", "key": "vol_posture", "label": "vol posture", "text": "Meta up to 722, Tesla up to 393. So, Jim, So, Jim, I want to talk to you about volatility here, because we saw that Vix spike up to to 22 on Friday. And ever since then, it's been "}, {"date": "20261016", "key": "vol_posture", "label": "vol posture", "text": "yeah, I mean, yeah, gosh. And people don't want to hear it, but it's a reality and it's not a presidential election this time around, but it is maybe even more important given the "}, {"date": "20261016", "key": "vol_posture", "label": "vol posture", "text": "is lower. Right? So, structurally it is showing you a lower implied volatility when that's not again something that's necessarily as true, right? And now just because that implied "}, {"date": "20261016", "key": "vol_posture", "label": "vol posture", "text": "let's start there. Um there is this dynamic where the currently we're moving past the actual implied volatility of the event being at the the peak, which it was when it was 30 days"}], "opex_stance": [{"date": "20261016", "key": "opex_stance", "label": "opex stance", "text": "compressed as the VIX is showing you. So, the VIX is showing down 2.3% .39 today. Uh the reality is it's down about half of that, .2, right? So, but it is down because again, all t"}, {"date": "20261016", "key": "opex_stance", "label": "opex stance", "text": "the end of expiration. Long way of saying expiration matter, drive a lot of flows. Vol compression tends to be dominant in this window, but don't don't see that for the macro reali"}, {"date": "20261016", "key": "opex_stance", "label": "opex stance", "text": "talked about this before during COVID. We knew about all the risk. Tons of tremendous risk, uh you know, going uh starting in December, January. We talked about the markets rallyin"}, {"date": "20261016", "key": "opex_stance", "label": "opex stance", "text": "volatility around options expiration? Yeah, so importantly, uh options expiration, even the week before, so really this 2-week period, there is structurally a tremendous amount of "}], "fed_liquidity": [{"date": "20261023", "key": "fed_liquidity", "label": "fed & liquidity", "text": "the Fed meeting itself. So, so prepare. We're getting close to that Fed meeting."}, {"date": "20261023", "key": "fed_liquidity", "label": "fed & liquidity", "text": "and feel for what they are telling you. And they have gone dead quiet. And if anything, uh, they are, which is a complete change. If anything, they are talking down the market and "}, {"date": "20261023", "key": "fed_liquidity", "label": "fed & liquidity", "text": "that's exacerbating kind of the move. But everything I see here is the thing that aligns here is risk off, risk off, risk off, risk off. And whether that is credit default swaps ge"}, {"date": "20261019", "key": "fed_liquidity", "label": "fed & liquidity", "text": "very telling. Uh last thing on flows here before we move on to I think a lot of discussion about that but just let's a good time for this chart about skew. Um one month skew right "}], "crash_call": [{"date": "20261023", "key": "crash_call", "label": "base case", "text": "open revert to the price the real price. Um and and just because those you could see a crash in those over weekend something weird could happen but that doesn't mean it would cause"}, {"date": "20261023", "key": "crash_call", "label": "base case", "text": "There's no code here. We're trying. There's no code here. And we we love this type of question, right? I don't think people understand how much we like it. I there's I don't think "}, {"date": "20261023", "key": "crash_call", "label": "base case", "text": "have the market decline more than 20. what what could happen and markets could be closed for a little bit or something like weird like that could happen and these are things you ha"}, {"date": "20261023", "key": "crash_call", "label": "base case", "text": "decline later. And so you're still calling for like a 20% decline post J sometime after in January or after minimum 20%. The only thing that would this is a new piece of info that "}]}, "priority": [{"key": "crash_call", "label": "Crash / drawdown view", "n": 29, "latest": "20261023", "quote": "just because those you could see a crash in those over weekend something weird could happen but that doesn't mean it wou", "share": 31}, {"key": "walls_skew", "label": "Event walls & put skew", "n": 22, "latest": "20261021", "quote": "I gave you the skew one. We have not seen uh a combination of the three big forces, price of oil uh you know US uh 10-ye", "share": 23}, {"key": "fed_liquidity", "label": "Fed / liquidity", "n": 14, "latest": "20261023", "quote": "the Fed meeting itself. So, so prepare. We're getting close to that Fed meeting.", "share": 15}, {"key": "vol_posture", "label": "Vol posture", "n": 13, "latest": "20261021", "quote": "Jim, So, Jim, I want to talk to you about volatility here, because we saw that Vix spike up to to 22 on Friday. And ever", "share": 14}, {"key": "opex_stance", "label": "OpEx stance", "n": 12, "latest": "20261016", "quote": "compressed as the VIX is showing you. So, the VIX is showing down 2.3% .39 today. Uh the reality is it's down about half", "share": 13}, {"key": "regime", "label": "Gamma regime", "n": 5, "latest": "20261021", "quote": "four month window before a decline. So, what you'll see is the skew pops, people are worried, people are starting to hed", "share": 5}, {"key": "gamma_flip", "label": "Gamma flip", "n": 0, "latest": "", "quote": "", "share": 0}], "priorityKr": {"crash_call": "크래시 / 하락 시나리오", "walls_skew": "이벤트 월 & put skew", "fed_liquidity": "Fed / 유동성", "vol_posture": "변동성 포지션", "opex_stance": "OpEx 대응", "regime": "Gamma regime", "gamma_flip": "Gamma flip"}, "prioMeta": {"total": 95, "videos": 10}};
 
 const I18N = {
   en: {
@@ -229,6 +266,8 @@ const I18N = {
     stateCW: "Call wall",
     evH: "Evidence by theme",
     evEmpty: "No explicit mention in this 30-day window.",
+    prioH: "What he emphasizes",
+    prioEmpty: "no verbatim mentions this window",
     tipAxis: "SPX level on the strike axis",
     footDesk: 'View on the <a href="../karsan/" target="_blank">signal desk</a>',
     footRadio: 'Hear it on <a href="../radio/" target="_blank">radio</a>',
@@ -259,6 +298,8 @@ const I18N = {
     stateCW: "Call wall",
     evH: "테마별 근거",
     evEmpty: "이 30일 창에서 직접 언급 없음.",
+    prioH: "그가 강조하는 것",
+    prioEmpty: "이 창에서 직접 언급 없음",
     tipAxis: "strike 축의 SPX level",
     footDesk: '시그널 <a href="../karsan/" target="_blank">데스크</a> 보기',
     footRadio: '<a href="../radio/" target="_blank">라디오</a>로 듣기',
@@ -292,6 +333,8 @@ const MARKER_NAMES = {
   const quotes = document.getElementById("quotes");
   const tip = document.getElementById("tip");
   const langsw = document.getElementById("langsw");
+  const prioEl = document.getElementById("prio");
+  const prioCap = document.getElementById("prioCap");
   const themeKeys = Object.keys(CARD.themes);
   let theme = "all";
   let lang = "en";
@@ -311,6 +354,7 @@ const MARKER_NAMES = {
     renderTabs();
     renderLegend();
     renderQuotes();
+    renderPrio();
     try { localStorage.setItem("card-lang", lang); } catch (e) {}
   }
   langsw.addEventListener("click", e => {
@@ -374,6 +418,51 @@ const MARKER_NAMES = {
       m.classList.toggle("lit", lit);
     });
   }
+
+  /* ranked "what he emphasizes" panel — one hue, brightness carries the count */
+  function ramp(n, max) {
+    if (!max || !n) return "#232932";
+    return "hsl(212, 62%, " + Math.round(34 + 32 * (n / max)) + "%)";
+  }
+
+  function renderPrio() {
+    const ps = CARD.priority;
+    const max = ps.reduce((a, p) => Math.max(a, p.n), 0);
+    prioCap.textContent = lang === "kr"
+      ? "그가 말한 빈도순 — 최근 30일 인터뷰 " + CARD.prioMeta.videos + "건에서 나온 원문 발언 " +
+        CARD.prioMeta.total + "개. 행을 누르면 근거가 필터링됩니다."
+      : "Ranked by how often he says it — " + CARD.prioMeta.total + " verbatim claims across " +
+        CARD.prioMeta.videos + " interviews in the last 30 days. Click a row to filter the evidence.";
+    prioEl.innerHTML = ps.map((p, i) => {
+      const nm = lang === "kr" ? (CARD.priorityKr[p.key] || p.label) : p.label;
+      const w = max ? (p.n / max * 100) : 0;
+      return '<div class="pr' + (p.n ? "" : " mute") + (theme === p.key ? " on" : "") +
+        '" data-t="' + p.key + '" role="button" tabindex="0" aria-label="' +
+        nm + ": " + p.n + " claims, " + p.share + ' percent">' +
+        '<span class="rk">' + (i + 1) + "</span>" +
+        '<span class="nm">' + nm + "</span>" +
+        '<span class="bw"><span class="bar" style="width:' + w.toFixed(1) +
+          '%;background:' + ramp(p.n, max) + '"></span></span>' +
+        '<span class="ct"><b>' + p.n + "</b> " + p.share + "%</span>" +
+        '<span class="dt">' + (p.latest || "—") + "</span>" +
+        '<span class="ev2">' + (p.quote ? "“" + p.quote + "…”" : t("prioEmpty")) + "</span>" +
+        "</div>";
+    }).join("");
+  }
+
+  function pickPrio(row) {
+    theme = (theme === row.dataset.t) ? "all" : row.dataset.t;
+    renderTabs(); renderQuotes(); renderLadder(); renderPrio();
+  }
+  prioEl.addEventListener("click", e => {
+    const r = e.target.closest(".pr");
+    if (r) pickPrio(r);
+  });
+  prioEl.addEventListener("keydown", e => {
+    if (e.key !== "Enter" && e.key !== " ") return;
+    const r = e.target.closest(".pr");
+    if (r) { e.preventDefault(); pickPrio(r); }
+  });
 
   /* marker tooltips + legend focus */
   function showTip(m, ev) {
