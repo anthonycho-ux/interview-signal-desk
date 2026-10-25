@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Karsan signal desk</title>
+<style>
+  :root {
+    color-scheme: light;
+    --surface-1: #fcfcfb;
+    --surface-2: #f4f4f1;
+    --page: #f9f9f7;
+    --ink-1: #0b0b0b;
+    --ink-2: #52514e;
+    --ink-3: #898781;
+    --hair: #e1e0d9;
+    --axis: #c3c2b7;
+    --ok: #0ca30c;
+    --warn: #fab219;
+    --serious: #d03b3b;
+    --accent: #2a78d6;
+    --shadow: 0 6px 20px rgba(0,0,0,0.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      color-scheme: dark;
+      --surface-1: #1a1a19;
+      --surface-2: #262625;
+      --page: #0d0d0d;
+      --ink-1: #f0efec;
+      --ink-2: #c3c2b7;
+      --ink-3: #898781;
+      --hair: #2c2c2a;
+      --axis: #383835;
+      --ok: #4fcf4f;
+      --warn: #fab219;
+      --serious: #e66767;
+      --accent: #3987e5;
+      --shadow: 0 6px 20px rgba(0,0,0,0.5);
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --surface-1: #1a1a19;
+    --surface-2: #262625;
+    --page: #0d0d0d;
+    --ink-1: #f0efec;
+    --ink-2: #c3c2b7;
+    --ink-3: #898781;
+    --hair: #2c2c2a;
+    --axis: #383835;
+    --ok: #4fcf4f;
+    --warn: #fab219;
+    --serious: #e66767;
+    --accent: #3987e5;
+    --shadow: 0 6px 20px rgba(0,0,0,0.5);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--page); color: var(--ink-1);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 14.5px; line-height: 1.5;
+  }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 24px 16px 80px; }
+
+  header { margin-bottom: 18px; }
+  h1 { font-size: 21px; font-weight: 600; margin: 0 0 3px; letter-spacing: -0.01em; }
+  .sub { color: var(--ink-2); font-size: 13px; margin: 0; }
+  .statusline { display: flex; gap: 8px; align-items: center; margin-top: 8px; flex-wrap: wrap; }
+  .pill { font-size: 12px; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--hair); color: var(--ink-2); background: var(--surface-1); }
+  .pill.ok { color: var(--ok); border-color: var(--ok); }
+  .pill.btn { cursor: pointer; }
+  .pill.btn:hover { border-color: var(--ink-2); }
+
+  .grid { display: grid; grid-template-columns: 300px 1fr; gap: 16px; align-items: start; }
+  .panel { background: var(--surface-1); border: 1px solid var(--hair); padding: 14px; border-radius: 8px; }
+  .panel h2 { font-size: 12.5px; font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 10px; }
+
+  /* timeline */
+  .tl { max-height: 72vh; overflow-y: auto; }
+  .tlitem { display: flex; gap: 10px; align-items: baseline; padding: 7px 8px; border-radius: 6px; cursor: pointer; border: 1px solid transparent; }
+  .tlitem:hover { background: var(--surface-2); }
+  .tlitem.active { border-color: var(--accent); background: var(--surface-2); }
+  .tlitem.missing { opacity: 0.5; }
+  .tl .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; align-self: center; background: var(--ink-3); }
+  .tl .dot.ok { background: var(--ok); }
+  .tl .dot.missing { background: var(--warn); }
+  .tl .date { font-size: 11.5px; color: var(--ink-3); font-variant-numeric: tabular-nums; width: 52px; flex: none; }
+  .tl .ttl { font-size: 13px; color: var(--ink-1); }
+  .tl .miss { font-size: 11px; color: var(--serious); }
+
+  /* search */
+  .search { width: 100%; margin-bottom: 10px; padding: 8px 10px; border: 1px solid var(--axis); border-radius: 6px; background: var(--surface-1); color: var(--ink-1); font-size: 13.5px; }
+  .search:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+
+  /* transcript */
+  .transcript { max-height: 58vh; overflow-y: auto; }
+  .seg { padding: 6px 8px; border-radius: 6px; cursor: pointer; border: 1px solid transparent; }
+  .seg:hover { background: var(--surface-2); }
+  .seg.sel { border-color: var(--accent); background: var(--surface-2); }
+  .seg .t { font-size: 11px; color: var(--ink-3); margin-right: 6px; font-variant-numeric: tabular-nums; }
+  .seg.mark { background: color-mix(in srgb, var(--accent) 12%, var(--surface-1)); }
+  .seg .hit { background: var(--warn); color: #000; border-radius: 2px; padding: 0 1px; }
+  .empty { color: var(--ink-3); font-size: 13px; padding: 12px 8px; }
+
+  /* signal board */
+  .board { display: flex; flex-direction: column; gap: 10px; }
+  .claim { border: 1px solid var(--hair); border-radius: 8px; padding: 10px 12px; background: var(--surface-1); }
+  .claim.empty-theme { opacity: 0.7; }
+  .claim .top { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .claim .k { font-size: 11px; text-transform: uppercase; letter-spacing: 0.03em; color: var(--ink-3); font-weight: 600; }
+  .claim .status { margin-left: auto; font-size: 11.5px; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--hair); color: var(--ink-2); }
+  .claim .status.confirmed { color: var(--ok); border-color: var(--ok); }
+  .claim .status.rejected { color: var(--serious); border-color: var(--serious); }
+  .claim .cur { font-size: 14px; margin-top: 4px; }
+  .claim .cur .lbl { color: var(--ink-3); font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.02em; display: block; margin-bottom: 2px; }
+  .claim .cur .qt { color: var(--ink-1); }
+  .claim .ev { font-size: 12.5px; color: var(--ink-2); margin-top: 4px; }
+  .claim .ev .src { color: var(--accent); cursor: pointer; }
+  .claim .ev .src:hover { text-decoration: underline; }
+  .claim .shift { margin-top: 8px; border-top: 1px dashed var(--hair); padding-top: 6px; }
+  .claim .shift summary { font-size: 11.5px; color: var(--ink-3); cursor: pointer; user-select: none; text-transform: uppercase; letter-spacing: 0.02em; }
+  .claim .shift .ql { padding: 3px 0; font-size: 12.5px; color: var(--ink-2); }
+  .claim .shift .ql .d { color: var(--ink-3); font-variant-numeric: tabular-nums; margin-right: 6px; font-size: 11.5px; }
+  .claim .shift .ql .src { color: var(--accent); cursor: pointer; font-size: 11.5px; margin-left: 4px; }
+  .claim .shift .ql .src:hover { text-decoration: underline; }
+  .claim .actions { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+  .btn { font: inherit; font-size: 12px; padding: 3px 10px; border-radius: 6px; border: 1px solid var(--axis); background: var(--surface-1); color: var(--ink-1); cursor: pointer; }
+  .btn:hover { border-color: var(--ink-2); }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.danger { color: var(--serious); border-color: var(--serious); }
+
+  .exportbar { margin-top: 12px; display: flex; gap: 8px; align-items: center; }
+  .note { font-size: 12px; color: var(--ink-3); }
+  .toast { position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%); background: var(--ink-1); color: var(--surface-1); padding: 8px 16px; border-radius: 8px; font-size: 13px; opacity: 0; pointer-events: none; transition: opacity 160ms; z-index: 50; }
+  .toast.on { opacity: 1; }
+
+  .controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .videotitle { font-size: 14.5px; font-weight: 600; }
+  .videotitle .d { color: var(--ink-3); font-weight: 400; font-size: 12.5px; margin-left: 6px; }
+  .link { font-size: 12.5px; color: var(--accent); text-decoration: none; }
+  .link:hover { text-decoration: underline; }
+
+  @media (max-width: 860px) {
+    .grid { grid-template-columns: 1fr; }
+    .tl { max-height: 30vh; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Karsan signal desk</h1>
+    <p class="sub">Cem Karsan interviews · last 30 days · navigate → check the evidence → confirm the current-state signal</p>
+    <div class="statusline">
+      <span class="pill" id="countPill"></span>
+      <span class="pill" id="confirmPill"></span>
+      <span class="pill btn" id="themeBtn">dark</span>
+      <span class="pill btn" id="exportBtn">export signal</span>
+    </div>
+  </header>
+
+  <div class="grid">
+    <!-- left: timeline -->
+    <section class="panel">
+      <h2>Interviews</h2>
+      <div class="tl" id="timeline"></div>
+    </section>
+
+    <!-- right: transcript + signal -->
+    <div style="display:flex;flex-direction:column;gap:16px;min-width:0">
+      <section class="panel">
+        <div class="controls">
+          <div class="videotitle" id="videoTitle"></div>
+          <a class="link" id="videoLink" href="#" target="_blank" rel="noopener">open ↗</a>
+        </div>
+        <input class="search" id="search" type="search" placeholder="Search transcript… (typing filters)">
+        <div class="transcript" id="transcript"></div>
+      </section>
+
+      <section class="panel">
+        <h2>Signal — confirm each claim with dated evidence</h2>
+        <div class="board" id="board"></div>
+        <div class="exportbar">
+          <button class="btn primary" id="exportSignalBtn">export signal JSON</button>
+          <button class="btn" id="resetSigBtn">reset to extraction</button>
+          <span class="note">click a quote in the transcript to attach it as evidence, then confirm · quotes are verbatim auto-captions</span>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+(() => {
+  "use strict";
+  const $ = (id) => document.getElementById(id);
+
+  /* ---------- theme ---------- */
+  function theme() {
+    const d = document.documentElement;
+    return d.getAttribute("data-theme") === "dark"
+      || (!d.hasAttribute("data-theme") && matchMedia("(prefers-color-scheme: dark)").matches);
+  }
+  function applyTheme(dark) {
+    document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+    $("themeBtn").textContent = dark ? "light" : "dark";
+  }
+  applyTheme(theme());
+
+  /* ---------- data ---------- */
+  let DATA = [];
+  let SIG = {};
+  let idx = 0;
+  let claims = [];
+  const STORE_KEY = "karsan-signal-v2";
+
+  function load() {
+    const keys = new Set(Object.keys(SIG));
+    try {
+      const s = localStorage.getItem(STORE_KEY);
+      if (s) {
+        const parsed = JSON.parse(s);
+        if (Array.isArray(parsed) && parsed.length && parsed.every(c => c && keys.has(c.k))) {
+          claims = parsed;
+          return;
+        }
+      }
+    } catch (e) { /* ignore */ }
+    claims = Object.keys(SIG).map(k => ({
+      k,
+      label: SIG[k].label,
+      status: "unconfirmed",
+      current: SIG[k].latest ? SIG[k].latest.text : "",
+      evidence: null,
+      empty: !SIG[k].latest,
+    }));
+  }
+  function persist() {
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(claims)); } catch (e) {}
+  }
+
+  function fmtDate(d) {
+    if (!d) return "";
+    return d.slice(4, 6) + "/" + d.slice(6, 8) + "/" + d.slice(2, 4);
+  }
+
+  async function init() {
+    try {
+      const [r1, r2] = await Promise.all([
+        fetch("transcripts.json", { cache: "no-store" }),
+        fetch("signals.json", { cache: "no-store" }),
+      ]);
+      if (!r1.ok) throw new Error("transcripts.json HTTP " + r1.status);
+      if (!r2.ok) throw new Error("signals.json HTTP " + r2.status);
+      DATA = await r1.json();
+      SIG = await r2.json();
+    } catch (e) {
+      $("timeline").innerHTML = '<div class="empty">Could not load data — ' + e.message + "</div>";
+      return;
+    }
+    DATA.sort((a, b) => (a.date || "").localeCompare(b.date || ""));
+    load();
+    renderTimeline();
+    renderBoard();
+    const firstOk = DATA.find(v => v.status === "ok") || DATA[0];
+    if (firstOk) select(firstOk.id);
+    const okN = DATA.filter(v => v.status === "ok").length;
+    $("countPill").textContent = DATA.length + " videos · " + okN + " transcripts";
+    $("confirmPill").textContent = claims.filter(c => c.status === "confirmed").length + "/" + claims.length + " confirmed";
+  }
+
+  /* ---------- timeline ---------- */
+  function renderTimeline() {
+    $("timeline").innerHTML = DATA.map(v => {
+      const active = v.id === idx ? "active" : "";
+      const miss = v.status !== "ok" ? "missing" : "";
+      return '<div class="tlitem ' + active + " " + miss + '" data-id="' + v.id + '">' +
+        '<span class="dot ' + (v.status === "ok" ? "ok" : "missing") + '"></span>' +
+        '<span class="date">' + fmtDate(v.date) + "</span>" +
+        '<span style="min-width:0">' +
+        '<div class="ttl">' + esc(v.title) + "</div>" +
+        (miss ? '<div class="miss">no captions (rate-limited)</div>' : "") +
+        "</span></div>";
+    }).join("");
+    document.querySelectorAll(".tlitem").forEach(el => {
+      el.addEventListener("click", () => select(el.dataset.id));
+    });
+  }
+
+  function esc(s) {
+    const d = document.createElement("div");
+    d.textContent = s || "";
+    return d.innerHTML;
+  }
+
+  /* ---------- select video ---------- */
+  let query = "";
+  function select(id) {
+    idx = id;
+    renderTimeline();
+    const v = DATA.find(x => x.id === id);
+    $("videoTitle").innerHTML = esc(v.title) + '<span class="d">' + fmtDate(v.date) + "</span>";
+    $("videoLink").href = v.url || "#";
+    renderTranscript(v);
+  }
+
+  function renderTranscript(v) {
+    const box = $("transcript");
+    if (v.status !== "ok") {
+      box.innerHTML = '<div class="empty">Transcript unavailable for this video (auto-caption download was rate-limited). Retry later — the 10 with captions are fully searchable.</div>';
+      return;
+    }
+    const q = query.toLowerCase();
+    const hits = v.segments.map((s, i) => {
+      const text = s.text;
+      const low = text.toLowerCase();
+      const pos = q ? low.indexOf(q) : -1;
+      let html = "";
+      if (pos >= 0 && q.length >= 2) {
+        html = esc(text.slice(0, pos)) + '<span class="hit">' + esc(text.slice(pos, pos + q.length)) + "</span>" + esc(text.slice(pos + q.length));
+      } else {
+        html = esc(text);
+      }
+      return { i, s, html };
+    });
+    box.innerHTML = hits.map(h => {
+      const sel = h.s.marked ? " sel" : "";
+      return '<div class="seg' + sel + '" data-i="' + h.i + '">' +
+        '<span class="t">' + fmtts(h.s.t) + "</span>" + h.html + "</div>";
+    }).join("") || '<div class="empty">no segments</div>';
+
+    box.querySelectorAll(".seg").forEach(el => {
+      el.addEventListener("click", () => {
+        document.querySelectorAll(".seg").forEach(x => x.classList.remove("sel"));
+        el.classList.add("sel");
+        const i = +el.dataset.i;
+        attachEvidence(v.id, v.title, v.date, v.segments[i].t, v.segments[i].text);
+      });
+    });
+  }
+
+  function fmtts(t) {
+    if (t == null) return "–";
+    const m = Math.floor(t / 60);
+    const s = Math.floor(t % 60);
+    return m + ":" + String(s).padStart(2, "0");
+  }
+
+  function attachEvidence(vid, vtitle, vdate, t, text) {
+    const target = claims.find(c => c.status === "unconfirmed" && !c.evidence) || claims.find(c => c.status === "unconfirmed");
+    if (!target) {
+      toast("confirm or reject existing claims before attaching more evidence");
+      return;
+    }
+    target.evidence = { id: vid, title: vtitle, date: vdate, t, text: text.slice(0, 240) };
+    persist();
+    renderBoard();
+    toast("evidence attached → " + target.label + " (confirm it)");
+  }
+
+  /* ---------- signal board ---------- */
+  function renderBoard() {
+    const box = $("board");
+    if (!claims.length) { box.innerHTML = '<div class="empty">no claims</div>'; return; }
+    box.innerHTML = claims.map((c, i) => {
+      const st = c.status;
+      const ev = c.evidence;
+      const quotes = (SIG[c.k] && SIG[c.k].quotes) || [];
+      const shift = quotes.length > 1
+        ? '<details class="shift"><summary>' + quotes.length + " dated quotes — how the view shifted</summary>" +
+          quotes.map(q => {
+            return '<div class="ql"><span class="d">' + fmtDate(q.date) + "</span><span class=\"qt\">" + esc(q.text) + '</span><span class="src" data-jump="' + c.k + '" data-jump-video="' + q.video + '" data-jump-t="' + q.t + '">↪</span></div>';
+          }).join("") + "</details>"
+        : "";
+      const emptyCard = c.empty
+        ? '<div class="ev" style="color:var(--ink-3)">no explicit mention in this 30-day window — nothing to confirm</div>'
+        : (ev
+            ? '<div class="ev">“' + esc(ev.text) + '”<br>— <span class="src" data-jump-ev="' + ev.id + '">' + esc(ev.title) + " · " + fmtts(ev.t) + "</span></div>"
+            : '<div class="ev" style="color:var(--ink-3)">no evidence attached yet — click a quote in the transcript</div>');
+      return '<div class="claim' + (c.empty ? " empty-theme" : "") + '" data-i="' + i + '">' +
+        '<div class="top">' +
+        '<span class="k">' + esc(c.label) + "</span>" +
+        '<span class="status ' + st + '">' + st + "</span></div>" +
+        (c.empty ? "" : '<div class="cur"><span class="lbl">latest across 10 transcripts</span><span class="qt">“' + esc(c.current) + '”</span></div>') +
+        emptyCard +
+        shift +
+        (c.empty ? "" : '<div class="actions">' +
+          '<button class="btn primary" data-act="confirm">confirm</button>' +
+          '<button class="btn danger" data-act="reject">reject</button>' +
+          '<button class="btn" data-act="edit">edit</button>' +
+          '<button class="btn" data-act="unset">clear evidence</button>' +
+          "</div>") +
+        "</div>";
+    }).join("");
+
+    box.querySelectorAll("[data-act]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const i = +btn.closest(".claim").dataset.i;
+        act(i, btn.dataset.act);
+      });
+    });
+    // jump to youtube / transcript for a quote
+    const jump = (vid, t) => {
+      select(vid);
+      const v = DATA.find(x => x.id === vid);
+      if (!v) return;
+      setTimeout(() => {
+        const els = [...$("transcript").querySelectorAll(".seg")];
+        const el = els.find(e => {
+          const t0 = parseFloat(e.querySelector(".t").textContent.replace(":", "."));
+          return Math.abs(t0 - t) < 5;
+        });
+        if (el) { el.classList.add("mark"); el.scrollIntoView({ block: "center" }); }
+      }, 120);
+    };
+    box.querySelectorAll("[data-jump]").forEach(el => {
+      el.addEventListener("click", () => jump(el.dataset.jumpVideo, +el.dataset.jumpT));
+    });
+    box.querySelectorAll("[data-jump-ev]").forEach(el => {
+      el.addEventListener("click", () => {
+        const cl = el.closest(".claim");
+        const ev = claims[+cl.dataset.i].evidence;
+        if (ev) jump(ev.id, ev.t);
+      });
+    });
+  }
+
+  function act(i, action) {
+    const c = claims[i];
+    if (action === "confirm") c.status = "confirmed";
+    else if (action === "reject") c.status = "rejected";
+    else if (action === "unset") c.evidence = null;
+    else if (action === "edit") {
+      const nv = prompt("Edit current-state value:", c.current);
+      if (nv !== null && nv.trim()) c.current = nv.trim();
+    }
+    persist();
+    renderBoard();
+    $("confirmPill").textContent = claims.filter(x => x.status === "confirmed").length + "/" + claims.length + " confirmed";
+    toast(action + " → " + c.label);
+  }
+
+  function toast(msg) {
+    const t = $("toast");
+    t.textContent = msg;
+    t.classList.add("on");
+    clearTimeout(t._h);
+    t._h = setTimeout(() => t.classList.remove("on"), 1600);
+  }
+
+  /* ---------- search ---------- */
+  $("search").addEventListener("input", e => {
+    query = e.target.value.trim();
+    const v = DATA.find(x => x.id === idx);
+    if (v) renderTranscript(v);
+  });
+
+  /* ---------- export ---------- */
+  function exportJSON() {
+    const out = {
+      exportedAt: new Date().toISOString(),
+      note: "verbatim auto-caption quotes; confirm/reject per theme",
+      signal: claims.map(c => {
+        const qs = (SIG[c.k] && SIG[c.k].quotes) || [];
+        return {
+          theme: c.k, label: c.label, status: c.status,
+          current: c.current, evidence: c.evidence,
+          quoteCount: qs.length,
+        };
+      }),
+    };
+    const blob = new Blob([JSON.stringify(out, null, 2)], { type: "application/json" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "karsan-current-signal.json";
+    a.click();
+    URL.revokeObjectURL(a.href);
+    toast("signal exported");
+  }
+  $("exportBtn").addEventListener("click", exportJSON);
+  $("exportSignalBtn").addEventListener("click", exportJSON);
+  $("resetSigBtn").addEventListener("click", () => {
+    if (confirm("Reset all claims to the fresh extraction? This clears your confirmations.")) {
+      claims = Object.keys(SIG).map(k => ({
+        k, label: SIG[k].label, status: "unconfirmed",
+        current: SIG[k].latest ? SIG[k].latest.text : "",
+        evidence: null, empty: !SIG[k].latest,
+      }));
+      persist();
+      renderBoard();
+    }
+  });
+  $("themeBtn").addEventListener("click", () => applyTheme(!theme()));
+
+  init();
+})();
+</script>
+</body>
+</html>
