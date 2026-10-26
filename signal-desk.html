@@ -134,26 +134,51 @@
 
   /* signal board */
   .board { display: flex; flex-direction: column; gap: 10px; }
-  .claim { border: 1px solid var(--hair); border-radius: 8px; padding: 10px 12px; background: var(--surface-1); }
-  .claim.empty-theme { opacity: 0.7; }
-  .claim .top { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
-  .claim .k { font-size: 11px; text-transform: uppercase; letter-spacing: 0.03em; color: var(--ink-3); font-weight: 600; }
-  .claim .status { margin-left: auto; font-size: 11.5px; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--hair); color: var(--ink-2); }
-  .claim .status.confirmed { color: var(--ok); border-color: var(--ok); }
-  .claim .status.rejected { color: var(--serious); border-color: var(--serious); }
-  .claim .cur { font-size: 14px; margin-top: 4px; }
-  .claim .cur .lbl { color: var(--ink-3); font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.02em; display: block; margin-bottom: 2px; }
-  .claim .cur .qt { color: var(--ink-1); }
-  .claim .ev { font-size: 12.5px; color: var(--ink-2); margin-top: 4px; }
-  .claim .ev .src { color: var(--accent); cursor: pointer; }
-  .claim .ev .src:hover { text-decoration: underline; }
-  .claim .shift { margin-top: 8px; border-top: 1px dashed var(--hair); padding-top: 6px; }
-  .claim .shift summary { font-size: 11.5px; color: var(--ink-3); cursor: pointer; user-select: none; text-transform: uppercase; letter-spacing: 0.02em; }
-  .claim .shift .ql { padding: 3px 0; font-size: 12.5px; color: var(--ink-2); }
-  .claim .shift .ql .d { color: var(--ink-3); font-variant-numeric: tabular-nums; margin-right: 6px; font-size: 11.5px; }
-  .claim .shift .ql .src { color: var(--accent); cursor: pointer; font-size: 11.5px; margin-left: 4px; }
-  .claim .shift .ql .src:hover { text-decoration: underline; }
-  .claim .actions { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+
+  /* ranked ledger: rank, uppercase label, mono count, share track, evidence column */
+  .ledger { border: 1px solid var(--hair); border-radius: 10px; overflow: hidden; background: var(--surface-1); }
+  .lhead, .lrow { display: grid; grid-template-columns: 26px minmax(140px, 1.3fr) 72px 96px minmax(170px, 2fr) 132px; gap: 12px; padding: 9px 12px; align-items: start; }
+  .lhead { font: 500 10px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-3); background: var(--surface-2); border-bottom: 1px solid var(--hair); }
+  .lrow { border-bottom: 1px solid var(--hair); }
+  .lrow:last-child { border-bottom: 0; }
+  .lrow:hover { background: var(--surface-2); }
+  .lrow.zero { opacity: 0.45; }
+  .lrow .rank { font: 500 12px ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--ink-3); text-align: right; font-variant-numeric: tabular-nums; }
+  .lrow .name { font-size: 12.5px; font-weight: 650; letter-spacing: 0.055em; text-transform: uppercase; color: var(--ink-1); }
+  .lrow .stat { font-size: 10.5px; letter-spacing: 0.05em; text-transform: uppercase; margin-top: 4px; color: var(--ink-3); }
+  .lrow .stat.confirmed { color: var(--ok); }
+  .lrow .stat.rejected { color: var(--serious); }
+  .lrow .num { font: 500 13px ui-monospace, SFMono-Regular, Menlo, monospace; text-align: right; color: var(--ink-1); font-variant-numeric: tabular-nums; }
+  .lrow .num .u { color: var(--ink-3); font-size: 10.5px; letter-spacing: 0.04em; margin-left: 3px; }
+  .lrow .track { height: 3px; border-radius: 2px; background: transparent; margin-top: 7px; overflow: hidden; }
+  .lrow .fill { height: 100%; background: var(--ink-3); opacity: 0.6; }
+  .lrow .fill.top { background: var(--up); opacity: 1; }
+  .lrow .quote { font: 11.5px/1.45 ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--ink-2); min-width: 0; }
+  .lrow .quote .qt1, .lrow .quote .meta { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .lrow .quote .meta { color: var(--ink-3); }
+  .lrow .acts { display: flex; flex-wrap: wrap; gap: 4px; justify-content: flex-end; }
+  .lrow .acts .btn { padding: 2px 6px; font-size: 10.5px; }
+  .ledger-foot { font: 11px/1.55 ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--ink-3); padding: 9px 12px; border-top: 1px solid var(--hair); background: var(--surface-2); }
+  .ledger-foot .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin: 0 4px 0 10px; }
+
+  /* narrow panel: evidence drops to its own line instead of overflowing */
+  .panel { container-type: inline-size; }
+  @container (max-width: 700px) {
+    .lhead, .lrow { grid-template-columns: 24px 1fr 56px 70px; gap: 10px; row-gap: 7px; }
+    .lhead > div:nth-child(5), .lhead > div:nth-child(6) { display: none; }
+    .lrow > div:nth-child(5) { grid-column: 1 / -1; }
+    .lrow > div:nth-child(6) { grid-column: 1 / -1; }
+    .lrow .acts { justify-content: flex-start; }
+    .lrow .name { font-size: 12px; }
+    .lrow .quote { font-size: 11px; }
+  }
+  /* the dated-quote drawer spans the whole row, not the narrow evidence cell */
+  .lrow .drawer { grid-column: 1 / -1; }
+  .lrow .shift summary { font-size: 10.5px; color: var(--ink-3); cursor: pointer; user-select: none; text-transform: uppercase; letter-spacing: 0.05em; }
+  .lrow .shift .ql { padding: 2px 0; font-size: 11.5px; color: var(--ink-2); }
+  .lrow .shift .ql .d { color: var(--ink-3); font-variant-numeric: tabular-nums; margin-right: 6px; font-size: 11px; }
+  .lrow .shift .ql .src, .lrow .quote .meta.src { color: var(--accent); cursor: pointer; }
+  .lrow .shift .ql .src:hover, .lrow .quote .meta.src:hover { text-decoration: underline; }
   .btn { font: inherit; font-size: 12px; padding: 3px 10px; border-radius: 6px; border: 1px solid var(--axis); background: var(--surface-1); color: var(--ink-1); cursor: pointer; }
   .btn:hover { border-color: var(--ink-2); }
   .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
@@ -214,18 +239,19 @@
         <input class="search" id="search" type="search" placeholder="Search transcript… (typing filters)">
         <div class="transcript" id="transcript"></div>
       </section>
-
-      <section class="panel">
-        <h2>Signal — confirm each claim with dated evidence</h2>
-        <div class="board" id="board"></div>
-        <div class="exportbar">
-          <button class="btn primary" id="exportSignalBtn">export signal JSON</button>
-          <button class="btn" id="resetSigBtn">reset to extraction</button>
-          <span class="note">click a quote in the transcript to attach it as evidence, then confirm · quotes are verbatim auto-captions</span>
-        </div>
-      </section>
     </div>
   </div>
+
+  <!-- full width: the ranked table needs the canvas, not a panel column -->
+  <section class="panel" style="margin-top:16px">
+    <h2>Signal — confirm each claim with dated evidence</h2>
+    <div class="board" id="board"></div>
+    <div class="exportbar">
+      <button class="btn primary" id="exportSignalBtn">export signal JSON</button>
+      <button class="btn" id="resetSigBtn">reset to extraction</button>
+      <span class="note">click a quote in the transcript to attach it as evidence, then confirm · quotes are verbatim auto-captions</span>
+    </div>
+  </section>
 </div>
 <div class="toast" id="toast"></div>
 
@@ -524,40 +550,68 @@
   function renderBoard() {
     const box = $("board");
     if (!claims.length) { box.innerHTML = '<div class="empty">no claims</div>'; return; }
-    box.innerHTML = claims.map((c, i) => {
+    /* display order: most evidence first, silent themes last but never dropped */
+    const order = claims.map((c, i) => ({ i, n: ((SIG[c.k] || {}).quotes || []).length, empty: !!c.empty }))
+      .sort((a, b) => (a.empty - b.empty) || (b.n - a.n))
+      .map(x => x.i);
+    const totalQ = order.reduce((s, i) => s + (((SIG[claims[i].k] || {}).quotes || []).length), 0);
+    const maxShare = Math.max(1e-9, ...order.map(i => (((SIG[claims[i].k] || {}).quotes || []).length) / (totalQ || 1)));
+
+    const rows = order.map((i, pos) => {
+      const c = claims[i];
       const st = c.status;
       const ev = c.evidence;
       const quotes = (SIG[c.k] && SIG[c.k].quotes) || [];
+      const n = quotes.length;
+      const latest = quotes.slice().sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")) || (b.t - a.t))[0];
+      const share = totalQ ? n / totalQ : 0;
+      const top = pos < 2 && n > 0;
       const shift = quotes.length > 1
-        ? '<details class="shift"><summary>' + quotes.length + " dated quotes — how the view shifted</summary>" +
+        ? '<details class="shift"><summary>' + quotes.length + " dated quotes</summary>" +
           quotes.map(q => {
-            return '<div class="ql"><span class="d">' + fmtDate(q.date) + "</span><span class=\"qt\">" + esc(q.text) + '</span><span class="src" data-jump="' + c.k + '" data-jump-video="' + q.video + '" data-jump-t="' + q.t + '">↪</span></div>';
+            return '<div class="ql"><span class="d">' + fmtDate(q.date) + '</span><span class="qt">' + esc(q.text) + '</span><span class="src" data-jump="' + c.k + '" data-jump-video="' + q.video + '" data-jump-t="' + q.t + '">&#8618;</span></div>';
           }).join("") + "</details>"
         : "";
-      const emptyCard = c.empty
-        ? '<div class="ev" style="color:var(--ink-3)">no explicit mention in this 30-day window — nothing to confirm</div>'
-        : (ev
-            ? '<div class="ev">“' + esc(ev.text) + '”<br>— <span class="src" data-jump-ev="' + ev.id + '">' + esc(ev.title) + " · " + fmtts(ev.t) + "</span></div>"
-            : '<div class="ev" style="color:var(--ink-3)">no evidence attached yet — click a quote in the transcript</div>');
-      return '<div class="claim' + (c.empty ? " empty-theme" : "") + '" data-i="' + i + '">' +
-        '<div class="top">' +
-        '<span class="k">' + esc(c.label) + "</span>" +
-        '<span class="status ' + st + '">' + st + "</span></div>" +
-        (c.empty ? "" : '<div class="cur"><span class="lbl">latest across 10 transcripts</span><span class="qt">“' + esc(c.current) + '”</span></div>') +
-        emptyCard +
-        shift +
-        (c.empty ? "" : '<div class="actions">' +
+      let evidence;
+      if (c.empty) {
+        evidence = '<div class="quote"><span class="meta">no mention in this window</span></div>';
+      } else if (ev) {
+        evidence = '<div class="quote"><span class="qt1">&#8220;' + esc(ev.text.slice(0, 220)) + (ev.text.length > 220 ? "&#8230;" : "") + '&#8221;</span><span class="meta src" data-jump-ev="' + ev.id + '">' + esc(ev.title) + " &middot; " + fmtts(ev.t) + "</span></div>";
+      } else if (latest) {
+        evidence = '<div class="quote" style="color:var(--ink-3)"><span class="qt1">&#8220;' + esc(latest.text.slice(0, 220)) + '&#8230;&#8221;</span><span class="meta">latest ' + fmtDate(latest.date) + " &middot; not attached</span></div>";
+      } else {
+        evidence = '<div class="quote"><span class="meta">no evidence attached yet</span></div>';
+      }
+      return '<div class="lrow' + (c.empty ? " zero" : "") + '" data-i="' + i + '">' +
+        '<div class="rank">' + (pos + 1) + "</div>" +
+        '<div><div class="name">' + esc(c.label) + '</div><div class="stat ' + st + '">' + st + "</div></div>" +
+        '<div class="num">' + (n ? n + '<span class="u">' + (n === 1 ? "quote" : "quotes") + "</span>" : '<span style="color:var(--ink-3)">&ndash;</span>') + "</div>" +
+        '<div><div class="num">' + (n ? Math.round(share * 100) + '<span class="u">%</span>' : '<span style="color:var(--ink-3)">&ndash;</span>') + "</div>" +
+          (n ? '<div class="track"><div class="fill' + (top ? " top" : "") + '" style="width:' + Math.max(3, Math.round((share / maxShare) * 100)) + '%"></div></div>' : "") + "</div>" +
+        "<div>" + evidence + "</div>" +
+        (c.empty ? '<div class="acts"></div>' : '<div class="acts">' +
           '<button class="btn primary" data-act="confirm">confirm</button>' +
           '<button class="btn danger" data-act="reject">reject</button>' +
           '<button class="btn" data-act="edit">edit</button>' +
-          '<button class="btn" data-act="unset">clear evidence</button>' +
-          "</div>") +
+          '<button class="btn" data-act="unset">clear</button>' + "</div>") +
+        (shift ? '<div class="drawer">' + shift + "</div>" : "") +
         "</div>";
     }).join("");
 
+    const dates = DATA.map(v => v.date).filter(Boolean).sort();
+    const span = dates.length ? fmtDate(dates[0]) + " &ndash; " + fmtDate(dates[dates.length - 1]) : "&ndash;";
+    const okN = DATA.filter(v => v.status === "ok").length;
+    const lab = STANCE ? Object.values(STANCE.themes || {}).reduce((s, t) => s + Object.values(t.quotes || {}).filter(q => q.dir).length, 0) : 0;
+    const foot = '<div class="ledger-foot">Data: ' + span + " &middot; " + totalQ + " quotes &middot; " + claims.length + " themes &middot; " + okN + " interviews analyzed" +
+      "<br>bar: " + '<span class="dot" style="background:var(--up)"></span>top two by volume &middot; <span class="dot" style="background:var(--ink-3)"></span>scaled to the largest theme' +
+      " &middot; stance labelled " + lab + " of " + totalQ + " (provisional)</div>";
+
+    box.innerHTML = '<div class="ledger"><div class="lhead"><div style="text-align:right">#</div><div>theme</div><div style="text-align:right">quotes</div><div style="text-align:right">share</div><div>latest evidence in interviews</div><div style="text-align:right">state</div></div>' +
+      rows + foot + "</div>";
+
     box.querySelectorAll("[data-act]").forEach(btn => {
       btn.addEventListener("click", () => {
-        const i = +btn.closest(".claim").dataset.i;
+        const i = +btn.closest(".lrow").dataset.i;
         act(i, btn.dataset.act);
       });
     });
@@ -580,7 +634,7 @@
     });
     box.querySelectorAll("[data-jump-ev]").forEach(el => {
       el.addEventListener("click", () => {
-        const cl = el.closest(".claim");
+        const cl = el.closest(".lrow");
         const ev = claims[+cl.dataset.i].evidence;
         if (ev) jump(ev.id, ev.t);
       });
