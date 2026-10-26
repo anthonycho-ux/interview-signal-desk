@@ -19,6 +19,7 @@
     --warn: #fab219;
     --serious: #d03b3b;
     --accent: #2a78d6;
+    --up: #b87a00;
     --shadow: 0 6px 20px rgba(0,0,0,0.08);
   }
   @media (prefers-color-scheme: dark) {
@@ -36,6 +37,7 @@
       --warn: #fab219;
       --serious: #e66767;
       --accent: #3987e5;
+      --up: #e0a020;
       --shadow: 0 6px 20px rgba(0,0,0,0.5);
     }
   }
@@ -53,6 +55,7 @@
     --warn: #fab219;
     --serious: #e66767;
     --accent: #3987e5;
+    --up: #e0a020;
     --shadow: 0 6px 20px rgba(0,0,0,0.5);
   }
 
@@ -74,22 +77,46 @@
   .pill.btn { cursor: pointer; }
   .pill.btn:hover { border-color: var(--ink-2); }
 
-  .grid { display: grid; grid-template-columns: 300px 1fr; gap: 16px; align-items: start; }
+  .grid { display: grid; grid-template-columns: 344px 1fr; gap: 16px; align-items: start; }
   .panel { background: var(--surface-1); border: 1px solid var(--hair); padding: 14px; border-radius: 8px; }
   .panel h2 { font-size: 12.5px; font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 10px; }
 
   /* timeline */
   .tl { max-height: 72vh; overflow-y: auto; }
-  .tlitem { display: flex; gap: 10px; align-items: baseline; padding: 7px 8px; border-radius: 6px; cursor: pointer; border: 1px solid transparent; }
+  .tlitem { display: block; padding: 7px 8px; border-radius: 6px; cursor: pointer; border: 1px solid transparent; }
   .tlitem:hover { background: var(--surface-2); }
   .tlitem.active { border-color: var(--accent); background: var(--surface-2); }
   .tlitem.missing { opacity: 0.5; }
-  .tl .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; align-self: center; background: var(--ink-3); }
+  .tlrow { display: flex; gap: 10px; align-items: flex-start; }
+  .tl .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; margin-top: 6px; background: var(--ink-3); }
   .tl .dot.ok { background: var(--ok); }
   .tl .dot.missing { background: var(--warn); }
   .tl .date { font-size: 11.5px; color: var(--ink-3); font-variant-numeric: tabular-nums; width: 52px; flex: none; }
-  .tl .ttl { font-size: 13px; color: var(--ink-1); }
+  .tl .ttl { font-size: 13px; color: var(--ink-1); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
   .tl .miss { font-size: 11px; color: var(--serious); }
+
+  /* emphasis strip: one row per interview, seven theme columns */
+  .tlhead { display: flex; gap: 0; align-items: flex-end; padding: 0 9px 5px; border-bottom: 1px solid var(--hair); margin-bottom: 4px; }
+  .tlhead .sp { width: 0; flex: none; }
+  .strip { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 3px; margin-top: 6px; margin-left: 0; }
+  .tlhead .strip { margin-top: 0; margin-left: 0; flex: 1 1 auto; min-width: 0; }
+  .tlhead .strip div { font-size: 12px; letter-spacing: 0; text-transform: uppercase; color: var(--ink-3); white-space: nowrap; overflow: hidden; }
+  .cell { position: relative; height: 22px; border-radius: 3px; border: 1px solid var(--hair); background: color-mix(in srgb, var(--hair) 30%, var(--surface-1)); overflow: hidden; }
+  .cell.has { cursor: pointer; }
+  .cell.has:hover { outline: 1px solid var(--accent); outline-offset: 0; }
+  .cell .bar { position: absolute; left: 0; right: 0; bottom: 0; background: var(--ink-3); opacity: 0.55; }
+  .cell .st { position: absolute; top: 3px; right: 3px; width: 5px; height: 5px; border-radius: 50%; }
+  .cell .st.up { background: var(--up); }
+  .cell .st.down { background: var(--accent); }
+  .strip.thin .cell .bar { opacity: 0.3; }
+  .cell.unk { background: repeating-linear-gradient(90deg, var(--hair) 0 2px, transparent 2px 4px); border-color: transparent; }
+  .mover { font-size: 12px; color: var(--ink-3); margin-top: 4px; font-variant-numeric: tabular-nums; }
+  .mover .nm { color: var(--ink-2); }
+  .mover .up { color: var(--up); }
+  .mover .down { color: var(--accent); }
+  .legend { font-size: 12px; color: var(--ink-3); line-height: 1.45; margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--hair); }
+  .legend b { color: var(--ink-2); font-weight: 600; }
+  .legend .sw { display: inline-block; width: 9px; height: 9px; border-radius: 2px; vertical-align: -1px; }
 
   /* search */
   .search { width: 100%; margin-bottom: 10px; padding: 8px 10px; border: 1px solid var(--axis); border-radius: 6px; background: var(--surface-1); color: var(--ink-1); font-size: 13.5px; }
@@ -166,7 +193,15 @@
     <!-- left: timeline -->
     <section class="panel">
       <h2>Interviews</h2>
+      <div class="note" style="margin:-4px 0 8px">attention per theme, share of that interview's claims</div>
+      <div class="tlhead"><span class="sp"></span><div class="strip" id="stripHead"></div></div>
       <div class="tl" id="timeline"></div>
+      <div class="legend">
+        columns: regime &middot; gamma flip &middot; walls/skew &middot; vol posture &middot; opex &middot; fed/liquidity &middot; crash/drawdown.<br>
+        bar height = share of that interview's claims on the theme.<br>
+        dot top-right = stance: <span class="sw" style="background:var(--up);border-radius:50%"></span> presses the theme harder &middot; <span class="sw" style="background:var(--accent);border-radius:50%"></span> deflates it &middot; no dot = unlabelled.<br>
+        hatched = no transcript, unknown not zero. faint bar = under 6 claims, too thin to compare. Stance is a provisional keyword prior.
+      </div>
     </section>
 
     <!-- right: transcript + signal -->
@@ -214,6 +249,7 @@
   /* ---------- data ---------- */
   let DATA = [];
   let SIG = {};
+  let STANCE = null;
   let idx = 0;
   let claims = [];
   const STORE_KEY = "karsan-signal-v2";
@@ -250,14 +286,16 @@
 
   async function init() {
     try {
-      const [r1, r2] = await Promise.all([
+      const [r1, r2, r3] = await Promise.all([
         fetch("transcripts.json", { cache: "no-store" }),
         fetch("signals.json", { cache: "no-store" }),
+        fetch("stance.json", { cache: "no-store" }).catch(() => null),
       ]);
       if (!r1.ok) throw new Error("transcripts.json HTTP " + r1.status);
       if (!r2.ok) throw new Error("signals.json HTTP " + r2.status);
       DATA = await r1.json();
       SIG = await r2.json();
+      if (r3 && r3.ok) { try { STANCE = await r3.json(); } catch (e) { STANCE = null; } }
     } catch (e) {
       $("timeline").innerHTML = '<div class="empty">Could not load data — ' + e.message + "</div>";
       return;
@@ -274,21 +312,135 @@
   }
 
   /* ---------- timeline ---------- */
+  const THEME_ORDER = ["regime", "gamma_flip", "walls_skew", "vol_posture", "opex_stance", "fed_liquidity", "crash_call"];
+  const TLAB = { regime: "regime", gamma_flip: "flip", walls_skew: "walls", vol_posture: "vol", opex_stance: "opex", fed_liquidity: "fed", crash_call: "crash" };
+  const HDR = { regime: "reg", gamma_flip: "flip", walls_skew: "wall", vol_posture: "vol", opex_stance: "opex", fed_liquidity: "fed", crash_call: "crsh" };
+
+  /* per-interview counts, share of that interview's claims, and mean stance */
+  function buildStats() {
+    const per = {};
+    for (const t of THEME_ORDER) {
+      const blob = SIG[t];
+      if (!blob) continue;
+      for (const q of (blob.quotes || [])) {
+        const s = per[q.video] || (per[q.video] = { c: {}, tot: 0, dsum: {}, dn: {} });
+        s.c[t] = (s.c[t] || 0) + 1;
+        s.tot++;
+        const st = STANCE && STANCE.themes && STANCE.themes[t] && STANCE.themes[t].quotes[q.video + ":" + Math.round(q.t)];
+        if (st && st.dir) { s.dsum[t] = (s.dsum[t] || 0) + st.dir; s.dn[t] = (s.dn[t] || 0) + 1; }
+      }
+    }
+    return per;
+  }
+
   function renderTimeline() {
-    $("timeline").innerHTML = DATA.map(v => {
+    const per = buildStats();
+    const share = {};
+    DATA.forEach(v => {
+      share[v.id] = {};
+      const s = per[v.id];
+      if (!s || !s.tot) return;
+      THEME_ORDER.forEach(t => { share[v.id][t] = (s.c[t] || 0) / s.tot; });
+    });
+    /* baseline is the pooled share of the previous (older) three transcribed
+       interviews: sum(counts)/sum(totals), not the mean of shares, because a
+       2-claim clip would otherwise carry the same weight as a 22-claim one. */
+    const baseline = (i, t) => {
+      let c = 0, tot = 0, n = 0;
+      for (let j = i + 1; j < DATA.length && n < 3; j++) {
+        const s = per[DATA[j].id];
+        if (!s || !s.tot) continue;
+        c += s.c[t] || 0; tot += s.tot; n++;
+      }
+      return tot ? { v: c / tot, n } : null;
+    };
+
+    $("stripHead").innerHTML = THEME_ORDER.map(t => "<div>" + HDR[t] + "</div>").join("");
+
+    $("timeline").innerHTML = DATA.map((v, i) => {
       const active = v.id === idx ? "active" : "";
       const miss = v.status !== "ok" ? "missing" : "";
+      const s = per[v.id];
+      const has = !!(s && s.tot);
+      const transcribed = v.status === "ok";
+
+      const cells = THEME_ORDER.map(t => {
+        if (!transcribed) return '<div class="cell unk" title="no transcript - unknown, not zero"></div>';
+        const c = has ? (s.c[t] || 0) : 0;
+        const sh = has ? (share[v.id][t] || 0) : 0;
+        const mean = (has && s.dn[t]) ? s.dsum[t] / s.dn[t] : 0;
+        const b = baseline(i, t);
+        const btxt = b ? " · 3-interview base " + Math.round(b.v * 100) + "%" : " · no baseline yet";
+        const tip = TLAB[t] + ": " + c + " quote" + (c === 1 ? "" : "s") + (has ? " · " + Math.round(sh * 100) + "% of " + s.tot : " · no claims extracted") + btxt +
+          ((has && s.dn[t]) ? " · stance " + (mean > 0 ? "+" : "") + mean.toFixed(1) + " (" + s.dn[t] + " labelled)" : " · stance unlabelled");
+        const tone = mean > 0.15 ? " up" : mean < -0.15 ? " down" : "";
+        return '<div class="cell' + (c ? " has" : "") + '" data-video="' + v.id + '" data-theme="' + t + '" title="' + esc(tip) + '">' +
+          (c ? '<div class="bar" style="height:' + Math.max(8, Math.round(sh * 100)) + '%"></div>' : "") +
+          (tone ? '<span class="st' + tone + '"></span>' : "") + "</div>";
+      }).join("");
+
+      /* one line per interview: biggest move vs the pooled baseline. Thin
+         interviews (<6 claims) and small moves (<10 points) are not called. */
+      let mover;
+      if (!transcribed) {
+        mover = '<div class="mover">no transcript</div>';
+      } else if (!has) {
+        mover = '<div class="mover">transcript read · no on-theme claim</div>';
+      } else if (s.tot < 6) {
+        mover = '<div class="mover">' + s.tot + " claims · too thin to compare</div>";
+      } else {
+        let best = null;
+        THEME_ORDER.forEach(t => {
+          const b = baseline(i, t);
+          if (!b) return;
+          const d = (share[v.id][t] || 0) - b.v;
+          if (Math.abs(d) >= 0.10 && (!best || Math.abs(d) > Math.abs(best.d))) best = { t, d };
+        });
+        const anyBase = THEME_ORDER.some(t => baseline(i, t));
+        mover = best
+          ? '<div class="mover"><span class="nm">' + TLAB[best.t] + "</span> " + Math.round(share[v.id][best.t] * 100) + "% " +
+            '<span class="' + (best.d > 0 ? "up" : "down") + '">' + (best.d > 0 ? "\u25B2+" : "\u25BC") + Math.round(Math.abs(best.d) * 100) + "</span> vs base</div>"
+          : '<div class="mover">' + (anyBase ? "steady · " + s.tot + " claims" : "oldest in window · " + s.tot + " claims, no baseline") + "</div>";
+      }
+
       return '<div class="tlitem ' + active + " " + miss + '" data-id="' + v.id + '">' +
+        '<div class="tlrow">' +
         '<span class="dot ' + (v.status === "ok" ? "ok" : "missing") + '"></span>' +
         '<span class="date">' + fmtDate(v.date) + "</span>" +
-        '<span style="min-width:0">' +
+        '<span style="min-width:0;flex:1">' +
         '<div class="ttl">' + esc(v.title) + "</div>" +
         (miss ? '<div class="miss">no captions (rate-limited)</div>' : "") +
-        "</span></div>";
+        "</span></div>" +
+        '<div class="strip' + (has && s.tot < 6 ? " thin" : "") + '">' + cells + "</div>" +
+        mover +
+        "</div>";
     }).join("");
+
     document.querySelectorAll(".tlitem").forEach(el => {
       el.addEventListener("click", () => select(el.dataset.id));
     });
+    document.querySelectorAll(".cell.has").forEach(el => {
+      el.addEventListener("click", (ev) => {
+        ev.stopPropagation();
+        jumpToTheme(el.dataset.video, el.dataset.theme);
+      });
+    });
+  }
+
+  /* click a cell: open that interview and land on its first quote for the theme */
+  function jumpToTheme(vid, theme) {
+    const qs = (((SIG[theme] || {}).quotes) || []).filter(q => q.video === vid).sort((a, b) => a.t - b.t);
+    select(vid);
+    if (!qs.length) return;
+    const t = qs[0].t;
+    setTimeout(() => {
+      const els = [...$("transcript").querySelectorAll(".seg")];
+      const el = els.find(e => {
+        const t0 = parseTS(e.querySelector(".t").textContent);
+        return Math.abs(t0 - t) < 6;
+      });
+      if (el) { el.classList.add("mark"); el.scrollIntoView({ block: "center" }); }
+    }, 140);
   }
 
   function esc(s) {
@@ -348,6 +500,12 @@
     const m = Math.floor(t / 60);
     const s = Math.floor(t % 60);
     return m + ":" + String(s).padStart(2, "0");
+  }
+
+  /* transcript timestamps render as M:SS; parseFloat would read 7:59 as 7.59 */
+  function parseTS(s) {
+    const p = String(s).trim().split(":");
+    return p.length === 2 ? (+p[0]) * 60 + (+p[1]) : parseFloat(s);
   }
 
   function attachEvidence(vid, vtitle, vdate, t, text) {
@@ -411,7 +569,7 @@
       setTimeout(() => {
         const els = [...$("transcript").querySelectorAll(".seg")];
         const el = els.find(e => {
-          const t0 = parseFloat(e.querySelector(".t").textContent.replace(":", "."));
+          const t0 = parseTS(e.querySelector(".t").textContent);
           return Math.abs(t0 - t) < 5;
         });
         if (el) { el.classList.add("mark"); el.scrollIntoView({ block: "center" }); }

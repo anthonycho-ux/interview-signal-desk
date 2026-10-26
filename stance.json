@@ -1,0 +1,804 @@
+{
+ "_note": "provisional keyword-prior stance; dir>0 presses the theme harder, dir<0 deflates it. claim intensity, not bullish/bearish. src=auto means unconfirmed.",
+ "_schema": "video:rounded_seconds -> {dir, hits, src}",
+ "themes": {
+  "regime": {
+   "label": "Gamma regime",
+   "quotes": {
+    "8q2DSWpJBCE:479": {
+     "dir": 1,
+     "hits": [
+      "+decline"
+     ],
+     "src": "auto",
+     "date": "20261021",
+     "text": "four month window before a decline. So, what you'll see is the skew pops, people are worried, people are starting to hedge, but reflexively what does that mean?"
+    },
+    "12bqNXx6PDs:162": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261016",
+     "text": "long of Vega per day of time. Also, that vol coming getting delivered vol means there's more vol selling, which sells means there's a a vol my element, which me"
+    },
+    "12bqNXx6PDs:102": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261016",
+     "text": "implied volatility in that expiration. So, uh what ends up happening is is if you look at a volatility curve, and I encourage people to do that, you will see th"
+    },
+    "qbA9__jh8BY:522": {
+     "dir": -1,
+     "hits": [
+      "-relief"
+     ],
+     "src": "auto",
+     "date": "20261013",
+     "text": "that Vanna Charm? You know, little bit of positive positive kind of motion is likely some relief to the wall of worry, call it, is likely there, in my opinion, "
+    },
+    "qbA9__jh8BY:225": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261013",
+     "text": "compressing. Why? Any idea? Why Why Why is this long Vomma? Why do dealers get long vo- a long Vomma and Veda? In other words, by every day that goes by during "
+    }
+   }
+  },
+  "gamma_flip": {
+   "label": "Gamma flip / levels",
+   "quotes": {}
+  },
+  "walls_skew": {
+   "label": "Event walls & put skew",
+   "quotes": {
+    "8q2DSWpJBCE:768": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261021",
+     "text": "just another reason to be concerned. I'll highlight one important stat here, too. I gave you the skew one. We have not seen uh a combination of the three big fo"
+    },
+    "8q2DSWpJBCE:700": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261021",
+     "text": "tomorrow. They affect things over time. If they are not resolved over some time they they you know create a more more you know convex potential risk to to the e"
+    },
+    "8q2DSWpJBCE:620": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261021",
+     "text": "can't hate what we've seen so far today. I suppose some of these earnings calls themselves are going to be important. We know that that has turned the screws on"
+    },
+    "8q2DSWpJBCE:575": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261021",
+     "text": "what you see at tops, not at bottoms. And uh very very interesting kind of action both from the numbers and the price action and skew and other things underneat"
+    },
+    "8q2DSWpJBCE:505": {
+     "dir": 0,
+     "hits": [
+      "+decline",
+      "-decline"
+     ],
+     "src": "auto",
+     "date": "20261021",
+     "text": "have it pay off. It needs to be hard. And so, you generally model through some period of months before a decline. Not uh you can't time this exactly. This is no"
+    },
+    "8q2DSWpJBCE:479": {
+     "dir": 1,
+     "hits": [
+      "+decline"
+     ],
+     "src": "auto",
+     "date": "20261021",
+     "text": "four month window before a decline. So, what you'll see is the skew pops, people are worried, people are starting to hedge, but reflexively what does that mean?"
+    },
+    "8q2DSWpJBCE:403": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261021",
+     "text": "after OpEx. Yeah, I think I think the view has been and and generally, the highest probability outcome here is, you know, uh uh push higher, push higher, get go"
+    },
+    "QbKczI0S0p4:314": {
+     "dir": 1,
+     "hits": [
+      "+downside"
+     ],
+     "src": "auto",
+     "date": "20261019",
+     "text": "very telling. Uh last thing on flows here before we move on to I think a lot of discussion about that but just let's a good time for this chart about skew. Um o"
+    },
+    "QbKczI0S0p4:9": {
+     "dir": 2,
+     "hits": [
+      "+sell-off"
+     ],
+     "src": "auto",
+     "date": "20261019",
+     "text": "think a lot of people consider it nasty. It's it's always interesting to contextualize that, right? After some of the sell-offs that you and I have have seen in"
+    },
+    "12bqNXx6PDs:391": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261016",
+     "text": "not the fear index, okay? The change, now that we get a little inside baseball again, the change relative to the skew of the vol, or in other words, the actual "
+    },
+    "12bqNXx6PDs:326": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261016",
+     "text": "during this OpEx period? Yeah, so so fixed rate vol is measuring what the actual uh vol implied volatility of the strikes uh of the the actual surface are wheth"
+    },
+    "12bqNXx6PDs:177": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261016",
+     "text": "These all lead to vol selling at scale. This is inside baseball. You know, there's a big takeaway during these 2 weeks. So, every morning you come in, vol compr"
+    },
+    "qbA9__jh8BY:1304": {
+     "dir": -1,
+     "hits": [
+      "-rally"
+     ],
+     "src": "auto",
+     "date": "20261013",
+     "text": "Mhm. Like that chart makes a ton of sense in general and well how these things event fall, right? Collapses, that skew comes down, markets rally, but especially"
+    },
+    "qbA9__jh8BY:911": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261013",
+     "text": "a bit of like moguls, like skiing here. You have this situation that keeps happening with calls in the convexity part of the market, like this AI part of the ma"
+    },
+    "qbA9__jh8BY:575": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261013",
+     "text": "Charm flows and event wall passing. But, I think that might be an opportunity to kind of stay short kind of the most stressful weak links weak links Mhm."
+    },
+    "qbA9__jh8BY:549": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261013",
+     "text": "good opportunity to to sell there. I want to be clear with one of the key areas I'm most worried about into the potential risks that are coming are regional ban"
+    },
+    "qbA9__jh8BY:522": {
+     "dir": -1,
+     "hits": [
+      "-relief"
+     ],
+     "src": "auto",
+     "date": "20261013",
+     "text": "that Vanna Charm? You know, little bit of positive positive kind of motion is likely some relief to the wall of worry, call it, is likely there, in my opinion, "
+    },
+    "qbA9__jh8BY:510": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261013",
+     "text": "well. But, given all that, you're also seeing a pretty high put skew in that part of the market. And with an event wall for earnings, that tends to mean what? I"
+    },
+    "qbA9__jh8BY:339": {
+     "dir": -1,
+     "hits": [
+      "-cheap"
+     ],
+     "src": "auto",
+     "date": "20261013",
+     "text": "more. Vol naturally becomes a hot potato and then it compresses more. But it also compresses the realized vol because the more and more big dealers get long vol"
+    },
+    "YIR7RVLadt8:1472": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261009",
+     "text": "reversal. Again, not yet. getting close. That's one path. And the reason that would start to work and it'd be accompanied with a rising v both into that and out"
+    },
+    "YIR7RVLadt8:378": {
+     "dir": -1,
+     "hits": [
+      "-compressed"
+     ],
+     "src": "auto",
+     "date": "20261009",
+     "text": "crisis, right, which we've talked about. But but uh in the meantime um if it's the ball is compressed and held at bay uh during that trading day uh you will get"
+    },
+    "YIR7RVLadt8:319": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261009",
+     "text": "consider as a day trader? My opinion is it's been that way for a long time. And the reason that happens is because of all compression. When market V markets are"
+    }
+   }
+  },
+  "vol_posture": {
+   "label": "Vol posture",
+   "quotes": {
+    "8q2DSWpJBCE:385": {
+     "dir": 2,
+     "hits": [
+      "+decline",
+      "+spike"
+     ],
+     "src": "auto",
+     "date": "20261021",
+     "text": "Meta up to 722, Tesla up to 393. So, Jim, So, Jim, I want to talk to you about volatility here, because we saw that Vix spike up to to 22 on Friday. And ever si"
+    },
+    "12bqNXx6PDs:716": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261016",
+     "text": "yeah, I mean, yeah, gosh. And people don't want to hear it, but it's a reality and it's not a presidential election this time around, but it is maybe even more "
+    },
+    "12bqNXx6PDs:532": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261016",
+     "text": "is lower. Right? So, structurally it is showing you a lower implied volatility when that's not again something that's necessarily as true, right? And now just b"
+    },
+    "12bqNXx6PDs:509": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261016",
+     "text": "let's start there. Um there is this dynamic where the currently we're moving past the actual implied volatility of the event being at the the peak, which it was"
+    },
+    "12bqNXx6PDs:436": {
+     "dir": -1,
+     "hits": [
+      "-compressed"
+     ],
+     "src": "auto",
+     "date": "20261016",
+     "text": "compressed as the VIX is showing you. So, the VIX is showing down 2.3% .39 today. Uh the reality is it's down about half of that, .2, right? So, but it is down "
+    },
+    "12bqNXx6PDs:366": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261016",
+     "text": "would go down. Opposite would be true. If the market went down, we would slide up to a higher implied volatility. It would move to a lower spot."
+    },
+    "12bqNXx6PDs:190": {
+     "dir": 1,
+     "hits": [
+      "+downside"
+     ],
+     "src": "auto",
+     "date": "20261016",
+     "text": "very steep at these expirations. Meaning, the downside options are more expensive than the calls. So, as that vol comes down, not only are they decaying longer "
+    },
+    "12bqNXx6PDs:135": {
+     "dir": -2,
+     "hits": [
+      "-cheap",
+      "-cheap"
+     ],
+     "src": "auto",
+     "date": "20261016",
+     "text": "market of dealers, okay? But, what this does by by its very definition is means as that vol comes down that you've sold for an extra premium, you get delivered "
+    },
+    "qbA9__jh8BY:339": {
+     "dir": -1,
+     "hits": [
+      "-cheap"
+     ],
+     "src": "auto",
+     "date": "20261013",
+     "text": "more. Vol naturally becomes a hot potato and then it compresses more. But it also compresses the realized vol because the more and more big dealers get long vol"
+    },
+    "qbA9__jh8BY:281": {
+     "dir": -1,
+     "hits": [
+      "-cheap"
+     ],
+     "src": "auto",
+     "date": "20261013",
+     "text": "Makes sense. Yes. So So if if they can sell those to buy something cheaper, they're going to buy after it. So they can put on a calendar vol spread for example "
+    },
+    "7jVCFx8wnTE:99": {
+     "dir": -1,
+     "hits": [
+      "-rally"
+     ],
+     "src": "auto",
+     "date": "20261010",
+     "text": "Yeah. And all we got was like a steady vol crush, market rally. People just threw in the towel. They were like, \"I guess this isn't going to be anything.\" You k"
+    },
+    "xsiJmn1jRQQ:917": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261005",
+     "text": "house. He's not wrong. He's the house. He's better information. Right now, it is hard for him to control the bond market. But, if they take the at the Fed on bo"
+    },
+    "xsiJmn1jRQQ:243": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261005",
+     "text": "this. The reality is there is a real suppression of equity volatility. There is a support to equity vol. They're trying, this is very well known, trying to to N"
+    }
+   }
+  },
+  "opex_stance": {
+   "label": "OpEx stance",
+   "quotes": {
+    "12bqNXx6PDs:436": {
+     "dir": -1,
+     "hits": [
+      "-compressed"
+     ],
+     "src": "auto",
+     "date": "20261016",
+     "text": "compressed as the VIX is showing you. So, the VIX is showing down 2.3% .39 today. Uh the reality is it's down about half of that, .2, right? So, but it is down "
+    },
+    "12bqNXx6PDs:288": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261016",
+     "text": "the end of expiration. Long way of saying expiration matter, drive a lot of flows. Vol compression tends to be dominant in this window, but don't don't see that"
+    },
+    "12bqNXx6PDs:253": {
+     "dir": -1,
+     "hits": [
+      "-compressed"
+     ],
+     "src": "auto",
+     "date": "20261016",
+     "text": "talked about this before during COVID. We knew about all the risk. Tons of tremendous risk, uh you know, going uh starting in December, January. We talked about"
+    },
+    "12bqNXx6PDs:64": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261016",
+     "text": "volatility around options expiration? Yeah, so importantly, uh options expiration, even the week before, so really this 2-week period, there is structurally a t"
+    },
+    "12bqNXx6PDs:11": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261016",
+     "text": "earning season. We got expiration week. Uh we're really kicking into gear right now. And of course, we got the Fed soon."
+    },
+    "12bqNXx6PDs:7": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261016",
+     "text": "Expiration week. It's a fun week. We got the start of earning season. We got expiration week."
+    },
+    "12bqNXx6PDs:5": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261016",
+     "text": "Good to be here. Expiration week."
+    },
+    "qbA9__jh8BY:963": {
+     "dir": 1,
+     "hits": [
+      "+squeeze"
+     ],
+     "src": "auto",
+     "date": "20261013",
+     "text": "positioning has come down. Probably a little bit better place for for the dispersion to go back. Now we've seen this go for a bit. Question is, where does that "
+    },
+    "qbA9__jh8BY:220": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261013",
+     "text": "will go till OPEX more. That 2-week cycle is very vol compressing. Why? Any idea?"
+    },
+    "qbA9__jh8BY:93": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261013",
+     "text": "important flows uh coming up this week. Yeah, cuz uh as we just saw, we set the table for the week. Uh CPI is one of those things on there, but expiration is de"
+    },
+    "qbA9__jh8BY:48": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261013",
+     "text": "It's important. I think because this is this is You know, and this is another good thing we could both This is wholly off topic where we're going, but as always"
+    },
+    "xsiJmn1jRQQ:83": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261005",
+     "text": "Okay. Right? And then there's also Friday, but two Mondays ago when there was no news, there was nothing coming out. And we shot up big after expiration. Now, t"
+    }
+   }
+  },
+  "fed_liquidity": {
+   "label": "Fed / liquidity",
+   "quotes": {
+    "z9l9fkz_M2I:972": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261023",
+     "text": "the Fed meeting itself. So, so prepare. We're getting close to that Fed meeting."
+    },
+    "z9l9fkz_M2I:928": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261023",
+     "text": "and feel for what they are telling you. And they have gone dead quiet. And if anything, uh, they are, which is a complete change. If anything, they are talking "
+    },
+    "z9l9fkz_M2I:218": {
+     "dir": 1,
+     "hits": [
+      "+worse"
+     ],
+     "src": "auto",
+     "date": "20261023",
+     "text": "that's exacerbating kind of the move. But everything I see here is the thing that aligns here is risk off, risk off, risk off, risk off. And whether that is cre"
+    },
+    "QbKczI0S0p4:314": {
+     "dir": 1,
+     "hits": [
+      "+downside"
+     ],
+     "src": "auto",
+     "date": "20261019",
+     "text": "very telling. Uh last thing on flows here before we move on to I think a lot of discussion about that but just let's a good time for this chart about skew. Um o"
+    },
+    "qbA9__jh8BY:1051": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261013",
+     "text": "be sometime in there in my opinion. This is a graphic showing 134 names that are down 40% or more as as Jim said there's bare markets technically 20% so there's"
+    },
+    "qbA9__jh8BY:963": {
+     "dir": 1,
+     "hits": [
+      "+squeeze"
+     ],
+     "src": "auto",
+     "date": "20261013",
+     "text": "positioning has come down. Probably a little bit better place for for the dispersion to go back. Now we've seen this go for a bit. Question is, where does that "
+    },
+    "qbA9__jh8BY:896": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261013",
+     "text": "of markets? I think between the Fed meeting, which is the 28th, I believe, and those earnings, given the amount of call positioning in this part of the market a"
+    },
+    "YIR7RVLadt8:1294": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261009",
+     "text": "really build up again is is a crisis. Now, the question is, will they let the real real cris type of crisis that's probably needed happen or is this like a temp"
+    },
+    "YIR7RVLadt8:27": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261009",
+     "text": "market, though? We're down a little bit. So, we had 10s. We had the FOMC meeting minutes here. Jem, you are out of your FOMOs CNBC blackout window as it were."
+    },
+    "xsiJmn1jRQQ:917": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261005",
+     "text": "house. He's not wrong. He's the house. He's better information. Right now, it is hard for him to control the bond market. But, if they take the at the Fed on bo"
+    },
+    "xsiJmn1jRQQ:708": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261005",
+     "text": "that will stop. It will stop. Because they they want a much bigger set of facilities. They want a uh the Fed involved. They want QE at the long end of the curve"
+    },
+    "xsiJmn1jRQQ:544": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261005",
+     "text": "come back and do QE. Dollars to donuts, I will bet you any amount of money that we have QE at full like bigger than you've seen in in since '08."
+    },
+    "xsiJmn1jRQQ:533": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261005",
+     "text": "things? They want the Fed on board. They want wars. They want this Kabuki theater, right, which is happening now. We're all We're raising rates at the front end"
+    },
+    "xsiJmn1jRQQ:405": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261005",
+     "text": "There are no bids to the bond market. And as bit much as as Bissant tries to control that market, as much as he says I'm the house, he's not the house there."
+    }
+   }
+  },
+  "crash_call": {
+   "label": "Crash / drawdown view",
+   "quotes": {
+    "z9l9fkz_M2I:815": {
+     "dir": 2,
+     "hits": [
+      "+crash",
+      "+crash"
+     ],
+     "src": "auto",
+     "date": "20261023",
+     "text": "open revert to the price the real price. Um and and just because those you could see a crash in those over weekend something weird could happen but that doesn't"
+    },
+    "z9l9fkz_M2I:731": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261023",
+     "text": "There's no code here. We're trying. There's no code here. And we we love this type of question, right? I don't think people understand how much we like it. I th"
+    },
+    "z9l9fkz_M2I:529": {
+     "dir": 1,
+     "hits": [
+      "+decline"
+     ],
+     "src": "auto",
+     "date": "20261023",
+     "text": "have the market decline more than 20. what what could happen and markets could be closed for a little bit or something like weird like that could happen and the"
+    },
+    "z9l9fkz_M2I:510": {
+     "dir": 1,
+     "hits": [
+      "+decline",
+      "+decline",
+      "-later"
+     ],
+     "src": "auto",
+     "date": "20261023",
+     "text": "decline later. And so you're still calling for like a 20% decline post J sometime after in January or after minimum 20%. The only thing that would this is a new"
+    },
+    "z9l9fkz_M2I:387": {
+     "dir": -1,
+     "hits": [
+      "-rally"
+     ],
+     "src": "auto",
+     "date": "20261023",
+     "text": "some potentially contested election? Right. So um so my view is still very much the case that there's basically two outcomes and I've been very adamant about th"
+    },
+    "8q2DSWpJBCE:505": {
+     "dir": 0,
+     "hits": [
+      "+decline",
+      "-decline"
+     ],
+     "src": "auto",
+     "date": "20261021",
+     "text": "have it pay off. It needs to be hard. And so, you generally model through some period of months before a decline. Not uh you can't time this exactly. This is no"
+    },
+    "8q2DSWpJBCE:479": {
+     "dir": 1,
+     "hits": [
+      "+decline"
+     ],
+     "src": "auto",
+     "date": "20261021",
+     "text": "four month window before a decline. So, what you'll see is the skew pops, people are worried, people are starting to hedge, but reflexively what does that mean?"
+    },
+    "8q2DSWpJBCE:403": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261021",
+     "text": "after OpEx. Yeah, I think I think the view has been and and generally, the highest probability outcome here is, you know, uh uh push higher, push higher, get go"
+    },
+    "8q2DSWpJBCE:385": {
+     "dir": 2,
+     "hits": [
+      "+decline",
+      "+spike"
+     ],
+     "src": "auto",
+     "date": "20261021",
+     "text": "Meta up to 722, Tesla up to 393. So, Jim, So, Jim, I want to talk to you about volatility here, because we saw that Vix spike up to to 22 on Friday. And ever si"
+    },
+    "8q2DSWpJBCE:266": {
+     "dir": 2,
+     "hits": [
+      "+decline",
+      "+downside"
+     ],
+     "src": "auto",
+     "date": "20261021",
+     "text": "so far. The average return on a downside surprise, though there's only been maybe seven of those total, um barely anything. And this is EPS, not rev. Um is a 2."
+    },
+    "8q2DSWpJBCE:260": {
+     "dir": 1,
+     "hits": [
+      "+decline"
+     ],
+     "src": "auto",
+     "date": "20261021",
+     "text": "is negative. On positive surprises, the average return is a decline of 0.2% so far."
+    },
+    "QbKczI0S0p4:951": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261019",
+     "text": "broadly. Um and importantly now, Elon, Anthropic, uh you know, Darya, those guys, a bunch of others, we obviously know Dell, uh whatnot, are starting to come ou"
+    },
+    "QbKczI0S0p4:473": {
+     "dir": 2,
+     "hits": [
+      "+decline",
+      "+decline"
+     ],
+     "src": "auto",
+     "date": "20261019",
+     "text": "decline if we're going to get one. People are worried, people are hedged for it. That means largely if if a decline happens, it's going to be market down, vol d"
+    },
+    "QbKczI0S0p4:454": {
+     "dir": 2,
+     "hits": [
+      "+decline",
+      "+decline"
+     ],
+     "src": "auto",
+     "date": "20261019",
+     "text": "uh activate those puts in the scenario. Again, think March of of 2000 20, Feb into March, then you can get something really historic. So, it's really this 99% o"
+    },
+    "12bqNXx6PDs:253": {
+     "dir": -1,
+     "hits": [
+      "-compressed"
+     ],
+     "src": "auto",
+     "date": "20261016",
+     "text": "talked about this before during COVID. We knew about all the risk. Tons of tremendous risk, uh you know, going uh starting in December, January. We talked about"
+    },
+    "12bqNXx6PDs:206": {
+     "dir": 1,
+     "hits": [
+      "+decline"
+     ],
+     "src": "auto",
+     "date": "20261016",
+     "text": "also need to buy back. And this tends to happen more in the mornings and the end of the day. And this drives a buyback of deltas, so it makes it very hard for m"
+    },
+    "12bqNXx6PDs:177": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261016",
+     "text": "These all lead to vol selling at scale. This is inside baseball. You know, there's a big takeaway during these 2 weeks. So, every morning you come in, vol compr"
+    },
+    "bvsA9SxOimU:311": {
+     "dir": 1,
+     "hits": [
+      "+decline"
+     ],
+     "src": "auto",
+     "date": "20261014",
+     "text": "the market more broadly. And I think they got a green light or whatever you call it, a red light to the market where for the decline, which is Trump has come ou"
+    },
+    "bvsA9SxOimU:292": {
+     "dir": 2,
+     "hits": [
+      "+crash"
+     ],
+     "src": "auto",
+     "date": "20261014",
+     "text": "Yeah, look at that. The way I see this is the world starting to wake up to what we've been talking for about. We said about 2 months ago starting in into the la"
+    },
+    "qbA9__jh8BY:963": {
+     "dir": 1,
+     "hits": [
+      "+squeeze"
+     ],
+     "src": "auto",
+     "date": "20261013",
+     "text": "positioning has come down. Probably a little bit better place for for the dispersion to go back. Now we've seen this go for a bit. Question is, where does that "
+    },
+    "qbA9__jh8BY:473": {
+     "dir": 1,
+     "hits": [
+      "+correction"
+     ],
+     "src": "auto",
+     "date": "20261013",
+     "text": "overall coming up? Yeah, as you highlighted the banks here, because it's been so stressful kind of in that bank kind of part of the market. I think the stat was"
+    },
+    "CufhyHuz0oA:278": {
+     "dir": 1,
+     "hits": [
+      "+correction"
+     ],
+     "src": "auto",
+     "date": "20261011",
+     "text": "market. Not like down 10% on a correction, down in a bear market."
+    },
+    "CufhyHuz0oA:157": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261011",
+     "text": "accounts. Why do you think that is? Why do you think that is, you know? Again, we we've been here telling you for months that what's coming, and if you watch th"
+    },
+    "7jVCFx8wnTE:286": {
+     "dir": 1,
+     "hits": [
+      "+correction"
+     ],
+     "src": "auto",
+     "date": "20261010",
+     "text": "58%, is now in a bear market. Not like down 10% on a correction, down in a bear market."
+    },
+    "7jVCFx8wnTE:203": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261010",
+     "text": "midterms are going to be very contested. And that brings forward you know, I was really looking for December, January this this thing to top. And if anything, t"
+    },
+    "YIR7RVLadt8:1442": {
+     "dir": 1,
+     "hits": [
+      "+decline"
+     ],
+     "src": "auto",
+     "date": "20261009",
+     "text": "higher from here if that is the path. Um, and that could begin early, right? A little bit of a decline. I don't think it would be super fast if that happened. T"
+    },
+    "YIR7RVLadt8:1426": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261009",
+     "text": "one of two things is going to happen. You're either going to soon before next Wednesday, within a week, um, or maybe before next Friday, next Friday, next Frida"
+    },
+    "YIR7RVLadt8:1211": {
+     "dir": 1,
+     "hits": [
+      "+recession"
+     ],
+     "src": "auto",
+     "date": "20261009",
+     "text": "capitalism that needs to happen. Well, and it's not like we haven't had this before. I mean, this is what FDR ultimately was the vector for. the uh government w"
+    },
+    "xsiJmn1jRQQ:525": {
+     "dir": 0,
+     "hits": [],
+     "src": "auto",
+     "date": "20261005",
+     "text": "They know that. And on top of that, they want a good outcome by 2028 and they want to be able to roll out really big things. What are those things?"
+    }
+   }
+  }
+ }
+}
