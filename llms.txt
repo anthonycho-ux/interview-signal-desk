@@ -1,0 +1,15 @@
+# interview-signal-desk
+
+> Scripts that turn public interview transcripts into a signal desk: theme counts, stance labels, a signal card, a bilingual briefing, and a radio bulletin. Built from public interviews with Cem Karsan; not affiliated with or endorsed by him.
+
+## Pages
+
+- [README](README.md): pipeline map, seven stages, artifact list.
+- [Visual README](docs/index.html): interactive seven-stage ledger instrument. Self-contained HTML, no external requests. Dark and light schemes.
+- [Live instrument](https://anthonycho-ux.github.io/interview-signal-desk/): the visual README served by GitHub Pages.
+
+## Notes for agents
+
+- Sizes in the instrument come from the GitHub Contents API, read 2026-11-03: root pipeline scripts 58,357 B (radio/ not counted), committed data artifacts 76,422 B.
+- `signals.json` is rewritten wholesale by `extract_signals.py` on each run; never hand-edit it.
+- `transcripts/*.en.vtt` is gitignored and never committed.
