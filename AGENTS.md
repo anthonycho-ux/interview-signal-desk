@@ -71,7 +71,7 @@ LSP unavailable (basedpyright not installed); symbols from grep, reference count
 - Do not add `transcripts.json` or `transcripts/` to git (both gitignored).
 - Do not describe stance labels as bullish or bearish.
 - Do not hardcode API keys. Scripts read the environment (see COMMANDS).
-- Do not deploy or publish (the HANDOFF path copies to the deploy-host host) without Anthony's explicit approval.
+- Do not deploy or publish (the HANDOFF path copies to the deploy host) without Anthony's explicit approval.
 
 ## UNIQUE STYLES
 - Ranked-ledger visual grammar: hairline rules, monospace numbers, one hue for magnitude (`VISUALIZATION-PRACTICE.md`).
