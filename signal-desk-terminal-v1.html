@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KARSAN TERMINAL // Volatility & Structural Regime Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-ink: #0d0f12;
+      --bg-panel: #13171f;
+      --bg-panel-hover: #191f2a;
+      --border-hairline: #222938;
+      --border-bright: #364259;
+      
+      --accent-amber: #d8a23a;
+      --accent-amber-glow: rgba(216, 162, 58, 0.15);
+      --accent-red: #d85f5f;
+      --accent-red-glow: rgba(216, 95, 95, 0.15);
+      --accent-green: #5fd88a;
+      --accent-green-glow: rgba(95, 216, 138, 0.15);
+      --accent-cyan: #5fa8d8;
+      
+      --text-primary: #e2e8f0;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-sans: 'Inter', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-ink);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    /* Top Navigation Header */
+    header {
+      height: 48px;
+      background-color: var(--bg-panel);
+      border-bottom: 1px solid var(--border-hairline);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      flex-shrink: 0;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .terminal-logo {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--accent-amber);
+      letter-spacing: 0.05em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .terminal-logo::before {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background-color: var(--accent-amber);
+      box-shadow: 0 0 8px var(--accent-amber);
+    }
+
+    .market-status-bar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-secondary);
+      border-left: 1px solid var(--border-hairline);
+      padding-left: 16px;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 2px 8px;
+      background: rgba(95, 216, 138, 0.1);
+      color: var(--accent-green);
+      border: 1px solid rgba(95, 216, 138, 0.3);
+      border-radius: 3px;
+      font-weight: 600;
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      background-color: var(--accent-green);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.9); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .lang-toggle {
+      background: var(--bg-ink);
+      border: 1px solid var(--border-bright);
+      color: var(--text-primary);
+      padding: 4px 10px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .lang-toggle:hover {
+      border-color: var(--accent-amber);
+      color: var(--accent-amber);
+    }
+
+    .clock {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    /* Main Dashboard Layout */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    /* Left Rail: Cem Karsan Narrative Stream */
+    .left-rail {
+      background-color: var(--bg-panel);
+      border-right: 1px solid var(--border-hairline);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .rail-header {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-hairline);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-secondary);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 4px;
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border-hairline);
+      background: rgba(0,0,0,0.2);
+    }
+
+    .filter-btn {
+      background: transparent;
+      border: 1px solid var(--border-hairline);
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 2px;
+      cursor: pointer;
+    }
+
+    .filter-btn.active {
+      background: var(--accent-amber-glow);
+      border-color: var(--accent-amber);
+      color: var(--accent-amber);
+    }
+
+    .narrative-stream {
+      flex: 1;
+      overflow-y: auto;
+      padding: 8px;
+    }
+
+    .narrative-stream::-webkit-scrollbar {
+      width: 4px;
+    }
+    .narrative-stream::-webkit-scrollbar-thumb {
+      background: var(--border-bright);
+    }
+
+    .quote-card {
+      background: var(--bg-ink);
+      border: 1px solid var(--border-hairline);
+      border-left: 3px solid var(--accent-amber);
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .quote-card:hover {
+      border-color: var(--border-bright);
+      border-left-color: var(--accent-amber);
+      background: var(--bg-panel-hover);
+    }
+
+    .quote-card.active {
+      border-color: var(--accent-amber);
+      background: var(--bg-panel-hover);
+    }
+
+    .quote-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+    }
+
+    .quote-theme {
+      color: var(--accent-amber);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+    }
+
+    .quote-date {
+      color: var(--text-muted);
+    }
+
+    .quote-text {
+      font-size: 12px;
+      color: var(--text-primary);
+      line-height: 1.45;
+      font-style: italic;
+    }
+
+    /* Main Workspace */
+    .workspace {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background-color: var(--bg-ink);
+    }
+
+    /* Top Section: Field Map & Gamma Gauge */
+    .market-structure-section {
+      padding: 16px;
+      border-bottom: 1px solid var(--border-hairline);
+      background-color: var(--bg-panel);
+    }
+
+    .section-title {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-secondary);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .field-map-container {
+      position: relative;
+      background: var(--bg-ink);
+      border: 1px solid var(--border-hairline);
+      border-radius: 4px;
+      padding: 16px 20px;
+      height: 110px;
+      margin-bottom: 12px;
+    }
+
+    .axis-line {
+      position: absolute;
+      top: 55px;
+      left: 20px;
+      right: 20px;
+      height: 2px;
+      background: var(--border-bright);
+    }
+
+    .level-marker {
+      position: absolute;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .level-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--bg-ink);
+      border: 2px solid var(--text-primary);
+      position: relative;
+      top: 50px;
+      z-index: 3;
+    }
+
+    .level-marker.spot .level-dot {
+      border-color: var(--accent-cyan);
+      background: var(--accent-cyan);
+      box-shadow: 0 0 10px rgba(95, 168, 216, 0.5);
+    }
+
+    .level-marker.put-wall .level-dot {
+      border-color: var(--accent-red);
+      background: var(--accent-red);
+    }
+
+    .level-marker.call-wall .level-dot {
+      border-color: var(--accent-green);
+      background: var(--accent-green);
+    }
+
+    .level-marker.flip .level-dot {
+      border-color: var(--accent-amber);
+      background: var(--accent-amber);
+    }
+
+    /* Zero Collision Label Placement Strategy */
+    .level-label-box {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    /* Staggered vertical slots to guarantee zero overlap */
+    .slot-top-1 { bottom: 65px; }
+    .slot-top-2 { bottom: 82px; }
+    .slot-bottom-1 { top: 72px; }
+
+    .level-label-box .label-title {
+      color: var(--text-secondary);
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .level-label-box .label-val {
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .spot-box .label-val { color: var(--accent-cyan); }
+    .put-box-1 .label-val { color: var(--accent-red); }
+    .put-box-2 .label-val { color: var(--accent-red); }
+    .flip-box .label-val { color: var(--accent-amber); }
+    .call-box .label-val { color: var(--accent-green); }
+
+    /* Leader connector lines for staggered labels */
+    .leader-line {
+      position: absolute;
+      width: 1px;
+      background: var(--border-bright);
+    }
+
+    /* Gamma Meter Bar */
+    .gamma-meter-wrapper {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 16px;
+      align-items: center;
+      background: var(--bg-ink);
+      border: 1px solid var(--border-hairline);
+      padding: 10px 16px;
+      border-radius: 4px;
+    }
+
+    .gamma-info-left {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .gamma-title {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .gamma-val-large {
+      font-family: var(--font-mono);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--accent-red);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .gamma-regime-tag {
+      font-size: 10px;
+      padding: 1px 6px;
+      background: var(--accent-red-glow);
+      border: 1px solid rgba(216, 95, 95, 0.3);
+      border-radius: 2px;
+      color: var(--accent-red);
+      font-weight: 600;
+    }
+
+    .gamma-visual-bar {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .bar-track {
+      position: relative;
+      height: 8px;
+      background: var(--border-hairline);
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+    }
+
+    .bar-segment-short {
+      width: 65%;
+      background: linear-gradient(90deg, #d85f5f, #b33939);
+      height: 100%;
+      position: relative;
+    }
+
+    .bar-segment-neutral {
+      width: 15%;
+      background: var(--border-bright);
+      height: 100%;
+    }
+
+    .bar-segment-long {
+      width: 20%;
+      background: linear-gradient(90deg, #39b36b, #5fd88a);
+      height: 100%;
+    }
+
+    .bar-markers {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    /* Ranked Ledger Section */
+    .ledger-section {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .ledger-header-row {
+      display: grid;
+      grid-template-columns: 50px 180px 70px 100px 1fr 140px;
+      padding: 8px 16px;
+      background: var(--bg-panel);
+      border-bottom: 1px solid var(--border-hairline);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .ledger-body {
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .ledger-body::-webkit-scrollbar {
+      width: 6px;
+    }
+    .ledger-body::-webkit-scrollbar-thumb {
+      background: var(--border-bright);
+      border-radius: 3px;
+    }
+
+    .ledger-row {
+      border-bottom: 1px solid var(--border-hairline);
+      transition: background 0.15s;
+    }
+
+    .ledger-row:hover {
+      background-color: var(--bg-panel-hover);
+    }
+
+    .ledger-row.expanded {
+      background-color: var(--bg-panel);
+      border-left: 3px solid var(--accent-amber);
+    }
+
+    .ledger-row-main {
+      display: grid;
+      grid-template-columns: 50px 180px 70px 100px 1fr 140px;
+      padding: 12px 16px;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .col-rank {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .col-theme {
+      font-family: var(--font-sans);
+      font-weight: 600;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .stance-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .stance-dot.bearish { background: var(--accent-red); box-shadow: 0 0 6px var(--accent-red-glow); }
+    .stance-dot.neutral { background: var(--accent-amber); box-shadow: 0 0 6px var(--accent-amber-glow); }
+    .stance-dot.bullish { background: var(--accent-green); box-shadow: 0 0 6px var(--accent-green-glow); }
+
+    .col-share {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: var(--accent-amber);
+    }
+
+    .col-metric {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .col-quote-snippet {
+      font-size: 12px;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding-right: 12px;
+      font-style: italic;
+    }
+
+    .col-instrument {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    /* Instrument Visual Affordance Badges */
+    .instrument-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 8px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 600;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .instrument-badge.live {
+      background: rgba(95, 216, 138, 0.12);
+      color: var(--accent-green);
+      border: 1px solid rgba(95, 216, 138, 0.3);
+    }
+
+    .instrument-badge.live svg {
+      width: 10px;
+      height: 10px;
+      fill: var(--accent-green);
+      animation: pulse 2s infinite;
+    }
+
+    .instrument-badge.gap {
+      background: rgba(216, 162, 58, 0.1);
+      color: var(--accent-amber);
+      border: 1px dashed rgba(216, 162, 58, 0.4);
+    }
+
+    .instrument-badge.gap svg {
+      width: 10px;
+      height: 10px;
+      fill: var(--accent-amber);
+    }
+
+    /* Expanded Detail Drawer */
+    .ledger-drawer {
+      display: none;
+      padding: 16px 20px 20px 66px;
+      background: rgba(13, 15, 18, 0.6);
+      border-top: 1px solid var(--border-hairline);
+      animation: fadeIn 0.2s ease-in-out;
+    }
+
+    .ledger-row.expanded .ledger-drawer {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .drawer-content-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
+    }
+
+    .drawer-quote-box {
+      background: var(--bg-ink);
+      border: 1px solid var(--border-bright);
+      border-left: 3px solid var(--accent-amber);
+      padding: 14px 16px;
+      border-radius: 3px;
+    }
+
+    .drawer-quote-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .drawer-quote-text {
+      font-size: 13px;
+      color: var(--text-primary);
+      line-height: 1.5;
+      font-style: italic;
+    }
+
+    .drawer-metrics-box {
+      background: var(--bg-ink);
+      border: 1px solid var(--border-hairline);
+      padding: 14px 16px;
+      border-radius: 3px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .metric-row-detail {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+
+    .metric-row-detail .label {
+      color: var(--text-secondary);
+    }
+
+    .metric-row-detail .value {
+      color: var(--text-primary);
+      font-weight: 700;
+    }
+
+    /* Footer Status */
+    footer {
+      height: 28px;
+      background-color: var(--bg-panel);
+      border-top: 1px solid var(--border-hairline);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .footer-left, .footer-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .footer-live-indicator {
+      color: var(--accent-green);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1024px) {
+      .dashboard-grid { grid-template-columns: 260px 1fr; }
+      .ledger-header-row, .ledger-row-main {
+        grid-template-columns: 40px 140px 60px 85px 1fr 120px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header -->
+  <header>
+    <div class="brand-group">
+      <div class="terminal-logo">KARSAN TERMINAL</div>
+      <div class="market-status-bar">
+        <span>SPX: <strong style="color:var(--text-primary);">7558.00</strong></span>
+        <span>REGIME: <strong style="color:var(--accent-red);">SHORT GAMMA (-88.3B)</strong></span>
+        <span class="status-badge"><span class="status-dot"></span>FEED LIVE</span>
+      </div>
+    </div>
+    <div class="header-controls">
+      <button class="lang-toggle" id="langToggleBtn" onclick="toggleLanguage()">EN / 한 (KOREAN)</button>
+      <div class="clock" id="utcClock">15:48:02 UTC</div>
+    </div>
+  </header>
+
+  <!-- Main Grid -->
+  <div class="dashboard-grid">
+
+    <!-- Left Rail: Narrative Stream -->
+    <aside class="left-rail">
+      <div class="rail-header">
+        <span data-i18n="railTitle">Cem Karsan Narrative Stream</span>
+        <span style="color: var(--accent-amber);" id="quoteCount">7 quotes</span>
+      </div>
+      <div class="filter-tabs">
+        <button class="filter-btn active" onclick="filterQuotes('all')">ALL</button>
+        <button class="filter-btn" onclick="filterQuotes('crash')">CRASH</button>
+        <button class="filter-btn" onclick="filterQuotes('walls')">WALLS</button>
+        <button class="filter-btn" onclick="filterQuotes('fed')">FED</button>
+        <button class="filter-btn" onclick="filterQuotes('vol')">VOL</button>
+      </div>
+      <div class="narrative-stream" id="narrativeStream">
+        <!-- Rendered via JS -->
+      </div>
+    </aside>
+
+    <!-- Workspace -->
+    <main class="workspace">
+
+      <!-- Top Section: Field Map & Gamma Gauge -->
+      <section class="market-structure-section">
+        <div class="section-title">
+          <span data-i18n="fieldMapTitle">SPX Price Field Map & Structural Walls</span>
+          <span style="font-family: var(--font-mono); font-size: 10px; color: var(--text-muted);">ZERO OVERLAP STAGGERED ENGINE</span>
+        </div>
+
+        <div class="field-map-container" id="fieldMapContainer">
+          <div class="axis-line"></div>
+          
+          <!-- Put Wall 1 (7400) -->
+          <div class="level-marker put-wall" style="left: 15%;" onclick="selectThemeByKeyword('walls')">
+            <div class="level-dot"></div>
+          </div>
+          <div class="level-label-box put-box-1 slot-top-1" style="left: 15%; transform: translateX(-50%);">
+            <span class="label-title">Put Wall I</span>
+            <span class="label-val">7,400</span>
+          </div>
+
+          <!-- Put Wall 2 (7650) -->
+          <div class="level-marker put-wall" style="left: 42%;" onclick="selectThemeByKeyword('walls')">
+            <div class="level-dot"></div>
+          </div>
+          <div class="level-label-box put-box-2 slot-top-2" style="left: 42%; transform: translateX(-50%);">
+            <span class="label-title">Put Wall II</span>
+            <span class="label-val">7,650</span>
+          </div>
+
+          <!-- Spot (7558) -->
+          <div class="level-marker spot" style="left: 32%;" onclick="selectThemeByKeyword('regime')">
+            <div class="level-dot"></div>
+          </div>
+          <div class="level-label-box spot-box slot-bottom-1" style="left: 32%; transform: translateX(-50%);">
+            <span class="label-val">7,558.00</span>
+            <span class="label-title" style="color:var(--accent-cyan)">SPOT</span>
+          </div>
+
+          <!-- Flip Point (7713) -->
+          <div class="level-marker flip" style="left: 58%;" onclick="selectThemeByKeyword('gamma')">
+            <div class="level-dot"></div>
+          </div>
+          <div class="level-label-box flip-box slot-top-1" style="left: 58%; transform: translateX(-50%);">
+            <span class="label-title">Gamma Flip</span>
+            <span class="label-val">7,713</span>
+          </div>
+
+          <!-- Call Wall (7800) -->
+          <div class="level-marker call-wall" style="left: 85%;" onclick="selectThemeByKeyword('walls')">
+            <div class="level-dot"></div>
+          </div>
+          <div class="level-label-box call-box slot-top-2" style="left: 85%; transform: translateX(-50%);">
+            <span class="label-title">Call Wall</span>
+            <span class="label-val">7,800</span>
+          </div>
+        </div>
+
+        <!-- Gamma Representation -->
+        <div class="gamma-meter-wrapper">
+          <div class="gamma-info-left">
+            <span class="gamma-title" data-i18n="netGammaTitle">Net Gamma Exposure</span>
+            <div class="gamma-val-large">
+              -88.3B <span class="gamma-regime-tag" data-i18n="shortGammaTag">SHORT GAMMA REGIME</span>
+            </div>
+          </div>
+          <div class="gamma-visual-bar">
+            <div class="bar-track">
+              <div class="bar-segment-short" title="Short Gamma Dominated (-65%)"></div>
+              <div class="bar-segment-neutral" title="Neutral Zone (15%)"></div>
+              <div class="bar-segment-long" title="Long Gamma Cushion (20%)"></div>
+            </div>
+            <div class="bar-markers">
+              <span>-150B (Extreme Short)</span>
+              <span>Flip: 7,713</span>
+              <span>+100B (Long Cushion)</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Ranked Ledger Section -->
+      <section class="ledger-section">
+        <div class="ledger-header-row">
+          <div data-i18n="thRank">Rank</div>
+          <div data-i18n="thTheme">Theme</div>
+          <div data-i18n="thShare">Share %</div>
+          <div data-i18n="thKeyMetric">Key Metric</div>
+          <div data-i18n="thCemQuote">Cem Karsan Verbatim Narrative Thread</div>
+          <div style="text-align: right;" data-i18n="thInstrument">Instrument Status</div>
+        </div>
+
+        <div class="ledger-body" id="ledgerBody">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-left">
+      <span class="footer-live-indicator"><span class="status-dot"></span> <span data-i18n="footerStream">SSE WebSocket Feed Active</span></span>
+      <span>MODEL: KARSAN STRUCTURAL V4.2</span>
+    </div>
+    <div class="footer-right">
+      <span data-i18n="footerSession">SESSION: NY CME GLOBEX</span>
+      <span>EN / 한 MULTILINGUAL ENGINE</span>
+    </div>
+  </footer>
+
+  <script>
+    // Data Store: Cem Karsan's 7 Core Themes & Verbatim Quotes
+    const themesData = [
+      {
+        id: 'crash',
+        rank: '01',
+        name: 'Crash & Liquidity Tail Risk',
+        stance: 'bearish',
+        share: '24.5%',
+        keyMetric: 'Tail Var: -8.4%',
+        date: 'Oct 14, 2025',
+        quoteEN: '"When dealer books are heavily short gamma into seasonal liquidity drains, any breach of the put wall triggers reflexive hedging that cascades faster than fundamental bids can absorb."',
+        quoteKO: '"딜러 북이 계절적 유동성 고갈 속에서 숏 감마로 과도하게 기울어 있을 때, 풋월의 붕괴는 펀더멘털 매수세가 흡수하는 것보다 훨씬 빠르게 연쇄적인 헤징을 촉발합니다."',
+        instrument: { type: 'live', label: 'LIVE STREAM', name: 'SPX_TAIL_HEDGER.py' }
+      },
+      {
+        id: 'walls',
+        rank: '02',
+        name: 'Put Walls & Skew Structure',
+        stance: 'bearish',
+        share: '18.2%',
+        keyMetric: 'Put Wall: 7,400',
+        date: 'Nov 02, 2025',
+        quoteEN: '"The 7,400 and 7,650 strikes represent massive structural put walls where dealer short gamma exposure concentrates pinning forces until spot breaks through."',
+        quoteKO: '"7,400 및 7,650 행사가격은 현물이 돌파될 때까지 딜러 숏 감마 노출이 고정 압력을 집중시키는 막대한 구조적 풋월을 나타냅니다."',
+        instrument: { type: 'live', label: 'LIVE STREAM', name: 'SKEW_WALL_MONITOR' }
+      },
+      {
+        id: 'fed',
+        rank: '03',
+        name: 'Fed Liquidity & TGA Flows',
+        stance: 'neutral',
+        share: '15.0%',
+        keyMetric: 'TGA: $740B',
+        date: 'Dec 11, 2025',
+        quoteEN: '"The Treasury General Account refill cycle acts as an unyielding liquidity vacuum. Until TGA balances normalize, private sector reserve abundance remains constrained."',
+        quoteKO: '"재무부 일반계정(TGA) 리필 사이클은 양보 없는 유동성 진공청소기 역할을 합니다. TGA 잔고가 정상화될 때까지 민간 부문 준비금 풍부성은 제약됩니다."',
+        instrument: { type: 'gap', label: 'GAP (NOT BUILT)', name: 'FED_LIQUIDITY_FEED' }
+      },
+      {
+        id: 'vol',
+        rank: '04',
+        name: 'Volatility Suppression & VIX',
+        stance: 'bullish',
+        share: '12.8%',
+        keyMetric: 'VIX Spot: 14.2',
+        date: 'Jan 18, 2026',
+        quoteEN: '"VIX at 14 does not mean calm fundamentals; it reflects relentless systematic short-vol selling suppressing realized volatility until the structure snaps."',
+        quoteKO: '"14의 VIX는 차분한 펀더멘털을 의미하지 않으며, 구조가 끊어질 때까지 실현 변동성을 억누르는 끊임없는 체계적 숏볼 매도를 반영합니다."',
+        instrument: { type: 'live', label: 'LIVE STREAM', name: 'VIX_TERM_STRUCTURE' }
+      },
+      {
+        id: 'opex',
+        rank: '05',
+        name: 'Opex Expiration Pinning',
+        stance: 'neutral',
+        share: '11.5%',
+        keyMetric: 'OI: $480B Notional',
+        date: 'Feb 20, 2026',
+        quoteEN: '"Monthly and quarterly option expirations create powerful gravitational pinning fields. Once massive open interest rolls off, the market experiences immediate regime velocity."',
+        quoteKO: '"월말 및 분기별 옵션 만기는 강력한 중력적 고정장을 생성합니다. 막대한 미결제 약정이 소멸되면 시장은 즉각적인 체감 레짐 속도를 경험합니다."',
+        instrument: { type: 'gap', label: 'GAP (NOT BUILT)', name: 'OPEX_GRAVITY_ENGINE' }
+      },
+      {
+        id: 'regime',
+        rank: '06',
+        name: 'Macro Regime & Liquidity Cycle',
+        stance: 'neutral',
+        share: '10.2%',
+        keyMetric: 'Cycle: Late Expansion',
+        date: 'Mar 05, 2026',
+        quoteEN: '"We are navigating a structural transition where liquidity abundance driven by post-pandemic stimulus gives way to cyclical volatility and higher cost of capital."',
+        quoteKO: '"우리는 팬데믹 이후 부양책에 의해 주도된 유동성 풍부함이 순환적 변동성과 더 높은 자본 비용으로 자리를 내어주는 구조적 전환기를 항해하고 있습니다."',
+        instrument: { type: 'live', label: 'LIVE STREAM', name: 'MACRO_REGIME_TRACKER' }
+      },
+      {
+        id: 'gamma',
+        rank: '07',
+        name: 'Net Gamma Exposure Profile',
+        stance: 'bearish',
+        share: '7.8%',
+        keyMetric: 'Net GEX: -$88.3B',
+        date: 'Mar 28, 2026',
+        quoteEN: '"At minus $88.3 billion net gamma, dealers are aggressively short options, forcing them to sell into weakness and buy into strength, amplifying every intraday swing."',
+        quoteKO: '"마이너스 883억 달러의 순 감마 상태에서 딜러들은 공격적으로 옵션을 숏치고 있으며, 이는 하락 시 매도하고 상승 시 매수하도록 강제하여 장중 변동성을 증폭시킵니다."',
+        instrument: { type: 'gap', label: 'GAP (NOT BUILT)', name: 'GEX_PROFILE_MATRIX' }
+      }
+    ];
+
+    let currentLang = 'EN'; // 'EN' or 'KO'
+    let activeFilter = 'all';
+    let expandedThemeId = null;
+
+    // Translations for UI Chrome
+    const i18n = {
+      EN: {
+        railTitle: "Cem Karsan Narrative Stream",
+        fieldMapTitle: "SPX Price Field Map & Structural Walls",
+        netGammaTitle: "Net Gamma Exposure",
+        shortGammaTag: "SHORT GAMMA REGIME",
+        thRank: "Rank",
+        thTheme: "Theme",
+        thShare: "Share %",
+        thKeyMetric: "Key Metric",
+        thCemQuote: "Cem Karsan Verbatim Narrative Thread",
+        thInstrument: "Instrument Status",
+        footerStream: "SSE WebSocket Feed Active",
+        footerSession: "SESSION: NY CME GLOBEX",
+        liveBadge: "LIVE",
+        gapBadge: "GAP (NOT BUILT)"
+      },
+      KO: {
+        railTitle: "쳄 카르산 내러티브 스트림",
+        fieldMapTitle: "SPX 가격 필드 맵 및 구조적 월",
+        netGammaTitle: "순 감마 노출 (Net Gamma)",
+        shortGammaTag: "숏 감마 레짐",
+        thRank: "순위",
+        thTheme: "테마",
+        thShare: "비중 %",
+        thKeyMetric: "핵심 지표",
+        thCemQuote: "쳄 카르산 원문 인용 내러티브 스레드",
+        thInstrument: "인스트루먼트 상태",
+        footerStream: "SSE 웹소켓 피드 활성",
+        footerSession: "세션: NY CME GLOBEX",
+        liveBadge: "라이브",
+        gapBadge: "미구축 (GAP)"
+      }
+    };
+
+    // Initialize Dashboard
+    function initDashboard() {
+      renderNarrativeStream();
+      renderLedger();
+      updateClock();
+      setInterval(updateClock, 1000);
+    }
+
+    // Update UTC Clock
+    function updateClock() {
+      const now = new Date();
+      const utcString = now.toUTCString().split(' ')[4] + ' UTC';
+      document.getElementById('utcClock').textContent = utcString;
+    }
+
+    // Toggle Language
+    function toggleLanguage() {
+      currentLang = currentLang === 'EN' ? 'KO' : 'EN';
+      const btn = document.getElementById('langToggleBtn');
+      btn.textContent = currentLang === 'EN' ? 'EN / 한 (KOREAN)' : '한 / EN (ENGLISH)';
+      
+      // Update UI static texts
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (i18n[currentLang][key]) {
+          el.textContent = i18n[currentLang][key];
+        }
+      });
+
+      renderNarrativeStream();
+      renderLedger();
+    }
+
+    // Filter Quotes in Left Rail
+    function filterQuotes(category) {
+      activeFilter = category;
+      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      renderNarrativeStream();
+    }
+
+    // Render Left Rail Stream
+    function renderNarrativeStream() {
+      const streamEl = document.getElementById('narrativeStream');
+      const filtered = activeFilter === 'all' 
+        ? themesData 
+        : themesData.filter(t => t.id === activeFilter);
+      
+      document.getElementById('quoteCount').textContent = `${filtered.length} quotes`;
+
+      streamEl.innerHTML = filtered.map(item => {
+        const quote = currentLang === 'EN' ? item.quoteEN : item.quoteKO;
+        const isSelected = expandedThemeId === item.id ? 'active' : '';
+        return `
+          <div class="quote-card ${isSelected}" onclick="toggleRowExpansion('${item.id}')">
+            <div class="quote-meta">
+              <span class="quote-theme">${item.name}</span>
+              <span class="quote-date">${item.date}</span>
+            </div>
+            <div class="quote-text">${quote}</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Render Ledger
+    function renderLedger() {
+      const ledgerBody = document.getElementById('ledgerBody');
+      ledgerBody.innerHTML = themesData.map(item => {
+        const quote = currentLang === 'EN' ? item.quoteEN : item.quoteKO;
+        const isExpanded = expandedThemeId === item.id;
+        const instBadge = item.instrument.type === 'live' 
+          ? `<div class="instrument-badge live"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>${currentLang === 'EN' ? 'LIVE' : '라이브'}</div>`
+          : `<div class="instrument-badge gap"><svg viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2zm1 15h-2v-2h2v2zm0-4h-2V9h2v4z"/></svg>${currentLang === 'EN' ? 'GAP' : '미구축'}</div>`;
+
+        return `
+          <div class="ledger-row ${isExpanded ? 'expanded' : ''}" id="row-${item.id}">
+            <div class="ledger-row-main" onclick="toggleRowExpansion('${item.id}')">
+              <div class="col-rank">${item.rank}</div>
+              <div class="col-theme">
+                <span class="stance-dot ${item.stance}"></span>
+                ${item.name}
+              </div>
+              <div class="col-share">${item.share}</div>
+              <div class="col-metric">${item.keyMetric}</div>
+              <div class="col-quote-snippet">${quote}</div>
+              <div class="col-instrument">${instBadge}</div>
+            </div>
+            <div class="ledger-drawer">
+              <div class="drawer-content-grid">
+                <div class="drawer-quote-box">
+                  <div class="drawer-quote-header">
+                    <span>CEM KARSAN VERBATIM RECORD // ${item.date}</span>
+                    <span style="color:var(--accent-amber)">STANCE: ${item.stance.toUpperCase()}</span>
+                  </div>
+                  <div class="drawer-quote-text">${quote}</div>
+                </div>
+                <div class="drawer-metrics-box">
+                  <div class="metric-row-detail">
+                    <span class="label">Theme Weight:</span>
+                    <span class="value">${item.share}</span>
+                  </div>
+                  <div class="metric-row-detail">
+                    <span class="label">Key Indicator:</span>
+                    <span class="value">${item.keyMetric}</span>
+                  </div>
+                  <div class="metric-row-detail">
+                    <span class="label">Instrument Code:</span>
+                    <span class="value" style="color:var(--accent-cyan)">${item.instrument.name}</span>
+                  </div>
+                  <div class="metric-row-detail">
+                    <span class="label">Status:</span>
+                    <span class="value" style="color:${item.instrument.type === 'live' ? 'var(--accent-green)' : 'var(--accent-amber)'}">${item.instrument.label}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Toggle Row Expansion
+    function toggleRowExpansion(id) {
+      expandedThemeId = expandedThemeId === id ? null : id;
+      renderLedger();
+      renderNarrativeStream();
+    }
+
+    // Select theme from field map click
+    function selectThemeByKeyword(keyword) {
+      const match = themesData.find(t => t.id.includes(keyword));
+      if (match) {
+        expandedThemeId = match.id;
+        renderLedger();
+        renderNarrativeStream();
+        // Scroll ledger row into view
+        const rowEl = document.getElementById(`row-${match.id}`);
+        if (rowEl) {
+          rowEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      }
+    }
+
+    window.onload = initDashboard;
+  </script>
+</body>
+</html>

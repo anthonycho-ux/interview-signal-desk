@@ -172,7 +172,7 @@ def render():
   </div>
   <div>
     %s
-    <p class="note">Generated with Gemini from the desk's evidence box. Quotes are verbatim from Cem Karsan interviews (last 30 days). Not investment advice; information only.</p>
+    <p class="note">Generated from the desk data with Gemma 4. Quotes are verbatim from Cem Karsan interviews (last 30 days). Not investment advice; information only.</p>
   </div>
   <aside class="rail">
     <h2>The evidence behind this</h2>

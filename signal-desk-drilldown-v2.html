@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Karsan desk</title>
+<style>
+:root{--bg:#0d0f12;--panel:#11141a;--line:#1e232a;--fg:#d7dce2;--dim:#7d8794;--amber:#d8a23a;--blue:#5f8fd8;--red:#d85f5f;--green:#5fd88a;--mono:ui-monospace,Menlo,Consolas,monospace}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:13px/1.5 system-ui,-apple-system,sans-serif;overflow:hidden}
+.wrap{display:grid;grid-template-columns:290px 1fr;height:100vh}
+
+/* ── rail ── */
+.rail{border-right:1px solid var(--line);background:#0a0c0f;display:flex;flex-direction:column;min-height:0}
+.rh{padding:12px 12px 10px;border-bottom:1px solid var(--line);flex:0 0 auto}
+.rh h2{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin:0 0 3px;font-weight:600}
+.rh .cnt{font-family:var(--mono);font-size:11px;color:var(--amber)}
+.vlist{overflow-y:auto;flex:1 1 auto;min-height:0}
+.vid{padding:8px 12px;border-bottom:1px solid var(--line);cursor:pointer;border-left:2px solid transparent}
+.vid:hover{background:#11141a}
+.vid.sel{border-left-color:var(--amber);background:#12161d}
+.vid .d{font-family:var(--mono);font-size:10px;color:var(--dim);display:flex;justify-content:space-between;gap:6px}
+.vid .t{font-size:11.5px;margin:2px 0 4px;line-height:1.35}
+.vid.sel .t{color:#fff}
+.vid .meta{font-family:var(--mono);font-size:9px;color:var(--dim);display:flex;justify-content:space-between;gap:6px}
+.vid .meta .n{color:var(--amber)}
+
+/* ── main ── */
+.main{overflow-y:auto;padding:12px 16px 24px;min-width:0}
+.hdr{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding-bottom:8px;border-bottom:1px solid var(--line);margin-bottom:12px}
+.hdr h1{font-size:13px;font-weight:600;margin:0}
+.hdr .sub{font-size:11px;color:var(--amber);margin-top:2px}
+.hdr .right{text-align:right;font-family:var(--mono);font-size:10px;color:var(--dim);white-space:nowrap}
+.lang{margin-top:5px}
+.lang button{background:none;border:1px solid var(--line);color:var(--dim);padding:2px 8px;cursor:pointer;font-size:10px;border-radius:3px;margin-left:3px}
+.lang button.on{color:var(--fg);border-color:var(--amber)}
+body.ko .en{display:none}
+body.en .ko{display:none}
+
+/* ── field map ── */
+.fieldbox{border:1px solid var(--line);border-radius:4px;background:linear-gradient(180deg,#0a0c10,#0d1015);position:relative;height:210px;margin-bottom:10px;overflow:hidden}
+.fieldbox .cap{position:absolute;top:7px;left:10px;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);z-index:5}
+.zone{position:absolute;top:26px;bottom:26px;z-index:0;opacity:.07}
+.zone.neg{background:var(--red)}
+.zone.pos{background:var(--green)}
+.axis{position:absolute;left:0;right:0;bottom:26px;height:1px;background:#2b323c;z-index:1}
+.tick{position:absolute;bottom:20px;width:1px;height:6px;background:#39414d}
+.tkl{position:absolute;bottom:4px;font-family:var(--mono);font-size:9px;color:var(--dim);transform:translateX(-50%)}
+.lvl{position:absolute;bottom:26px;z-index:2;width:0}
+.lvl .stem{position:absolute;bottom:0;left:0;width:1px;background:currentColor;opacity:.65}
+.lvl .lbl{position:absolute;left:0;transform:translateX(-50%);font-family:var(--mono);font-size:9px;white-space:nowrap;text-align:center;line-height:1.25}
+.lvl .lbl b{display:block;font-weight:600;letter-spacing:.06em}
+.lvl .lbl span{display:block;opacity:.75}
+.lvl.wall{color:var(--red)}
+.lvl.flip{color:var(--amber)}
+.lvl.magnet{color:var(--green)}
+.lvl.damp{color:var(--blue)}
+.lvl.latent{color:#5a6470}
+.spotdot{position:absolute;width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 10px rgba(95,216,138,.9);z-index:4;transform:translate(-50%,50%);bottom:26px}
+.spotlbl{position:absolute;font-family:var(--mono);font-size:9px;color:var(--green);z-index:4;transform:translateX(-50%);white-space:nowrap}
+
+/* ── gamma meter ── */
+.gm{display:flex;align-items:center;gap:10px;padding:7px 0 11px;border-bottom:1px solid var(--line);margin-bottom:12px}
+.gm .lbl{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);flex:0 0 auto}
+.gm .bar{flex:1 1 auto;height:9px;background:#0f1218;border:1px solid var(--line);border-radius:2px;position:relative;overflow:hidden;min-width:80px}
+.gm .fill{position:absolute;top:0;bottom:0}
+.gm .fill.neg{right:50%;background:linear-gradient(90deg,rgba(216,95,95,.15),var(--red))}
+.gm .fill.pos{left:50%;background:linear-gradient(90deg,var(--green),rgba(95,216,138,.15))}
+.gm .zero{position:absolute;left:50%;top:-1px;bottom:-1px;width:1px;background:#8a929d;z-index:2}
+.gm .val{font-family:var(--mono);font-size:12px;font-weight:600;flex:0 0 auto}
+.gm .val.neg{color:var(--red)}
+.gm .val.pos{color:var(--green)}
+.gm .regime{font-family:var(--mono);font-size:9px;color:var(--dim);letter-spacing:.08em;flex:0 0 auto}
+
+/* ── ledger ── */
+.lgrid{display:grid;grid-template-columns:34px minmax(0,1fr) 54px 84px 92px;gap:8px;padding:5px 8px;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);border-bottom:1px solid var(--line);background:#0f1218}
+.lrow{display:grid;grid-template-columns:34px minmax(0,1fr) 54px 84px 92px;gap:8px;padding:8px;border-bottom:1px solid var(--line);cursor:pointer;align-items:baseline}
+.lrow:hover{background:#11141a}
+.lrow .rk{font-family:var(--mono);font-size:10px;color:var(--dim)}
+.lrow .nm{min-width:0}
+.lrow .nm .top{font-weight:600;font-size:11px;letter-spacing:.05em;text-transform:uppercase}
+.lrow .nm .ko{font-weight:400;font-size:9px;opacity:.55;margin-left:4px}
+.lrow .nm .q{display:block;font-family:var(--mono);font-size:10px;color:var(--dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:1px}
+.lrow.open .nm .q{white-space:normal;overflow:visible;color:var(--fg)}
+.lrow .sh{font-family:var(--mono);font-size:11px;text-align:right}
+.lrow .sh .b{display:block;height:3px;background:#262b33;border-radius:1px;margin-top:4px;overflow:hidden}
+.lrow .sh .b i{display:block;height:100%;background:var(--amber)}
+.lrow .sh .b i.z{background:#39414d}
+.lrow .kv{font-family:var(--mono);font-size:10px;text-align:right;color:var(--fg)}
+.lrow .kv small{display:block;color:var(--dim);font-size:9px}
+.lrow .inst{font-family:var(--mono);font-size:9px;text-align:right;letter-spacing:.04em}
+.lrow .inst.live{color:var(--green)}
+.lrow .inst.gap{color:var(--red);opacity:.75}
+.lrow.gap{opacity:.6}
+.det{display:none;padding:10px 8px 12px 50px;background:#0f1218;border-bottom:1px solid var(--line)}
+.det.show{display:block}
+.det .qi{font-family:var(--mono);font-size:10.5px;color:var(--dim);line-height:1.55;padding:4px 0;border-bottom:1px dashed #1b2027}
+.det .qi:last-child{border-bottom:0}
+.det .qi em{color:var(--fg);font-style:normal}
+.det .qi .src{display:block;font-size:9px;opacity:.6;margin-top:1px}
+.det .none{font-size:10px;color:var(--red);opacity:.8;font-family:var(--mono)}
+.foot{margin-top:10px;padding-top:8px;border-top:1px solid var(--line);font-family:var(--mono);font-size:9px;color:var(--dim);display:flex;gap:14px;flex-wrap:wrap}
+.foot b{color:var(--fg)}
+.err{color:var(--red);font-family:var(--mono);font-size:11px;padding:10px 0}
+</style>
+</head>
+<body class="en">
+<div class="wrap">
+  <div class="rail">
+    <div class="rh">
+      <h2>CEM KARSAN</h2>
+      <div class="cnt"><span id="vcount">…</span> <span class="en">interviews</span><span class="ko">인터뷰</span></div>
+    </div>
+    <div class="vlist" id="vlist"></div>
+  </div>
+  <div class="main">
+    <div class="hdr">
+      <div>
+        <h1><span class="en">signal desk</span><span class="ko">시그널 데스크</span></h1>
+        <div class="sub" id="vtitle">…</div>
+      </div>
+      <div class="right">
+        <div id="asof">…</div>
+        <div class="lang">
+          <button id="btnEn" class="on" onclick="setL('en')">EN</button><button id="btnKo" onclick="setL('ko')">한</button>
+        </div>
+      </div>
+    </div>
+    <div class="fieldbox" id="fieldbox"><div class="cap"><span class="en">SPX price field</span><span class="ko">SPX 가격 필드</span></div></div>
+    <div class="gm" id="gm"></div>
+    <div class="lgrid">
+      <span>#</span>
+      <span><span class="en">theme · quote</span><span class="ko">테마 · 인용</span></span>
+      <span style="text-align:right"><span class="en">share (hits)</span><span class="ko">비중 (히트)</span></span>
+      <span style="text-align:right"><span class="en">key</span><span class="ko">지표</span></span>
+      <span style="text-align:right"><span class="en">instrument</span><span class="ko">계측기</span></span>
+    </div>
+    <div id="ledger"></div>
+    <div class="foot">
+      <span><span class="en">share = quotes in selected interview</span><span class="ko">비중 = 선택 인터뷰 내 인용</span></span>
+      <span><span class="en">gap = no instrument built</span><span class="ko">공백 = 계측기 없음</span></span>
+      <span><span class="en">levels from CBOE chain</span><span class="ko">레벨은 CBOE 체인</span></span>
+      <span id="srcstamp"></span>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ── theme definitions ─────────────────────────────────────────────
+   signals.json keys are the canonical ids.
+   kw = keywords used to attribute a video's text to a theme.       */
+const THEMES = [
+  {id:'crash_call',   nm:'crash',   ko:'크래시',  inst:'nk-watch',   live:true,  k:'VIX',   kw:['crash','drawdown','selloff','sell-off','bear','correction','panic','downside']},
+  {id:'walls_skew',   nm:'walls',   ko:'벽',      inst:'gamma',      live:true,  k:'flip',  kw:['wall','flip','skew','strike','level','support','resistance','pin']},
+  {id:'fed_liquidity',nm:'fed',     ko:'연준',    inst:null,         live:false, k:null,    kw:['fed','fomc','rate','powell','liquidity','balance sheet','qt','hike','cut','bond']},
+  {id:'vol_posture',  nm:'vol',     ko:'변동성',  inst:'fixed-vol',  live:true,  k:'ATM',   kw:['vol','volatility','vix','vomma','vega','implied','realized','suppression']},
+  {id:'opex_stance',  nm:'opex',    ko:'만기',    inst:null,         live:false, k:null,    kw:['opex','expiry','expiration','monthly','quad witching','roll']},
+  {id:'regime',       nm:'regime',  ko:'레짐',    inst:'pre-mkt',    live:true,  k:'ES',    kw:['regime','structural','framework','cycle','long term','decade','years']},
+  {id:'gamma_flip',   nm:'gamma',   ko:'감마',    inst:'stack',      live:true,  k:'net',   kw:['gamma','gex','dealer','positioning','hedging','charm','delta']},
+];
+
+const S = { levels:null, sig:null, sigKo:null, tr:null, trKo:null, sel:0, open:null, vids:[] };
+
+const fmt = n => (n==null) ? '—' : n.toLocaleString('en-US',{maximumFractionDigits:0});
+const money = n => (n==null) ? '—' : (n>0?'+':'') + n.toFixed(1) + 'B';
+
+async function jget(path){
+  const r = await fetch(path, {cache:'no-store'});
+  if(!r.ok) throw new Error(path + ' HTTP ' + r.status);
+  return r.json();
+}
+
+/* build the interview list from transcripts.json */
+function buildVids(){
+  const arr = Array.isArray(S.tr) ? S.tr : Object.values(S.tr || {});
+  const entries = arr.filter(v => v && (v.title || v.full_text)).map(v => [v.id || '', v]);
+  S.vids = entries.map(([id,v]) => {
+    const d = String(v.date || '');
+    const ds = d.length===8 ? d.slice(4,6)+'/'+d.slice(6,8) : (d || '—');
+    const text = (v.full_text || v.text || '').toLowerCase();
+    const counts = {};
+    let total = 0;
+    for(const t of THEMES){
+      const n = t.kw.reduce((a,k)=> a + (text.split(k).length - 1), 0);
+      counts[t.id] = n; total += n;
+    }
+    return { id, date:ds, rawDate:d, title:v.title || id, url:v.url||'', counts, total, words:(v.full_text||v.text||'').split(/\s+/).length };
+  }).sort((a,b) => (b.rawDate||'').localeCompare(a.rawDate||''));
+}
+
+/* ── field map ─────────────────────────────────────────────── */
+function renderField(){
+  const box = document.getElementById('fieldbox');
+  const L = S.levels;
+  box.querySelectorAll('.zone,.axis,.tick,.tkl,.lvl,.spotdot,.spotlbl').forEach(e=>e.remove());
+  if(!L || !L.levels){ box.insertAdjacentHTML('beforeend','<div class="err">levels.json unavailable</div>'); return; }
+
+  const prices = L.levels.map(x=>x.price).concat([L.spot, L.flip]);
+  const lo = Math.min(...prices) - 60, hi = Math.max(...prices) + 60;
+  const x = p => 6 + ((p - lo) / (hi - lo)) * 88;
+
+  // regime zones: negative gamma below flip, positive above
+  const fx = x(L.flip);
+  box.insertAdjacentHTML('beforeend',
+    `<div class="zone neg" style="left:0;width:${fx}%"></div>
+     <div class="zone pos" style="left:${fx}%;width:${100-fx}%"></div>
+     <div class="axis"></div>`);
+
+  // axis ticks
+  const step = 100;
+  let ticks = '';
+  for(let p = Math.ceil(lo/step)*step; p <= hi; p += step){
+    ticks += `<div class="tick" style="left:${x(p)}%"></div><div class="tkl" style="left:${x(p)}%">${p}</div>`;
+  }
+  box.insertAdjacentHTML('beforeend', ticks);
+
+  // level labels — stagger across 3 rows so neighbours never collide
+  const byPrice = new Map();
+  for(const l of L.levels){
+    const k = Math.round(l.price);
+    if(!byPrice.has(k)) byPrice.set(k, {price:k, roles:[l.role], net_bn:l.net_bn});
+    else { const e = byPrice.get(k); if(!e.roles.includes(l.role)) e.roles.push(l.role); }
+  }
+  const sorted = [...byPrice.values()].sort((a,b)=>a.price-b.price);
+  const roleCls = r => r==='put_wall' ? 'wall' : r==='flip' ? 'flip' : r==='magnet' ? 'magnet'
+                    : r==='dampener' ? 'damp' : 'latent';
+  const rowsY = [58, 96, 134];
+  let lastX = -999, rowIdx = 0;
+  let lvlHtml = '';
+  for(const l of sorted){
+    const px = x(l.price);
+    if(px - lastX < 11) rowIdx = (rowIdx+1) % 3; else rowIdx = 0;
+    lastX = px;
+    const y = rowsY[rowIdx];
+    const stemH = 26 + (rowsY[2] - y);
+    const primary = l.roles[0];
+    lvlHtml += `<div class="lvl ${roleCls(primary)}" style="left:${px}%">
+      <div class="stem" style="height:${stemH}px"></div>
+      <div class="lbl" style="bottom:${stemH+2}px"><b>${fmt(l.price)}</b><span>${l.roles.join(' / ').replace(/_/g,' ')}</span></div>
+    </div>`;
+  }
+  box.insertAdjacentHTML('beforeend', lvlHtml);
+
+  // spot marker
+  box.insertAdjacentHTML('beforeend',
+    `<div class="spotdot" style="left:${x(L.spot)}%"></div>
+     <div class="spotlbl" style="left:${x(L.spot)}%;bottom:32px"><span class="en">spot ${fmt(L.spot)}</span><span class="ko">현재가 ${fmt(L.spot)}</span></div>`);
+}
+
+/* ── gamma meter ───────────────────────────────────────────── */
+function renderGamma(){
+  const L = S.levels || {};
+  const g = L.net_gamma_at_spot_bn;
+  const el = document.getElementById('gm');
+  if(g == null){ el.innerHTML = '<span class="err">net gamma unavailable</span>'; return; }
+  const pct = Math.min(Math.abs(g) / 150 * 50, 50);
+  const neg = g < 0;
+  el.innerHTML = `
+    <span class="lbl"><span class="en">net gamma @ spot</span><span class="ko">순감마 @ 현재가</span></span>
+    <div class="bar"><div class="fill ${neg?'neg':'pos'}" style="width:${pct}%"></div><div class="zero"></div></div>
+    <span class="val ${neg?'neg':'pos'}">${money(g)}</span>
+    <span class="regime">${neg?'SHORT GAMMA':'LONG GAMMA'}</span>`;
+}
+
+/* ── ledger ────────────────────────────────────────────────── */
+function renderLedger(){
+  const v = S.vids[S.sel];
+  const el = document.getElementById('ledger');
+  if(!v){ el.innerHTML = '<div class="err">no interview selected</div>'; return; }
+
+  document.getElementById('vtitle').textContent = v.date + '  ' + v.title;
+
+  const total = v.total || 0;
+  el.innerHTML = THEMES.map((t,i) => {
+    const cnt = v.counts[t.id] || 0;
+    const share = total ? cnt/total : 0;
+    const quotes = (S.sig && S.sig[t.id] && S.sig[t.id].quotes) ? S.sig[t.id].quotes : [];
+    const koLatest = (S.sigKo && S.sigKo[t.id]) ? S.sigKo[t.id].ko_latest : null;
+    const last = quotes.length ? quotes[quotes.length-1] : null;
+    const preview = last ? '"' + last.text.slice(0,110) + (last.text.length>110?'…':'') + '"' : null;
+    const isOpen = S.open === t.id;
+
+    const shareTxt = total ? Math.round(share*100) + '%' : '—';
+    const keyTxt = t.k ? t.k : '—';
+    const keyVal = t.id==='walls_skew' ? fmt(S.levels?.flip)
+                 : t.id==='gamma_flip' ? money(S.levels?.net_gamma_at_spot_bn)
+                 : t.id==='vol_posture' ? (S.levels ? '' : '')
+                 : '';
+
+    const detail = isOpen ? `
+      <div class="det show">
+        ${(S.sigKo && S.sigKo[t.id] && S.sigKo[t.id].ko_latest) ? `<div class="qi ko"><em>요약</em> ${S.sigKo[t.id].ko_latest}</div>` : ''}
+        ${quotes.length
+          ? quotes.slice(-6).reverse().map(q => {
+              const ko = (S.sigKo && S.sigKo[t.id] && q.text === (S.sig[t.id].quotes.slice(-1)[0]||{}).text) ? koLatest : null;
+              return `<div class="qi"><em>${(q.date||'').toString().replace(/(\d{4})(\d{2})(\d{2})/,'$2/$3')}</em> ${q.text}
+                <span class="src">${t.inst || 'no instrument'} · ${q.url || q.video || ''}</span></div>`;
+            }).join('')
+          : `<div class="none"><span class="en">no quotes extracted for this theme</span><span class="ko">이 테마에 인용 없음</span></div>`}
+      </div>` : '';
+
+    return `<div class="lrow${t.live?'':' gap'}${isOpen?' open':''}" onclick="toggle('${t.id}')">
+        <span class="rk">${String(i+1).padStart(2,'0')}</span>
+        <span class="nm">
+          <span class="top">${t.nm}<span class="ko">${t.ko}</span></span>
+          <span class="q">${preview ? preview : '<span style="opacity:.45">' + (cnt ? 'hits in this interview, no extracted quote' : 'no hits, no quote') + '</span>'}</span>
+        </span>
+        <span class="sh">${shareTxt}<span class="b"><i class="${cnt?'':'z'}" style="width:${Math.round(share*100)}%"></i></span></span>
+        <span class="kv">${keyTxt}<small>${cnt ? cnt + ' hits' : '—'}</small></span>
+        <span class="inst ${t.live?'live':'gap'}">${t.live ? t.inst : '<span class="en">— gap</span><span class="ko">— 공백</span>'}</span>
+      </div>${detail}`;
+  }).join('');
+}
+
+/* ── rail ──────────────────────────────────────────────────── */
+function renderRail(){
+  document.getElementById('vcount').textContent = S.vids.length;
+  document.getElementById('vlist').innerHTML = S.vids.map((v,i) => {
+    const top = THEMES.map(t=>({id:t.id,n:v.counts[t.id]||0})).sort((a,b)=>b.n-a.n)[0];
+    const mover = (top && top.n > 0)
+      ? THEMES.find(t=>t.id===top.id).nm + ' ' + Math.round(top.n/(v.total||1)*100) + '%'
+      : '—';
+    return `<div class="vid${i===S.sel?' sel':''}" onclick="pick(${i})">
+      <div class="d"><span>${v.date}</span><span>${v.words > 5 ? v.words + ' w' : 'no transcript'}</span></div>
+      <div class="t">${v.title}</div>
+      ${(S.trKo && S.trKo[v.id] && S.trKo[v.id].ko_title) ? `<div class="t ko" style="color:var(--dim);font-size:11px;margin-top:-2px">${S.trKo[v.id].ko_title}</div>` : ''}
+      <div class="meta"><span class="n">${v.words > 5 ? mover : '—'}</span><span>${v.words > 5 ? v.total + ' hits' : '—'}</span></div>
+    </div>`;
+  }).join('');
+}
+
+function pick(i){ S.sel = i; S.open = null; renderRail(); renderLedger(); }
+function toggle(id){ S.open = (S.open===id) ? null : id; renderLedger(); }
+function setL(l){
+  document.body.className = l;
+  document.getElementById('btnEn').className = l==='en' ? 'on' : '';
+  document.getElementById('btnKo').className = l==='ko' ? 'on' : '';
+  try{ localStorage.setItem('karsan.lang', l); }catch(e){}
+}
+
+async function boot(){
+  try{
+    const [levels, sig, tr] = await Promise.all([ jget('levels.json'), jget('signals.json'), jget('transcripts.json') ]);
+    S.levels = levels; S.sig = sig; S.tr = tr;
+  }catch(e){
+    document.getElementById('ledger').innerHTML = '<div class="err">core data failed: ' + e.message + '</div>';
+    return;
+  }
+  try{ S.sigKo = await jget('signals-ko.json'); }catch(e){ S.sigKo = null; }
+  try{ S.trKo = await jget('transcripts-ko.json'); }catch(e){ S.trKo = null; }
+
+  document.getElementById('asof').textContent = 'asof ' + (S.levels.asof || '—');
+  document.getElementById('srcstamp').textContent = 'levels ' + (S.levels.date || '');
+
+  buildVids();
+  renderRail();
+  renderField();
+  renderGamma();
+  renderLedger();
+}
+
+try{ const saved = localStorage.getItem('karsan.lang'); if(saved) setL(saved); }catch(e){}
+boot();
+</script>
+</body>
+</html>
