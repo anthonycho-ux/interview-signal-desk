@@ -19,10 +19,10 @@ Stdlib-only Python build scripts that turn Cem Karsan interview transcripts into
 ├── generate-pajama-draft.py  # levels.json + signals.json -> pajama-draft.txt (Workers AI)
 ├── radio/                    # radio_script.py -> radio-script.json -> render_radio.py (ElevenLabs)
 ├── card/, pajama/            # generated HTML outputs
-├── signal-desk*.html         # desk pages; no script in this repo writes them
+├── signal-desk.html          # desk page; no script in this repo writes it
 ├── deploy-desk/              # untracked Cloudflare workspace (node_modules, generated output)
 ├── transcripts/              # gitignored VTT input
-└── *.json                    # data artifacts (signals, stance, gamma-terrain, karsan-videos, seed)
+└── *.json                    # data artifacts (signals, stance, gamma-terrain, karsan-videos)
 ```
 
 ## PIPELINE
@@ -94,6 +94,6 @@ python3 radio/render_radio.py [--out DIR] [--voice VOICE_ID]   # needs ELEVENLAB
 - `levels.json` is absent at the repo root, so `generate-pajama-draft.py` cannot run as-is. A copy exists at `deploy-desk/public/levels.json`.
 - `radio/radio_script.py` reads gamma data from `~/web/gamma/gamma-terrain.json`, not the repo copy. `build_signal_card.py` reads the repo's `gamma-terrain.json`.
 - `render_radio.py` copies its outputs into `~/web/karsan/radio`.
-- Working tree at generation: `build_pajama.py` modified; untracked `deploy-desk/`, `generate-pajama-draft.py`, `signal-desk-*.html`.
+- Working tree at generation: `build_pajama.py` modified; untracked `deploy-desk/` and `generate-pajama-draft.py`.
 - `deploy-desk/` is not source. Skip it when searching for code.
 - No deploy script exists in the repo; publishing is a manual copy.
