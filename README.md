@@ -12,13 +12,9 @@ This project is built from public interviews with Cem Karsan. It is not affiliat
 
 ## Pipeline
 
-1. `fetch_inventory.py` -> `karsan-videos.json`
-2. `normalize_transcripts.py` -> `transcripts.json` (reads `transcripts/*.en.vtt`, which is not committed)
-3. `extract_signals.py` -> `signals.json`
-4. `label_stance.py` -> `stance.json`
-5. `build_signal_card.py` -> `card/index.html`
-6. `generate-pajama-draft.py` -> `pajama-draft.txt`, then `build_pajama.py` -> `pajama/index.html`
-7. `radio/radio_script.py` -> `radio/render_radio.py`
+![interview-signal-desk pipeline ledger: seven stages from public interview transcripts to signal card, pajama briefing, and radio bulletin, with committed byte sizes per stage](assets/pipeline-ledger.svg)
+
+Each stage is a plain script you can run yourself; the exact commands are in [AGENTS.md](AGENTS.md).
 
 See `AGENTS.md` for commands, conventions, and anti-patterns.
 

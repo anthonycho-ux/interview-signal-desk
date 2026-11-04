@@ -1,0 +1,208 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="640" viewBox="0 0 1080 640" role="img" aria-label="interview-signal-desk pipeline: seven stages from interview transcripts to signal card, pajama briefing, and radio bulletin, with committed byte sizes from the GitHub contents API">
+  <title>interview-signal-desk pipeline ledger</title>
+  <style>
+    :root { }
+    svg {
+      --bg: #f7f2e7;
+      --ink: #17150f;
+      --faint: #d8d0bd;
+      --dim: #8a8375;
+      --amber: #b45309;
+      --green: #3f6c3a;
+    }
+    @media (prefers-color-scheme: dark) {
+      svg {
+        --bg: #14120d;
+        --ink: #e8e0cd;
+        --faint: #33301f;
+        --dim: #6f6a5a;
+        --amber: #f59e0b;
+        --green: #7fb069;
+      }
+    }
+    .bg { fill: var(--bg); }
+    .ink { fill: var(--ink); }
+    .faint { stroke: var(--faint); stroke-width: 1; }
+    .dim { fill: var(--dim); }
+    .amber { fill: var(--amber); }
+    .bar-track { fill: none; }
+    .bar-fill { height: 3px; }
+    text { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    .sans { font-family: "Lexend", "Helvetica Neue", Arial, sans-serif; }
+    .title { font-size: 22px; font-weight: 700; letter-spacing: 0.14em; }
+    .sub { font-size: 12px; letter-spacing: 0.02em; }
+    .colhead { font-size: 10px; letter-spacing: 0.12em; }
+    .rank { font-size: 12px; }
+    .stage { font-size: 15px; font-weight: 700; letter-spacing: 0.08em; }
+    .status { font-size: 9px; letter-spacing: 0.1em; }
+    .mono { font-size: 13px; }
+    .small { font-size: 11px; }
+    .foot { font-size: 10px; letter-spacing: 0.04em; }
+    /* the packet: one dot per stage, travels script to artifact, constant speed */
+    .packet { opacity: 0; }
+    .packet > circle { fill: var(--amber); }
+    .packet-run {
+      animation: dotcycle 9s linear infinite;
+    }
+    @keyframes dotcycle {
+      0%   { transform: translateX(0px); opacity: 0; }
+      1%   { opacity: 1; }
+      12%  { transform: translateX(330px); opacity: 1; }
+      14%  { transform: translateX(332px); opacity: 0; }
+      100% { transform: translateX(332px); opacity: 0; }
+    }
+    .hl { opacity: 0; fill: var(--amber); }
+    .hl-run {
+      animation: rowglow 9s linear infinite;
+    }
+    @keyframes rowglow {
+      0%, 100% { opacity: 0; }
+    }
+    .hl0 { animation-delay: 0s; }
+    .hl1 { animation-delay: 1.2857s; }
+    .hl2 { animation-delay: 2.5714s; }
+    .hl3 { animation-delay: 3.8571s; }
+    .hl4 { animation-delay: 5.1429s; }
+    .hl5 { animation-delay: 6.4286s; }
+    .hl6 { animation-delay: 7.7143s; }
+    .hl0 { animation-name: g0; }
+    .hl1 { animation-name: g1; }
+    .hl2 { animation-name: g2; }
+    .hl3 { animation-name: g3; }
+    .hl4 { animation-name: g4; }
+    .hl5 { animation-name: g5; }
+    .hl6 { animation-name: g6; }
+    @keyframes g0 { 0% {opacity:0;} 0.5% {opacity:0.07;} 13% {opacity:0.07;} 15% {opacity:0;} 100% {opacity:0;} }
+    @keyframes g1 { 13% {opacity:0;} 13.5% {opacity:0.07;} 27% {opacity:0.07;} 29% {opacity:0;} 100% {opacity:0;} }
+    @keyframes g2 { 27% {opacity:0;} 27.5% {opacity:0.07;} 41% {opacity:0.07;} 43% {opacity:0;} 100% {opacity:0;} }
+    @keyframes g3 { 41% {opacity:0;} 41.5% {opacity:0.07;} 55% {opacity:0.07;} 57% {opacity:0;} 100% {opacity:0;} }
+    @keyframes g4 { 55% {opacity:0;} 55.5% {opacity:0.07;} 69% {opacity:0.07;} 71% {opacity:0;} 100% {opacity:0;} }
+    @keyframes g5 { 69% {opacity:0;} 69.5% {opacity:0.07;} 83% {opacity:0.07;} 85% {opacity:0;} 100% {opacity:0;} }
+    @keyframes g6 { 83% {opacity:0;} 83.5% {opacity:0.07;} 97% {opacity:0.07;} 99% {opacity:0;} 100% {opacity:0;} }
+  </style>
+
+  <rect class="bg" x="0" y="0" width="1080" height="640" rx="12"/>
+
+  <!-- header -->
+  <text class="title ink sans" x="40" y="52">INTERVIEW SIGNAL DESK</text>
+  <text class="sub dim sans" x="40" y="74">public interview transcripts in, signal out. seven stages, one ledger. commit 0efedbb.</text>
+  <text class="small dim" x="40" y="94" style="letter-spacing:0.08em">PIPELINE SOURCE 58,357 B &#183; COMMITTED ARTIFACTS 76,422 B</text>
+  <text class="small dim" x="1040" y="52" text-anchor="end" style="letter-spacing:0.1em">v1</text>
+
+  <!-- column heads -->
+  <text class="colhead dim sans" x="40" y="128">RANK</text>
+  <text class="colhead dim sans" x="80" y="128">STAGE</text>
+  <text class="colhead dim sans" x="270" y="128">SCRIPT</text>
+  <text class="colhead dim sans" x="612" y="128">ARTIFACT</text>
+  <text class="colhead dim sans" x="890" y="128" text-anchor="end">COMMITTED BYTES</text>
+  <line class="faint" x1="40" y1="140" x2="1040" y2="140"/>
+
+  <!-- rows: top = 150 + 54*i -->
+  <!-- 01 INGEST -->
+  <rect class="hl hl-run hl0" x="34" y="150" width="1006" height="54" rx="4"/>
+  <text class="rank ink" x="56" y="182" text-anchor="end">01</text>
+  <text class="stage ink sans" x="80" y="180">INGEST</text>
+  <text class="status green sans" x="80" y="194">CONFIRMED</text>
+  <text class="mono ink" x="270" y="182">fetch_inventory.py</text>
+  <text class="small dim" x="270" y="196">yt-dlp channel listing</text>
+  <text class="mono ink" x="612" y="182">karsan-videos.json</text>
+  <text class="mono ink" x="890" y="182" text-anchor="end">2,516</text>
+  <rect class="dim bar-fill" x="740" y="188" width="10" height="3"/>
+  <line class="faint" x1="40" y1="204" x2="1040" y2="204"/>
+  <g transform="translate(280,176)"><g class="packet packet-run" style="animation-delay: 0s">
+    <circle cx="0" cy="0" r="3"/>
+  </g></g>
+
+  <!-- 02 NORMALIZE (local only, dimmed, zero-row stays visible) -->
+  <rect class="hl hl-run hl1" x="34" y="204" width="1006" height="54" rx="4"/>
+  <text class="rank dim" x="56" y="236" text-anchor="end">02</text>
+  <text class="stage dim sans" x="80" y="234">NORMALIZE</text>
+  <text class="status dim sans" x="80" y="248">LOCAL ONLY</text>
+  <text class="mono dim" x="270" y="236">normalize_transcripts.py</text>
+  <text class="small dim" x="270" y="250">transcripts/*.en.vtt, gitignored</text>
+  <text class="mono dim" x="612" y="236">transcripts.json</text>
+  <text class="mono dim" x="890" y="236" text-anchor="end">&#8212;</text>
+  <line class="faint" x1="40" y1="258" x2="1040" y2="258"/>
+  <g transform="translate(280,230)"><g class="packet packet-run" style="animation-delay: 1.2857s">
+    <circle cx="0" cy="0" r="3" opacity="0.55"/>
+  </g></g>
+
+  <!-- 03 EXTRACT -->
+  <rect class="hl hl-run hl2" x="34" y="258" width="1006" height="54" rx="4"/>
+  <text class="rank ink" x="56" y="290" text-anchor="end">03</text>
+  <text class="stage ink sans" x="80" y="288">EXTRACT</text>
+  <text class="status amber sans" x="80" y="302">CORE</text>
+  <text class="mono ink" x="270" y="290">extract_signals.py</text>
+  <text class="small dim" x="270" y="304">regex themes, wall levels</text>
+  <text class="mono ink" x="612" y="290">signals.json</text>
+  <text class="mono ink" x="890" y="290" text-anchor="end">36,297</text>
+  <rect class="amber bar-fill" x="740" y="296" width="150" height="3"/>
+  <line class="faint" x1="40" y1="312" x2="1040" y2="312"/>
+  <g transform="translate(280,284)"><g class="packet packet-run" style="animation-delay: 2.5714s">
+    <circle cx="0" cy="0" r="3"/>
+  </g></g>
+
+  <!-- 04 LABEL -->
+  <rect class="hl hl-run hl3" x="34" y="312" width="1006" height="54" rx="4"/>
+  <text class="rank ink" x="56" y="344" text-anchor="end">04</text>
+  <text class="stage ink sans" x="80" y="342">LABEL</text>
+  <text class="status amber sans" x="80" y="356">CORE</text>
+  <text class="mono ink" x="270" y="344">label_stance.py</text>
+  <text class="small dim" x="270" y="358">claim intensity, not bull/bear</text>
+  <text class="mono ink" x="612" y="344">stance.json</text>
+  <text class="mono ink" x="890" y="344" text-anchor="end">30,379</text>
+  <rect class="amber bar-fill" x="740" y="350" width="126" height="3"/>
+  <line class="faint" x1="40" y1="366" x2="1040" y2="366"/>
+  <g transform="translate(280,338)"><g class="packet packet-run" style="animation-delay: 3.8571s">
+    <circle cx="0" cy="0" r="3"/>
+  </g></g>
+
+  <!-- 05 CARD -->
+  <rect class="hl hl-run hl4" x="34" y="366" width="1006" height="54" rx="4"/>
+  <text class="rank ink" x="56" y="398" text-anchor="end">05</text>
+  <text class="stage ink sans" x="80" y="396">CARD</text>
+  <text class="status green sans" x="80" y="410">GENERATED</text>
+  <text class="mono ink" x="270" y="398">build_signal_card.py</text>
+  <text class="small dim" x="270" y="412">gamma-terrain.json joins the read</text>
+  <text class="mono ink" x="612" y="398">card/index.html</text>
+  <text class="mono dim" x="890" y="398" text-anchor="end">&#8212;</text>
+  <line class="faint" x1="40" y1="420" x2="1040" y2="420"/>
+  <g transform="translate(280,392)"><g class="packet packet-run" style="animation-delay: 5.1429s">
+    <circle cx="0" cy="0" r="3"/>
+  </g></g>
+
+  <!-- 06 PAJAMA -->
+  <rect class="hl hl-run hl5" x="34" y="420" width="1006" height="54" rx="4"/>
+  <text class="rank ink" x="56" y="452" text-anchor="end">06</text>
+  <text class="stage ink sans" x="80" y="450">PAJAMA</text>
+  <text class="status green sans" x="80" y="464">GENERATED</text>
+  <text class="mono ink" x="270" y="450" style="font-size:12px">generate-pajama-draft.py + build_pajama.py</text>
+  <text class="small dim" x="270" y="464">Workers AI draft, bilingual EN/KR</text>
+  <text class="mono ink" x="612" y="450">pajama/index.html</text>
+  <text class="mono ink" x="890" y="450" text-anchor="end">7,230</text>
+  <text class="small dim" x="890" y="464" text-anchor="end">pajama-draft.txt</text>
+  <rect class="dim bar-fill" x="740" y="456" width="30" height="3"/>
+  <line class="faint" x1="40" y1="474" x2="1040" y2="474"/>
+  <g transform="translate(280,446)"><g class="packet packet-run" style="animation-delay: 6.4286s">
+    <circle cx="0" cy="0" r="3"/>
+  </g></g>
+
+  <!-- 07 RADIO -->
+  <rect class="hl hl-run hl6" x="34" y="474" width="1006" height="54" rx="4"/>
+  <text class="rank ink" x="56" y="506" text-anchor="end">07</text>
+  <text class="stage ink sans" x="80" y="504">RADIO</text>
+  <text class="status green sans" x="80" y="518">GENERATED</text>
+  <text class="mono ink" x="270" y="506" style="font-size:12px">radio/radio_script.py + render_radio.py</text>
+  <text class="small dim" x="270" y="520">numbers-only host lines, ElevenLabs</text>
+  <text class="mono ink" x="612" y="506">radio bulletin (audio)</text>
+  <text class="mono dim" x="890" y="506" text-anchor="end">&#8212;</text>
+  <line class="faint" x1="40" y1="530" x2="1040" y2="530"/>
+  <g transform="translate(280,500)"><g class="packet packet-run" style="animation-delay: 7.7143s">
+    <circle cx="0" cy="0" r="3"/>
+  </g></g>
+
+  <!-- provenance footer -->
+  <text class="foot dim sans" x="40" y="566">SIZES FROM THE GITHUB CONTENTS API, 2026-11-03 &#183; ROOT PIPELINE SCRIPTS 58,357 B (radio/ not counted) &#183; COMMITTED DATA ARTIFACTS 76,422 B</text>
+  <text class="foot dim sans" x="40" y="586">BAR = SHARE OF LARGEST ARTIFACT (signals.json) &#183; AMBER = TOP TWO BY VOLUME &#183; DASH = NOT COMMITTED (generated locally)</text>
+  <text class="foot dim sans" x="40" y="612">BUILT FROM PUBLIC INTERVIEWS WITH CEM KARSAN. NOT AFFILIATED WITH OR ENDORSED BY HIM.</text>
+</svg>
